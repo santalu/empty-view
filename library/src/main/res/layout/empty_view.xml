@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/dialog_spacing_medium"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/empty_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dialog_spacing_normal"/>
+
+        <ProgressBar
+            android:id="@+id/empty_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dialog_spacing_normal"/>
+
+        <TextView
+            android:id="@+id/empty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dialog_spacing_normal"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dialog_text_spacing"
+            android:textSize="@dimen/dialog_text_size"/>
+
+        <Button
+            android:id="@+id/empty_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dialog_spacing_small"
+            android:paddingLeft="@dimen/dialog_spacing_normal"
+            android:paddingRight="@dimen/dialog_spacing_normal"
+            android:paddingTop="@dimen/dialog_spacing_small"
+            android:textSize="@dimen/dialog_text_size"/>
+
+    </LinearLayout>
+
+</merge>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.santalu.emptyview.EmptyView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/empty_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:emptyDrawable="@drawable/ic_sentiment_dissatisfied"
+    app:emptyDrawableTint="@color/colorPrimary"
+    app:emptyGravity="center"
+    app:emptyText="@string/empty"
+    app:errorBackgroundColor="@color/red"
+    app:errorButtonBackgroundColor="@color/white"
+    app:errorButtonText="@string/try_again"
+    app:errorButtonTextColor="@color/black"
+    app:errorDrawable="@drawable/ic_sentiment_very_dissatisfied"
+    app:errorDrawableTint="@color/white"
+    app:errorText="@string/error_unknown"
+    app:errorTextColor="@color/white"
+    app:loadingDrawable="@drawable/ic_sentiment_satisfied"
+    app:loadingStyle="circular"
+    app:loadingText="@string/loading"
+    app:loadingTint="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="1dp"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="16dp"
+        android:text="@string/lorem"/>
+
+</com.santalu.emptyview.EmptyView>

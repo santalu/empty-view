@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EmptyView">
+        <attr format="enum" name="emptyGravity">
+            <enum name="center" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="bottom" value="2"/>
+        </attr>
+        <attr name="loadingStyle">
+            <enum name="circular" value="0"/>
+            <enum name="linear" value="1"/>
+            <enum name="text" value="2"/>
+        </attr>
+        <attr format="string" name="loadingText"/>
+        <attr format="color" name="loadingTextColor"/>
+        <attr format="reference" name="loadingDrawable"/>
+        <attr format="color" name="loadingTint"/>
+        <attr format="color" name="loadingBackgroundColor"/>
+        <attr format="string" name="emptyText"/>
+        <attr format="color" name="emptyTextColor"/>
+        <attr format="reference" name="emptyDrawable"/>
+        <attr format="color" name="emptyDrawableTint"/>
+        <attr format="color" name="emptyBackgroundColor"/>
+        <attr format="string" name="errorText"/>
+        <attr format="color" name="errorTextColor"/>
+        <attr format="reference" name="errorDrawable"/>
+        <attr format="color" name="errorDrawableTint"/>
+        <attr format="color" name="errorBackgroundColor"/>
+        <attr format="string" name="errorButtonText"/>
+        <attr format="color" name="errorButtonTextColor"/>
+        <attr format="color" name="errorButtonBackgroundColor"/>
+    </declare-styleable>
+
+</resources>
