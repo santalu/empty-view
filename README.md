@@ -1,6 +1,6 @@
 # EmptyView
 
-[![](https://jitpack.io/v/santalu/emptyview.svg)](https://jitpack.io/#santalu/emptyview)
+[![](https://jitpack.io/v/santalu/emptyview.svg)](https://jitpack.io/#santalu/emptyview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EmptyView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6039)
 
 A view that displays states of screen like loading, error, empty etc.
 
