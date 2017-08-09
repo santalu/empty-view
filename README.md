@@ -31,7 +31,7 @@ dependencies {
 ```
 
 ### XML
-```
+```xml
 <com.santalu.emptyview.EmptyView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
