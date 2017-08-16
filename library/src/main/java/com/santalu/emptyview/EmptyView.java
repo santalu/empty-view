@@ -7,8 +7,11 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.annotation.StringRes;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -32,15 +35,14 @@ import java.util.ArrayList;
 
 public class EmptyView extends RelativeLayout {
 
-    @IntDef({ CONTENT, EMPTY, ERROR, LOADING })
+    @IntDef({State.CONTENT, State.EMPTY, State.ERROR, State.LOADING})
     @Retention(RetentionPolicy.SOURCE)
     public @interface State {
+        int LOADING = 0;
+        int EMPTY = 1;
+        int ERROR = 2;
+        int CONTENT = 3;
     }
-
-    public static final int LOADING = 0;
-    public static final int EMPTY = 1;
-    public static final int ERROR = 2;
-    public static final int CONTENT = 3;
 
     private static final int CENTER = 0;
     private static final int TOP = 1;
@@ -102,7 +104,8 @@ public class EmptyView extends RelativeLayout {
         init(attrs);
     }
 
-    @Override protected void onFinishInflate() {
+    @Override
+    protected void onFinishInflate() {
         super.onFinishInflate();
         inflate(getContext(), R.layout.empty_view, this);
         mContainer = findViewById(R.id.empty_layout);
@@ -114,14 +117,16 @@ public class EmptyView extends RelativeLayout {
         setEmptyGravity(mEmptyGravity);
     }
 
-    @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    @Override
+    public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
         if (child.getVisibility() == VISIBLE && (child.getTag() == null || !child.getTag().equals(TAG))) {
             mChildViews.add(child);
         }
     }
 
-    @Override public void setOnClickListener(OnClickListener onClickListener) {
+    @Override
+    public void setOnClickListener(OnClickListener onClickListener) {
         this.mOnClickListener = onClickListener;
     }
 
@@ -140,7 +145,7 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    public void showLoading(int text) {
+    public void showLoading(@StringRes int text) {
         showLoading(getString(text));
     }
 
@@ -150,10 +155,10 @@ public class EmptyView extends RelativeLayout {
     }
 
     public void showLoading() {
-        setState(LOADING);
+        setState(State.LOADING);
     }
 
-    public void showError(int text) {
+    public void showError(@StringRes int text) {
         showError(getString(text));
     }
 
@@ -163,10 +168,10 @@ public class EmptyView extends RelativeLayout {
     }
 
     public void showError() {
-        setState(ERROR);
+        setState(State.ERROR);
     }
 
-    public void showEmpty(int text) {
+    public void showEmpty(@StringRes int text) {
         showEmpty(getString(text));
     }
 
@@ -176,13 +181,14 @@ public class EmptyView extends RelativeLayout {
     }
 
     public void showEmpty() {
-        setState(EMPTY);
+        setState(State.EMPTY);
     }
 
     public void showContent() {
-        setState(CONTENT);
+        setState(State.CONTENT);
     }
 
+    @State
     public int getState() {
         return mState;
     }
@@ -223,7 +229,7 @@ public class EmptyView extends RelativeLayout {
     private void setState(@State int state) {
         mState = state;
         switch (state) {
-            case LOADING:
+            case State.LOADING:
                 mContainer.setVisibility(VISIBLE);
                 mProgressBar.setVisibility(VISIBLE);
                 mImageView.setVisibility(GONE);
@@ -232,7 +238,7 @@ public class EmptyView extends RelativeLayout {
                 setupLoadingView();
                 setChildVisibility(GONE);
                 break;
-            case EMPTY:
+            case State.EMPTY:
                 mContainer.setVisibility(VISIBLE);
                 mProgressBar.setVisibility(GONE);
                 mImageView.setVisibility(VISIBLE);
@@ -241,7 +247,7 @@ public class EmptyView extends RelativeLayout {
                 setupEmptyView();
                 setChildVisibility(GONE);
                 break;
-            case ERROR:
+            case State.ERROR:
                 mContainer.setVisibility(VISIBLE);
                 mProgressBar.setVisibility(GONE);
                 mImageView.setVisibility(VISIBLE);
@@ -250,7 +256,7 @@ public class EmptyView extends RelativeLayout {
                 setupErrorView();
                 setChildVisibility(GONE);
                 break;
-            case CONTENT:
+            case State.CONTENT:
                 mContainer.setVisibility(GONE);
                 mProgressBar.setVisibility(GONE);
                 mImageView.setVisibility(GONE);
@@ -295,7 +301,7 @@ public class EmptyView extends RelativeLayout {
         setButton(mErrorButtonText, mErrorButtonTextColor, mErrorButtonBackgroundColor);
     }
 
-    private void setIcon(Drawable drawable, int tint) {
+    private void setIcon(@Nullable Drawable drawable, @ColorInt int tint) {
         if (drawable == null) {
             mImageView.setVisibility(GONE);
         } else {
@@ -305,7 +311,7 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    private void setText(CharSequence text, int color) {
+    private void setText(@Nullable CharSequence text, @ColorInt int color) {
         if (TextUtils.isEmpty(text)) {
             mTextView.setVisibility(GONE);
         } else {
@@ -315,7 +321,7 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    private void setButton(CharSequence text, int color, int backgroundColor) {
+    private void setButton(@Nullable CharSequence text, @ColorInt int color, @ColorInt int backgroundColor) {
         if (TextUtils.isEmpty(text)) {
             mButton.setVisibility(GONE);
         } else {
@@ -329,11 +335,11 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    private String getString(int id) {
+    private String getString(@StringRes int id) {
         return id < 0 ? null : getContext().getString(id);
     }
 
-    private String fromHtml(String text) {
+    private String fromHtml(@Nullable String text) {
         if (TextUtils.isEmpty(text)) {
             return null;
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
