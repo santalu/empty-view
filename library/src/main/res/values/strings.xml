@@ -1,9 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="loading">Yükleniyor…</string>
-    <string name="error_unknown">İsteğinizi şuanda gerçekleştiremiyoruz.\nLütfen daha sonra tekrar deneyin!</string>
-    <string name="error_connection_not_found">Lütfen bağlantı ayarlarınızı kontrol edin ve tekrar deneyin.</string>
-    <string name="error_connection_timeout">Bağlantı zaman aşımına uğradı!</string>
-    <string name="error_endpoint">Bağlantı adresine erişilemiyor!</string>
-
+    <string name="emptyview_loading">Yükleniyor…</string>
+    <string name="emptyview_error_unknown">İsteğinizi şuanda gerçekleştiremiyoruz.\nLütfen daha sonra tekrar deneyin!</string>
+    <string name="emptyview_error_connection_not_found">Lütfen bağlantı ayarlarınızı kontrol edin ve tekrar deneyin.</string>
+    <string name="emptyview_error_connection_timeout">Bağlantı zaman aşımına uğradı!</string>
+    <string name="emptyview_error_endpoint">Bağlantı adresine erişilemiyor!</string>
 </resources>

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <dimen name="dialog_spacing_lite">6dp</dimen>
-    <dimen name="dialog_spacing_small">10dp</dimen>
-    <dimen name="dialog_spacing_normal">18dp</dimen>
-    <dimen name="dialog_spacing_medium">22dp</dimen>
-    <dimen name="dialog_spacing_large">26dp</dimen>
-    <dimen name="dialog_text_spacing">6dp</dimen>
-    <dimen name="dialog_text_size">20sp</dimen>
-
+    <dimen name="emptyview_dialog_spacing_lite">6dp</dimen>
+    <dimen name="emptyview_dialog_spacing_small">10dp</dimen>
+    <dimen name="emptyview_dialog_spacing_normal">18dp</dimen>
+    <dimen name="emptyview_dialog_spacing_medium">22dp</dimen>
+    <dimen name="emptyview_dialog_spacing_large">26dp</dimen>
+    <dimen name="emptyview_dialog_text_spacing">6dp</dimen>
+    <dimen name="emptyview_dialog_text_size">20sp</dimen>
 </resources>

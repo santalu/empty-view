@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     public void showError(Throwable throwable) {
         if (throwable == null || TextUtils.isEmpty(throwable.getMessage())) {
-            showError(R.string.error_unknown);
+            showError(R.string.emptyview_error_unknown);
             return;
         }
         Error error = Error.find(throwable);
@@ -123,15 +123,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     public void showConnectionError() {
-        showError(R.string.error_connection_not_found);
+        showError(R.string.emptyview_error_connection_not_found);
     }
 
     public void showTimeoutError() {
-        showError(R.string.error_connection_timeout);
+        showError(R.string.emptyview_error_connection_timeout);
     }
 
     public void showEndpointError() {
-        showError(R.string.error_endpoint);
+        showError(R.string.emptyview_error_endpoint);
     }
 
     enum Error {
