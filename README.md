@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  compile 'com.github.santalu:emptyview:1.0'
+  compile 'com.github.santalu:emptyview:1.0.1'
 }
 ```
 
@@ -55,7 +55,7 @@ dependencies {
     app:loadingText="@string/loading"
     app:loadingTint="@color/colorPrimary">
 
-    ***Your content here***
+    *** your content here ***
 
 </com.santalu.emptyview.EmptyView>
 ```
