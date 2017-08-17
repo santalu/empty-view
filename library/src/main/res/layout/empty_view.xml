@@ -8,39 +8,39 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/emptyview_dialog_spacing_medium"
+        android:padding="@dimen/emptyview_spacing_medium"
         android:visibility="gone">
 
         <ImageView
             android:id="@+id/empty_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/emptyview_dialog_spacing_normal"/>
+            android:layout_marginBottom="@dimen/emptyview_spacing_normal"/>
 
         <ProgressBar
             android:id="@+id/empty_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/emptyview_dialog_spacing_normal"/>
+            android:layout_marginBottom="@dimen/emptyview_spacing_normal"/>
 
         <TextView
             android:id="@+id/empty_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/emptyview_dialog_spacing_normal"
+            android:layout_marginBottom="@dimen/emptyview_spacing_normal"
             android:gravity="center"
-            android:lineSpacingExtra="@dimen/emptyview_dialog_text_spacing"
-            android:textSize="@dimen/emptyview_dialog_text_size"/>
+            android:lineSpacingExtra="@dimen/emptyview_text_spacing"
+            android:textSize="@dimen/emptyview_text_size"/>
 
         <Button
             android:id="@+id/empty_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/emptyview_dialog_spacing_small"
-            android:paddingLeft="@dimen/emptyview_dialog_spacing_normal"
-            android:paddingRight="@dimen/emptyview_dialog_spacing_normal"
-            android:paddingTop="@dimen/emptyview_dialog_spacing_small"
-            android:textSize="@dimen/emptyview_dialog_text_size"/>
+            android:paddingBottom="@dimen/emptyview_spacing_small"
+            android:paddingLeft="@dimen/emptyview_spacing_normal"
+            android:paddingRight="@dimen/emptyview_spacing_normal"
+            android:paddingTop="@dimen/emptyview_spacing_small"
+            android:textSize="@dimen/emptyview_text_size"/>
 
     </LinearLayout>
 

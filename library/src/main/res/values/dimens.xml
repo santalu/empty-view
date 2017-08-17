@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="emptyview_dialog_spacing_lite">4dp</dimen>
-    <dimen name="emptyview_dialog_spacing_small">8dp</dimen>
-    <dimen name="emptyview_dialog_spacing_normal">16dp</dimen>
-    <dimen name="emptyview_dialog_spacing_medium">20dp</dimen>
-    <dimen name="emptyview_dialog_spacing_large">24dp</dimen>
-    <dimen name="emptyview_dialog_text_spacing">4dp</dimen>
-    <dimen name="emptyview_dialog_text_size">18sp</dimen>
+    <dimen name="emptyview_spacing_lite">4dp</dimen>
+    <dimen name="emptyview_spacing_small">8dp</dimen>
+    <dimen name="emptyview_spacing_normal">16dp</dimen>
+    <dimen name="emptyview_spacing_medium">20dp</dimen>
+    <dimen name="emptyview_spacing_large">24dp</dimen>
+    <dimen name="emptyview_text_spacing">4dp</dimen>
+    <dimen name="emptyview_text_size">18sp</dimen>
 
 </resources>

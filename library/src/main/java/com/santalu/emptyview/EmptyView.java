@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class EmptyView extends RelativeLayout {
 
-    @IntDef({State.CONTENT, State.EMPTY, State.ERROR, State.LOADING})
+    @IntDef({ State.CONTENT, State.EMPTY, State.ERROR, State.LOADING })
     @Retention(RetentionPolicy.SOURCE)
     public @interface State {
         int LOADING = 0;
@@ -104,8 +104,7 @@ public class EmptyView extends RelativeLayout {
         init(attrs);
     }
 
-    @Override
-    protected void onFinishInflate() {
+    @Override protected void onFinishInflate() {
         super.onFinishInflate();
         inflate(getContext(), R.layout.empty_view, this);
         mContainer = findViewById(R.id.empty_layout);
@@ -117,16 +116,14 @@ public class EmptyView extends RelativeLayout {
         setEmptyGravity(mEmptyGravity);
     }
 
-    @Override
-    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
         if (child.getVisibility() == VISIBLE && (child.getTag() == null || !child.getTag().equals(TAG))) {
             mChildViews.add(child);
         }
     }
 
-    @Override
-    public void setOnClickListener(OnClickListener onClickListener) {
+    @Override public void setOnClickListener(OnClickListener onClickListener) {
         this.mOnClickListener = onClickListener;
     }
 
@@ -188,8 +185,7 @@ public class EmptyView extends RelativeLayout {
         setState(State.CONTENT);
     }
 
-    @State
-    public int getState() {
+    @State public int getState() {
         return mState;
     }
 
