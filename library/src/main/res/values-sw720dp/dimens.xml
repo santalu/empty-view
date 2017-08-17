@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="emptyview_spacing_lite">8dp</dimen>
     <dimen name="emptyview_spacing_small">12dp</dimen>
     <dimen name="emptyview_spacing_normal">20dp</dimen>
@@ -7,4 +8,5 @@
     <dimen name="emptyview_spacing_large">28dp</dimen>
     <dimen name="emptyview_text_spacing">8dp</dimen>
     <dimen name="emptyview_text_size">22sp</dimen>
+
 </resources>

@@ -44,13 +44,20 @@ public class EmptyView extends RelativeLayout {
         int CONTENT = 3;
     }
 
-    private static final int CENTER = 0;
-    private static final int TOP = 1;
-    private static final int BOTTOM = 2;
+    @IntDef({ Style.CIRCULAR, Style.TEXT })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Style {
+        int CIRCULAR = 0;
+        int TEXT = 1;
+    }
 
-    private static final int CIRCULAR = 0;
-    private static final int LINEAR = 1;
-    private static final int TEXT = 2;
+    @IntDef({ Position.CENTER, Position.TOP, Position.BOTTOM })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Position {
+        int CENTER = 0;
+        int TOP = 1;
+        int BOTTOM = 2;
+    }
 
     private static final String TAG = EmptyView.class.getSimpleName();
 
@@ -109,10 +116,10 @@ public class EmptyView extends RelativeLayout {
         inflate(getContext(), R.layout.empty_view, this);
         mContainer = findViewById(R.id.empty_layout);
         mContainer.setTag(TAG);
-        mProgressBar = findViewById(R.id.empty_progress_bar);
         mImageView = findViewById(R.id.empty_icon);
         mTextView = findViewById(R.id.empty_text);
         mButton = findViewById(R.id.empty_button);
+        mProgressBar = findViewById(R.id.empty_progress_bar);
         setEmptyGravity(mEmptyGravity);
     }
 
@@ -127,15 +134,15 @@ public class EmptyView extends RelativeLayout {
         this.mOnClickListener = onClickListener;
     }
 
-    public void setEmptyGravity(int gravity) {
+    public void setEmptyGravity(@Position int gravity) {
         switch (gravity) {
-            case BOTTOM:
+            case Position.BOTTOM:
                 mContainer.setGravity(Gravity.BOTTOM | Gravity.CENTER);
                 break;
-            case TOP:
+            case Position.TOP:
                 mContainer.setGravity(Gravity.TOP | Gravity.CENTER);
                 break;
-            case CENTER:
+            case Position.CENTER:
             default:
                 mContainer.setGravity(Gravity.CENTER);
                 break;
@@ -198,7 +205,7 @@ public class EmptyView extends RelativeLayout {
             mLoadingBackgroundColor = a.getColor(R.styleable.EmptyView_loadingBackgroundColor, 0);
             mLoadingDrawable = a.getDrawable(R.styleable.EmptyView_loadingDrawable);
             mLoadingTint = a.getColor(R.styleable.EmptyView_loadingTint, 0);
-            mLoadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, CIRCULAR);
+            mLoadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, Style.CIRCULAR);
 
             //Empty state attrs
             mEmptyText = a.getText(R.styleable.EmptyView_emptyText);
@@ -206,7 +213,7 @@ public class EmptyView extends RelativeLayout {
             mEmptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
             mEmptyDrawable = a.getDrawable(R.styleable.EmptyView_emptyDrawable);
             mEmptyTint = a.getColor(R.styleable.EmptyView_emptyDrawableTint, 0);
-            mEmptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, CENTER);
+            mEmptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, Position.CENTER);
 
             //Error state attrs
             mErrorText = a.getText(R.styleable.EmptyView_errorText);
@@ -271,7 +278,7 @@ public class EmptyView extends RelativeLayout {
 
     private void setupLoadingView() {
         mContainer.setBackgroundColor(mLoadingBackgroundColor);
-        if (mLoadingStyle == TEXT) {
+        if (mLoadingStyle == Style.TEXT) {
             mProgressBar.setVisibility(GONE);
         } else {
             mProgressBar.setVisibility(VISIBLE);
