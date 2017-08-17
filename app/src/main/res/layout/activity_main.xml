@@ -15,11 +15,11 @@
     app:errorButtonTextColor="@color/black"
     app:errorDrawable="@drawable/ic_sentiment_very_dissatisfied"
     app:errorDrawableTint="@color/white"
-    app:errorText="@string/error_unknown"
+    app:errorText="@string/emptyview_error_unknown"
     app:errorTextColor="@color/white"
     app:loadingDrawable="@drawable/ic_sentiment_satisfied"
     app:loadingStyle="circular"
-    app:loadingText="@string/loading"
+    app:loadingText="@string/emptyview_loading"
     app:loadingTint="@color/colorPrimary">
 
     <TextView
