@@ -8,6 +8,9 @@
     <string name="show_content">Show content</string>
     <string name="show_error">Show error</string>
     <string name="show_empty">Show empty</string>
+    <string name="text_sample">Sample Text</string>
+    <string name="sample_normal">Normal Sample</string>
+    <string name="sample_recycler_view">RecyclerView Sample</string>
 
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl enim, gravida vel enim et, eleifend pretium lectus. Cras ullamcorper a quam eu ultricies. Fusce facilisis mattis libero a blandit. Donec et pellentesque ligula. Nulla quis velit a dui mattis tempus sit amet commodo quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse tempor, massa sed vestibulum auctor, massa mi aliquam lacus, ac sollicitudin mi arcu eu elit. Sed condimentum ex at nisl porta egestas.</string>
 

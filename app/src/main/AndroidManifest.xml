@@ -22,6 +22,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".SampleActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".RecyclerViewSampleActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
