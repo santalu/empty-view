@@ -13,8 +13,8 @@ import com.santalu.emptyview.EmptyView;
 
 public class SampleActivity extends AppCompatActivity implements OnClickListener {
 
-    EmptyView mEmptyView;
-    EmptyPresenter mEmptyPresenter;
+    EmptyView emptyView;
+    EmptyPresenter emptyPresenter;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, SampleActivity.class));
@@ -23,9 +23,9 @@ public class SampleActivity extends AppCompatActivity implements OnClickListener
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
-        mEmptyView = findViewById(R.id.empty_view);
-        mEmptyView.setOnClickListener(this);
-        mEmptyPresenter = new EmptyPresenter(mEmptyView);
+        emptyView = findViewById(R.id.empty_view);
+        emptyView.setOnClickListener(this);
+        emptyPresenter = new EmptyPresenter(emptyView);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,23 +37,23 @@ public class SampleActivity extends AppCompatActivity implements OnClickListener
         int itemId = item.getItemId();
         switch (itemId) {
             case R.id.show_progress:
-                mEmptyPresenter.showLoading();
+                emptyPresenter.showLoading();
                 break;
             case R.id.show_content:
-                mEmptyPresenter.showContent();
+                emptyPresenter.showContent();
                 break;
             case R.id.show_error:
-                mEmptyPresenter.showError();
+                emptyPresenter.showError();
                 break;
             case R.id.show_empty:
-                mEmptyPresenter.showEmpty();
+                emptyPresenter.showEmpty();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override public void onClick(View view) {
-        mEmptyPresenter.showLoading();
+        emptyPresenter.showLoading();
     }
 
 

@@ -61,35 +61,35 @@ public class EmptyView extends RelativeLayout {
 
     private static final String TAG = EmptyView.class.getSimpleName();
 
-    private ArrayList<View> mChildViews = new ArrayList<>();
-    private LinearLayout mContainer;
-    private ProgressBar mProgressBar;
-    private ImageView mImageView;
-    private TextView mTextView;
-    private Button mButton;
-    private OnClickListener mOnClickListener;
+    private ArrayList<View> childViews = new ArrayList<>();
+    private LinearLayout container;
+    private ProgressBar progressBar;
+    private ImageView imageView;
+    private TextView textView;
+    private Button button;
+    private OnClickListener onClickListener;
 
-    private CharSequence mLoadingText;
-    private CharSequence mEmptyText;
-    private CharSequence mErrorText;
-    private CharSequence mErrorButtonText;
-    private int mLoadingTint;
-    private int mLoadingTextColor;
-    private int mLoadingBackgroundColor;
-    private int mLoadingStyle;
-    private int mEmptyTint;
-    private int mEmptyTextColor;
-    private int mEmptyBackgroundColor;
-    private int mEmptyGravity;
-    private int mErrorTint;
-    private int mErrorTextColor;
-    private int mErrorButtonTextColor;
-    private int mErrorButtonBackgroundColor;
-    private int mErrorBackgroundColor;
-    private int mState;
-    private Drawable mLoadingDrawable;
-    private Drawable mEmptyDrawable;
-    private Drawable mErrorDrawable;
+    private CharSequence loadingText;
+    private CharSequence emptyText;
+    private CharSequence errorText;
+    private CharSequence errorButtonText;
+    private int loadingTint;
+    private int loadingTextColor;
+    private int loadingBackgroundColor;
+    private int loadingStyle;
+    private int emptyTint;
+    private int emptyTextColor;
+    private int emptyBackgroundColor;
+    private int emptyGravity;
+    private int errorTint;
+    private int errorTextColor;
+    private int errorButtonTextColor;
+    private int errorButtonBackgroundColor;
+    private int errorBackgroundColor;
+    private int state;
+    private Drawable loadingDrawable;
+    private Drawable emptyDrawable;
+    private Drawable errorDrawable;
 
     public EmptyView(Context context) {
         super(context);
@@ -114,37 +114,37 @@ public class EmptyView extends RelativeLayout {
     @Override protected void onFinishInflate() {
         super.onFinishInflate();
         inflate(getContext(), R.layout.empty_view, this);
-        mContainer = findViewById(R.id.empty_layout);
-        mContainer.setTag(TAG);
-        mImageView = findViewById(R.id.empty_icon);
-        mTextView = findViewById(R.id.empty_text);
-        mButton = findViewById(R.id.empty_button);
-        mProgressBar = findViewById(R.id.empty_progress_bar);
-        setEmptyGravity(mEmptyGravity);
+        container = findViewById(R.id.empty_layout);
+        container.setTag(TAG);
+        imageView = findViewById(R.id.empty_icon);
+        textView = findViewById(R.id.empty_text);
+        button = findViewById(R.id.empty_button);
+        progressBar = findViewById(R.id.empty_progress_bar);
+        setEmptyGravity(emptyGravity);
     }
 
     @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
         if (child.getVisibility() == VISIBLE && (child.getTag() == null || !child.getTag().equals(TAG))) {
-            mChildViews.add(child);
+            childViews.add(child);
         }
     }
 
     @Override public void setOnClickListener(OnClickListener onClickListener) {
-        this.mOnClickListener = onClickListener;
+        this.onClickListener = onClickListener;
     }
 
     public void setEmptyGravity(@Position int gravity) {
         switch (gravity) {
             case Position.BOTTOM:
-                mContainer.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+                container.setGravity(Gravity.BOTTOM | Gravity.CENTER);
                 break;
             case Position.TOP:
-                mContainer.setGravity(Gravity.TOP | Gravity.CENTER);
+                container.setGravity(Gravity.TOP | Gravity.CENTER);
                 break;
             case Position.CENTER:
             default:
-                mContainer.setGravity(Gravity.CENTER);
+                container.setGravity(Gravity.CENTER);
                 break;
         }
     }
@@ -154,7 +154,7 @@ public class EmptyView extends RelativeLayout {
     }
 
     public void showLoading(CharSequence text) {
-        mLoadingText = text;
+        loadingText = text;
         showLoading();
     }
 
@@ -167,7 +167,7 @@ public class EmptyView extends RelativeLayout {
     }
 
     public void showError(CharSequence text) {
-        mErrorText = text;
+        errorText = text;
         showError();
     }
 
@@ -180,7 +180,7 @@ public class EmptyView extends RelativeLayout {
     }
 
     public void showEmpty(CharSequence text) {
-        mEmptyText = text;
+        emptyText = text;
         showEmpty();
     }
 
@@ -193,148 +193,148 @@ public class EmptyView extends RelativeLayout {
     }
 
     @State public int getState() {
-        return mState;
+        return state;
     }
 
     private void init(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmptyView);
         try {
             //Loading state attrs
-            mLoadingText = a.getText(R.styleable.EmptyView_loadingText);
-            mLoadingTextColor = a.getColor(R.styleable.EmptyView_loadingTextColor, Color.BLACK);
-            mLoadingBackgroundColor = a.getColor(R.styleable.EmptyView_loadingBackgroundColor, 0);
-            mLoadingDrawable = a.getDrawable(R.styleable.EmptyView_loadingDrawable);
-            mLoadingTint = a.getColor(R.styleable.EmptyView_loadingTint, 0);
-            mLoadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, Style.CIRCULAR);
+            loadingText = a.getText(R.styleable.EmptyView_loadingText);
+            loadingTextColor = a.getColor(R.styleable.EmptyView_loadingTextColor, Color.BLACK);
+            loadingBackgroundColor = a.getColor(R.styleable.EmptyView_loadingBackgroundColor, 0);
+            loadingDrawable = a.getDrawable(R.styleable.EmptyView_loadingDrawable);
+            loadingTint = a.getColor(R.styleable.EmptyView_loadingTint, 0);
+            loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, Style.CIRCULAR);
 
             //Empty state attrs
-            mEmptyText = a.getText(R.styleable.EmptyView_emptyText);
-            mEmptyTextColor = a.getColor(R.styleable.EmptyView_emptyTextColor, Color.BLACK);
-            mEmptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
-            mEmptyDrawable = a.getDrawable(R.styleable.EmptyView_emptyDrawable);
-            mEmptyTint = a.getColor(R.styleable.EmptyView_emptyDrawableTint, 0);
-            mEmptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, Position.CENTER);
+            emptyText = a.getText(R.styleable.EmptyView_emptyText);
+            emptyTextColor = a.getColor(R.styleable.EmptyView_emptyTextColor, Color.BLACK);
+            emptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
+            emptyDrawable = a.getDrawable(R.styleable.EmptyView_emptyDrawable);
+            emptyTint = a.getColor(R.styleable.EmptyView_emptyDrawableTint, 0);
+            emptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, Position.CENTER);
 
             //Error state attrs
-            mErrorText = a.getText(R.styleable.EmptyView_errorText);
-            mErrorTextColor = a.getColor(R.styleable.EmptyView_errorTextColor, Color.BLACK);
-            mErrorButtonText = a.getText(R.styleable.EmptyView_errorButtonText);
-            mErrorButtonTextColor = a.getColor(R.styleable.EmptyView_errorButtonTextColor, Color.BLACK);
-            mErrorButtonBackgroundColor = a.getColor(R.styleable.EmptyView_errorButtonBackgroundColor, 0);
-            mErrorBackgroundColor = a.getColor(R.styleable.EmptyView_errorBackgroundColor, 0);
-            mErrorDrawable = a.getDrawable(R.styleable.EmptyView_errorDrawable);
-            mErrorTint = a.getColor(R.styleable.EmptyView_errorDrawableTint, 0);
+            errorText = a.getText(R.styleable.EmptyView_errorText);
+            errorTextColor = a.getColor(R.styleable.EmptyView_errorTextColor, Color.BLACK);
+            errorButtonText = a.getText(R.styleable.EmptyView_errorButtonText);
+            errorButtonTextColor = a.getColor(R.styleable.EmptyView_errorButtonTextColor, Color.BLACK);
+            errorButtonBackgroundColor = a.getColor(R.styleable.EmptyView_errorButtonBackgroundColor, 0);
+            errorBackgroundColor = a.getColor(R.styleable.EmptyView_errorBackgroundColor, 0);
+            errorDrawable = a.getDrawable(R.styleable.EmptyView_errorDrawable);
+            errorTint = a.getColor(R.styleable.EmptyView_errorDrawableTint, 0);
         } finally {
             a.recycle();
         }
     }
 
     private void setState(@State int state) {
-        mState = state;
+        this.state = state;
         switch (state) {
             case State.LOADING:
-                mContainer.setVisibility(VISIBLE);
-                mProgressBar.setVisibility(VISIBLE);
-                mImageView.setVisibility(GONE);
-                mTextView.setVisibility(GONE);
-                mButton.setVisibility(GONE);
+                container.setVisibility(VISIBLE);
+                progressBar.setVisibility(VISIBLE);
+                imageView.setVisibility(GONE);
+                textView.setVisibility(GONE);
+                button.setVisibility(GONE);
                 setupLoadingView();
                 setChildVisibility(GONE);
                 break;
             case State.EMPTY:
-                mContainer.setVisibility(VISIBLE);
-                mProgressBar.setVisibility(GONE);
-                mImageView.setVisibility(VISIBLE);
-                mTextView.setVisibility(VISIBLE);
-                mButton.setVisibility(GONE);
+                container.setVisibility(VISIBLE);
+                progressBar.setVisibility(GONE);
+                imageView.setVisibility(VISIBLE);
+                textView.setVisibility(VISIBLE);
+                button.setVisibility(GONE);
                 setupEmptyView();
                 setChildVisibility(GONE);
                 break;
             case State.ERROR:
-                mContainer.setVisibility(VISIBLE);
-                mProgressBar.setVisibility(GONE);
-                mImageView.setVisibility(VISIBLE);
-                mTextView.setVisibility(VISIBLE);
-                mButton.setVisibility(VISIBLE);
+                container.setVisibility(VISIBLE);
+                progressBar.setVisibility(GONE);
+                imageView.setVisibility(VISIBLE);
+                textView.setVisibility(VISIBLE);
+                button.setVisibility(VISIBLE);
                 setupErrorView();
                 setChildVisibility(GONE);
                 break;
             case State.CONTENT:
-                mContainer.setVisibility(GONE);
-                mProgressBar.setVisibility(GONE);
-                mImageView.setVisibility(GONE);
-                mTextView.setVisibility(GONE);
-                mButton.setVisibility(GONE);
+                container.setVisibility(GONE);
+                progressBar.setVisibility(GONE);
+                imageView.setVisibility(GONE);
+                textView.setVisibility(GONE);
+                button.setVisibility(GONE);
                 setChildVisibility(VISIBLE);
                 break;
         }
     }
 
     private void setChildVisibility(int visibility) {
-        for (View view : mChildViews) {
+        for (View view : childViews) {
             view.setVisibility(visibility);
         }
     }
 
     private void setupLoadingView() {
-        mContainer.setBackgroundColor(mLoadingBackgroundColor);
-        if (mLoadingStyle == Style.TEXT) {
-            mProgressBar.setVisibility(GONE);
+        container.setBackgroundColor(loadingBackgroundColor);
+        if (loadingStyle == Style.TEXT) {
+            progressBar.setVisibility(GONE);
         } else {
-            mProgressBar.setVisibility(VISIBLE);
-            if (mLoadingTint != 0) {
-                mProgressBar.getIndeterminateDrawable().setColorFilter(mLoadingTint, Mode.SRC_IN);
+            progressBar.setVisibility(VISIBLE);
+            if (loadingTint != 0) {
+                progressBar.getIndeterminateDrawable().setColorFilter(loadingTint, Mode.SRC_IN);
             }
         }
-        setIcon(mLoadingDrawable, mLoadingTint);
-        setText(mLoadingText, mLoadingTextColor);
+        setIcon(loadingDrawable, loadingTint);
+        setText(loadingText, loadingTextColor);
     }
 
     private void setupEmptyView() {
-        mContainer.setBackgroundColor(mEmptyBackgroundColor);
-        mContainer.setOnClickListener(mOnClickListener);
-        setIcon(mEmptyDrawable, mEmptyTint);
-        setText(mEmptyText, mEmptyTextColor);
+        container.setBackgroundColor(emptyBackgroundColor);
+        container.setOnClickListener(onClickListener);
+        setIcon(emptyDrawable, emptyTint);
+        setText(emptyText, emptyTextColor);
     }
 
     private void setupErrorView() {
-        mContainer.setBackgroundColor(mErrorBackgroundColor);
-        setIcon(mErrorDrawable, mErrorTint);
-        setText(mErrorText, mErrorTextColor);
-        setButton(mErrorButtonText, mErrorButtonTextColor, mErrorButtonBackgroundColor);
+        container.setBackgroundColor(errorBackgroundColor);
+        setIcon(errorDrawable, errorTint);
+        setText(errorText, errorTextColor);
+        setButton(errorButtonText, errorButtonTextColor, errorButtonBackgroundColor);
     }
 
     private void setIcon(@Nullable Drawable drawable, @ColorInt int tint) {
         if (drawable == null) {
-            mImageView.setVisibility(GONE);
+            imageView.setVisibility(GONE);
         } else {
-            mImageView.setVisibility(VISIBLE);
-            mImageView.setImageDrawable(drawable);
-            mImageView.setColorFilter(tint);
+            imageView.setVisibility(VISIBLE);
+            imageView.setImageDrawable(drawable);
+            imageView.setColorFilter(tint);
         }
     }
 
     private void setText(@Nullable CharSequence text, @ColorInt int color) {
         if (TextUtils.isEmpty(text)) {
-            mTextView.setVisibility(GONE);
+            textView.setVisibility(GONE);
         } else {
-            mTextView.setVisibility(VISIBLE);
-            mTextView.setText(fromHtml(text.toString()));
-            mTextView.setTextColor(color);
+            textView.setVisibility(VISIBLE);
+            textView.setText(fromHtml(text.toString()));
+            textView.setTextColor(color);
         }
     }
 
     private void setButton(@Nullable CharSequence text, @ColorInt int color, @ColorInt int backgroundColor) {
         if (TextUtils.isEmpty(text)) {
-            mButton.setVisibility(GONE);
+            button.setVisibility(GONE);
         } else {
-            mButton.setVisibility(VISIBLE);
-            mButton.setText(fromHtml(text.toString()));
-            mButton.setTextColor(color);
+            button.setVisibility(VISIBLE);
+            button.setText(fromHtml(text.toString()));
+            button.setTextColor(color);
             if (backgroundColor != 0) {
-                mButton.setBackgroundColor(backgroundColor);
+                button.setBackgroundColor(backgroundColor);
             }
-            mButton.setOnClickListener(mOnClickListener);
+            button.setOnClickListener(onClickListener);
         }
     }
 

@@ -32,11 +32,12 @@ public class RecyclerViewSampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sample_recyclerview);
         final EmptyView emptyView = findViewById(R.id.empty_view);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        recyclerView.setAdapter(new SampleAdapter(this));
+        final SampleAdapter adapter = new SampleAdapter(this);
+        recyclerView.setAdapter(adapter);
 
         emptyView.showLoading();
         emptyView.postDelayed(new Runnable() {
@@ -47,15 +48,15 @@ public class RecyclerViewSampleActivity extends AppCompatActivity {
     }
 
     private static class SampleAdapter extends Adapter<SampleAdapter.ViewHolder> {
-        private final LayoutInflater mInflater;
+        private final LayoutInflater inflater;
 
         SampleAdapter(Context context) {
-            mInflater = LayoutInflater.from(context);
+            inflater = LayoutInflater.from(context);
         }
 
         @Override
         public SampleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(mInflater.inflate(R.layout.item_recyclerview, parent, false));
+            return new ViewHolder(inflater.inflate(R.layout.item_recyclerview, parent, false));
         }
 
         @Override public void onBindViewHolder(SampleAdapter.ViewHolder holder, int position) {
