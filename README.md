@@ -1,6 +1,6 @@
 # EmptyView
 
-[![](https://jitpack.io/v/santalu/emptyview.svg)](https://jitpack.io/#santalu/emptyview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EmptyView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6039) [![](https://img.shields.io/badge/AndroidWeekly-%23270-blue.svg)](http://androidweekly.net/issues/issue-270)
+[![](https://jitpack.io/v/santalu/emptyview.svg)](https://jitpack.io/#santalu/emptyview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EmptyView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6039) [![](https://img.shields.io/badge/AndroidWeekly-%23270-blue.svg)](http://androidweekly.net/issues/issue-270) [![Build Status](https://travis-ci.org/santalu/emptyview.svg?branch=master)](https://travis-ci.org/santalu/emptyview)
 
 A view that displays states of screen like loading, error, empty etc.
 
