@@ -1,17 +1,17 @@
 <resources>
 
-    <string name="app_name">EmptyView</string>
+    <string name="app_name" translatable="false">EmptyView</string>
 
-    <string name="try_again">Try Again</string>
-    <string name="empty">Content not found!\nTap here to try again.</string>
-    <string name="show_progress">Show progress</string>
-    <string name="show_content">Show content</string>
-    <string name="show_error">Show error</string>
-    <string name="show_empty">Show empty</string>
-    <string name="text_sample">Sample Text</string>
-    <string name="sample_normal">Normal Sample</string>
-    <string name="sample_recycler_view">RecyclerView Sample</string>
+    <string name="try_again" translatable="false">Try Again</string>
+    <string name="empty" translatable="false">Content not found!\nTap here to try again.</string>
+    <string name="show_progress" translatable="false">Show progress</string>
+    <string name="show_content" translatable="false">Show content</string>
+    <string name="show_error" translatable="false">Show error</string>
+    <string name="show_empty" translatable="false">Show empty</string>
+    <string name="text_sample" translatable="false">Sample Text</string>
+    <string name="sample_normal" translatable="false">Normal Sample</string>
+    <string name="sample_recycler_view" translatable="false">RecyclerView Sample</string>
 
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl enim, gravida vel enim et, eleifend pretium lectus. Cras ullamcorper a quam eu ultricies. Fusce facilisis mattis libero a blandit. Donec et pellentesque ligula. Nulla quis velit a dui mattis tempus sit amet commodo quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse tempor, massa sed vestibulum auctor, massa mi aliquam lacus, ac sollicitudin mi arcu eu elit. Sed condimentum ex at nisl porta egestas.</string>
+    <string name="lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl enim, gravida vel enim et, eleifend pretium lectus. Cras ullamcorper a quam eu ultricies. Fusce facilisis mattis libero a blandit. Donec et pellentesque ligula. Nulla quis velit a dui mattis tempus sit amet commodo quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse tempor, massa sed vestibulum auctor, massa mi aliquam lacus, ac sollicitudin mi arcu eu elit. Sed condimentum ex at nisl porta egestas.</string>
 
 </resources>
