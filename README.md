@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  compile 'com.github.santalu:emptyview:1.0.3'
+  compile 'com.github.santalu:emptyview:1.0.4'
 }
 ```
 
@@ -64,6 +64,7 @@ dependencies {
 
 | Name        | Description           | Value  |
 | ------------- |:-------------:| -----:|
+| emptyFont      | font family | reference |
 | emptyGravity      | gravity of empty view | top, center, bottom |
 | loadingStyle     | style of loading state      | circular, linear, text |
 | loadingText | text will show on loading state      |   string |
@@ -73,6 +74,9 @@ dependencies {
 | loadingBackgroundColor | background color of loading state     |   color |
 | emptyText | text will show on empty state      |   string |
 | emptyTextColor | empty state text color     |   color |
+| emptyLetterSpacing | empty state letter spacing    |   float |
+| emptyLineSpacingExtra | empty state line spacing extra    |   float |
+| emptyLineSpacingMultiplier | empty state line spacing multiplier    |   float |
 | emptyDrawable | drawable will show on empty state     |   reference |
 | emptyDrawableTint | tint color of empty drawable      |   color |
 | emptyBackgroundColor | background color of empty state     |   color |
