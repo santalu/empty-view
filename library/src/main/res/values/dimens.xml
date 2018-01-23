@@ -6,7 +6,7 @@
     <dimen name="emptyview_spacing_normal">16dp</dimen>
     <dimen name="emptyview_spacing_medium">20dp</dimen>
     <dimen name="emptyview_spacing_large">24dp</dimen>
-    <dimen name="emptyview_text_spacing">4dp</dimen>
-    <dimen name="emptyview_text_size">18sp</dimen>
+    <dimen name="emptyview_text_size">16sp</dimen>
+    <dimen name="emptyview_button_text_size">18sp</dimen>
 
 </resources>

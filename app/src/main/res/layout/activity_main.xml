@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.santalu.emptyview.EmptyView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/empty_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+    app:emptyButtonText="@string/try_again"
+    app:emptyButtonTextColor="@color/colorPrimaryDark"
+    app:emptyDrawable="@drawable/ic_sentiment_dissatisfied"
+    app:emptyDrawableTint="@color/colorPrimary"
+    app:emptyFont="@font/allerta"
+    app:emptyGravity="center"
+    app:emptyText="@string/empty"
+    app:errorBackgroundColor="@color/red"
+    app:errorButtonBackgroundColor="@color/white"
+    app:errorButtonText="@string/try_again"
+    app:errorButtonTextColor="@color/black"
+    app:errorDrawable="@drawable/ic_sentiment_very_dissatisfied"
+    app:errorDrawableTint="@color/white"
+    app:errorText="@string/emptyview_error_unknown"
+    app:errorTextColor="@color/white"
+    app:loadingDrawable="@drawable/ic_sentiment_satisfied"
+    app:loadingStyle="circular"
+    app:loadingText="@string/emptyview_loading"
+    app:loadingTint="@color/colorPrimary">
 
-    <Button
-        android:id="@+id/sample_normal"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sample_normal"/>
+        android:fontFamily="@font/allerta"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="16dp"
+        android:text="@string/lorem" />
 
-    <Button
-        android:id="@+id/sample_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sample_recycler_view"/>
-
-</LinearLayout>
+</com.santalu.emptyview.EmptyView>

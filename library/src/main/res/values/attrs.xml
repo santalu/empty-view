@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="EmptyView">
-        <attr format="enum" name="emptyGravity">
-            <enum name="center" value="0"/>
-            <enum name="top" value="1"/>
-            <enum name="bottom" value="2"/>
+        <attr name="emptyFont" format="reference"/>
+        <attr name="emptyGravity" format="enum">
+            <enum name="center" value="0" />
+            <enum name="top" value="1" />
+            <enum name="bottom" value="2" />
         </attr>
         <attr name="loadingStyle">
-            <enum name="circular" value="0"/>
-            <enum name="text" value="2"/>
+            <enum name="circular" value="0" />
+            <enum name="text" value="2" />
         </attr>
-        <attr format="string" name="loadingText"/>
-        <attr format="color" name="loadingTextColor"/>
-        <attr format="reference" name="loadingDrawable"/>
-        <attr format="color" name="loadingTint"/>
-        <attr format="color" name="loadingBackgroundColor"/>
-        <attr format="string" name="emptyText"/>
-        <attr format="color" name="emptyTextColor"/>
-        <attr format="reference" name="emptyDrawable"/>
-        <attr format="color" name="emptyDrawableTint"/>
-        <attr format="color" name="emptyBackgroundColor"/>
-        <attr format="string" name="errorText"/>
-        <attr format="color" name="errorTextColor"/>
-        <attr format="reference" name="errorDrawable"/>
-        <attr format="color" name="errorDrawableTint"/>
-        <attr format="color" name="errorBackgroundColor"/>
-        <attr format="string" name="errorButtonText"/>
-        <attr format="color" name="errorButtonTextColor"/>
-        <attr format="color" name="errorButtonBackgroundColor"/>
+        <attr name="loadingText" format="string" />
+        <attr name="loadingTextColor" format="color" />
+        <attr name="loadingDrawable" format="reference" />
+        <attr name="loadingTint" format="color" />
+        <attr name="loadingBackgroundColor" format="color" />
+        <attr name="emptyText" format="string" />
+        <attr name="emptyTextColor" format="color" />
+        <attr name="emptyDrawable" format="reference" />
+        <attr name="emptyDrawableTint" format="color" />
+        <attr name="emptyBackgroundColor" format="color" />
+        <attr name="emptyLetterSpacing" format="float" />
+        <attr name="emptyLineSpacingExtra" format="float" />
+        <attr name="emptyLineSpacingMultiplier" format="float" />
+        <attr name="emptyButtonText" format="string" />
+        <attr name="emptyButtonTextColor" format="color" />
+        <attr name="emptyButtonBackgroundColor" format="color" />
+        <attr name="errorText" format="string" />
+        <attr name="errorTextColor" format="color" />
+        <attr name="errorDrawable" format="reference" />
+        <attr name="errorDrawableTint" format="color" />
+        <attr name="errorBackgroundColor" format="color" />
+        <attr name="errorButtonText" format="string" />
+        <attr name="errorButtonTextColor" format="color" />
+        <attr name="errorButtonBackgroundColor" format="color" />
     </declare-styleable>
 </resources>

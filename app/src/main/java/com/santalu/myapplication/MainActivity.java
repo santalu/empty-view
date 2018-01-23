@@ -1,34 +1,54 @@
 package com.santalu.myapplication;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 
-/**
- * Created by santalu on 31/08/2017.
- */
+import com.santalu.emptyview.EmptyView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickListener {
 
-    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    private EmptyView emptyView;
+    private EmptyPresenter emptyPresenter;
+
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button sampleNormal = findViewById(R.id.sample_normal);
-        Button sampleRv = findViewById(R.id.sample_rv);
-
-        sampleNormal.setOnClickListener(new OnClickListener() {
-            @Override public void onClick(View view) {
-                SampleActivity.start(MainActivity.this);
-            }
-        });
-
-        sampleRv.setOnClickListener(new OnClickListener() {
-            @Override public void onClick(View view) {
-                RecyclerViewSampleActivity.start(MainActivity.this);
-            }
-        });
+        emptyView = findViewById(R.id.empty_view);
+        emptyView.setOnClickListener(this);
+        emptyPresenter = new EmptyPresenter(emptyView);
     }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case R.id.show_progress:
+                emptyPresenter.showLoading();
+                break;
+            case R.id.show_content:
+                emptyPresenter.showContent();
+                break;
+            case R.id.show_error:
+                emptyPresenter.showError();
+                break;
+            case R.id.show_empty:
+                emptyPresenter.showEmpty();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override public void onClick(View view) {
+        emptyPresenter.showLoading();
+    }
+
+
 }

@@ -2,8 +2,8 @@
 <resources>
 
     <string name="emptyview_loading">Loading…</string>
-    <string name="emptyview_error_unknown">We can not fulfill your request now. Please try again later!</string>
-    <string name="emptyview_error_connection_not_found">No connection! Please check your connection settings.</string>
+    <string name="emptyview_error_unknown">We can not fulfill your request now.\nPlease try again later!</string>
+    <string name="emptyview_error_connection_not_found">No connection!\nPlease check your connection settings.</string>
     <string name="emptyview_error_connection_timeout">Connection timed out!</string>
     <string name="emptyview_error_endpoint">Unable to access the connection address!</string>
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
@@ -12,6 +13,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -35,30 +37,6 @@ import java.util.ArrayList;
 
 public class EmptyView extends RelativeLayout {
 
-    @IntDef({ State.CONTENT, State.EMPTY, State.ERROR, State.LOADING })
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-        int LOADING = 0;
-        int EMPTY = 1;
-        int ERROR = 2;
-        int CONTENT = 3;
-    }
-
-    @IntDef({ Style.CIRCULAR, Style.TEXT })
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Style {
-        int CIRCULAR = 0;
-        int TEXT = 1;
-    }
-
-    @IntDef({ Position.CENTER, Position.TOP, Position.BOTTOM })
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Position {
-        int CENTER = 0;
-        int TOP = 1;
-        int BOTTOM = 2;
-    }
-
     private static final String TAG = EmptyView.class.getSimpleName();
 
     private ArrayList<View> childViews = new ArrayList<>();
@@ -68,9 +46,9 @@ public class EmptyView extends RelativeLayout {
     private TextView textView;
     private Button button;
     private OnClickListener onClickListener;
-
     private CharSequence loadingText;
     private CharSequence emptyText;
+    private CharSequence emptyButtonText;
     private CharSequence errorText;
     private CharSequence errorButtonText;
     private int loadingTint;
@@ -81,12 +59,18 @@ public class EmptyView extends RelativeLayout {
     private int emptyTextColor;
     private int emptyBackgroundColor;
     private int emptyGravity;
+    private int emptyButtonTextColor;
+    private int emptyButtonBackgroundColor;
     private int errorTint;
     private int errorTextColor;
     private int errorButtonTextColor;
     private int errorButtonBackgroundColor;
     private int errorBackgroundColor;
     private int state;
+    private float emptyLetterSpacing;
+    private float emptyLineSpacingExtra;
+    private float emptyLineSpacingMultiplier;
+    private Typeface emptyFont;
     private Drawable loadingDrawable;
     private Drawable emptyDrawable;
     private Drawable errorDrawable;
@@ -125,7 +109,8 @@ public class EmptyView extends RelativeLayout {
 
     @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
-        if (child.getVisibility() == VISIBLE && (child.getTag() == null || !child.getTag().equals(TAG))) {
+        if (child.getVisibility() == VISIBLE &&
+                (child.getTag() == null || !child.getTag().equals(TAG))) {
             childViews.add(child);
         }
     }
@@ -196,39 +181,6 @@ public class EmptyView extends RelativeLayout {
         return state;
     }
 
-    private void init(AttributeSet attrs) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmptyView);
-        try {
-            //Loading state attrs
-            loadingText = a.getText(R.styleable.EmptyView_loadingText);
-            loadingTextColor = a.getColor(R.styleable.EmptyView_loadingTextColor, Color.BLACK);
-            loadingBackgroundColor = a.getColor(R.styleable.EmptyView_loadingBackgroundColor, 0);
-            loadingDrawable = a.getDrawable(R.styleable.EmptyView_loadingDrawable);
-            loadingTint = a.getColor(R.styleable.EmptyView_loadingTint, 0);
-            loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, Style.CIRCULAR);
-
-            //Empty state attrs
-            emptyText = a.getText(R.styleable.EmptyView_emptyText);
-            emptyTextColor = a.getColor(R.styleable.EmptyView_emptyTextColor, Color.BLACK);
-            emptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
-            emptyDrawable = a.getDrawable(R.styleable.EmptyView_emptyDrawable);
-            emptyTint = a.getColor(R.styleable.EmptyView_emptyDrawableTint, 0);
-            emptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, Position.CENTER);
-
-            //Error state attrs
-            errorText = a.getText(R.styleable.EmptyView_errorText);
-            errorTextColor = a.getColor(R.styleable.EmptyView_errorTextColor, Color.BLACK);
-            errorButtonText = a.getText(R.styleable.EmptyView_errorButtonText);
-            errorButtonTextColor = a.getColor(R.styleable.EmptyView_errorButtonTextColor, Color.BLACK);
-            errorButtonBackgroundColor = a.getColor(R.styleable.EmptyView_errorButtonBackgroundColor, 0);
-            errorBackgroundColor = a.getColor(R.styleable.EmptyView_errorBackgroundColor, 0);
-            errorDrawable = a.getDrawable(R.styleable.EmptyView_errorDrawable);
-            errorTint = a.getColor(R.styleable.EmptyView_errorDrawableTint, 0);
-        } finally {
-            a.recycle();
-        }
-    }
-
     private void setState(@State int state) {
         this.state = state;
         switch (state) {
@@ -270,6 +222,64 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
+    public void setTypeface(Typeface typeface) {
+        textView.setTypeface(typeface);
+        button.setTypeface(typeface);
+    }
+
+    private void init(AttributeSet attrs) {
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmptyView);
+        try {
+            if (Build.VERSION.SDK_INT >= VERSION_CODES.O) {
+                emptyFont = a.getFont(R.styleable.EmptyView_emptyFont);
+            } else {
+                int fontResId = a.getResourceId(R.styleable.EmptyView_emptyFont, 0);
+                if (fontResId != 0) {
+                    emptyFont = ResourcesCompat.getFont(getContext(), fontResId);
+                }
+            }
+
+            //Loading state attrs
+            loadingText = a.getText(R.styleable.EmptyView_loadingText);
+            loadingTextColor = a.getColor(R.styleable.EmptyView_loadingTextColor, Color.BLACK);
+            loadingBackgroundColor = a.getColor(R.styleable.EmptyView_loadingBackgroundColor, 0);
+            loadingDrawable = a.getDrawable(R.styleable.EmptyView_loadingDrawable);
+            loadingTint = a.getColor(R.styleable.EmptyView_loadingTint, 0);
+            loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, Style.CIRCULAR);
+
+            //Empty state attrs
+            emptyText = a.getText(R.styleable.EmptyView_emptyText);
+            emptyTextColor = a.getColor(R.styleable.EmptyView_emptyTextColor, Color.BLACK);
+            emptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
+            emptyDrawable = a.getDrawable(R.styleable.EmptyView_emptyDrawable);
+            emptyTint = a.getColor(R.styleable.EmptyView_emptyDrawableTint, 0);
+            emptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, Position.CENTER);
+            emptyLetterSpacing = a.getFloat(R.styleable.EmptyView_emptyLetterSpacing, 0);
+            emptyLineSpacingExtra = a.getFloat(R.styleable.EmptyView_emptyLineSpacingExtra, 1);
+            emptyLineSpacingMultiplier = a.getFloat(
+                    R.styleable.EmptyView_emptyLineSpacingMultiplier, 1.2f);
+            emptyButtonText = a.getText(R.styleable.EmptyView_emptyButtonText);
+            emptyButtonTextColor = a.getColor(R.styleable.EmptyView_emptyButtonTextColor,
+                    Color.BLACK);
+            emptyButtonBackgroundColor = a.getColor(
+                    R.styleable.EmptyView_emptyButtonBackgroundColor, 0);
+
+            //Error state attrs
+            errorText = a.getText(R.styleable.EmptyView_errorText);
+            errorTextColor = a.getColor(R.styleable.EmptyView_errorTextColor, Color.BLACK);
+            errorButtonText = a.getText(R.styleable.EmptyView_errorButtonText);
+            errorButtonTextColor = a.getColor(R.styleable.EmptyView_errorButtonTextColor,
+                    Color.BLACK);
+            errorButtonBackgroundColor = a.getColor(
+                    R.styleable.EmptyView_errorButtonBackgroundColor, 0);
+            errorBackgroundColor = a.getColor(R.styleable.EmptyView_errorBackgroundColor, 0);
+            errorDrawable = a.getDrawable(R.styleable.EmptyView_errorDrawable);
+            errorTint = a.getColor(R.styleable.EmptyView_errorDrawableTint, 0);
+        } finally {
+            a.recycle();
+        }
+    }
+
     private void setChildVisibility(int visibility) {
         for (View view : childViews) {
             view.setVisibility(visibility);
@@ -288,13 +298,22 @@ public class EmptyView extends RelativeLayout {
         }
         setIcon(loadingDrawable, loadingTint);
         setText(loadingText, loadingTextColor);
+        if (emptyFont != null) {
+            setTypeface(emptyFont);
+        }
     }
 
     private void setupEmptyView() {
         container.setBackgroundColor(emptyBackgroundColor);
-        container.setOnClickListener(onClickListener);
+        if (TextUtils.isEmpty(emptyButtonText)) {
+            container.setOnClickListener(onClickListener);
+        }
         setIcon(emptyDrawable, emptyTint);
         setText(emptyText, emptyTextColor);
+        setButton(emptyButtonText, emptyButtonTextColor, emptyButtonBackgroundColor);
+        if (emptyFont != null) {
+            setTypeface(emptyFont);
+        }
     }
 
     private void setupErrorView() {
@@ -302,6 +321,9 @@ public class EmptyView extends RelativeLayout {
         setIcon(errorDrawable, errorTint);
         setText(errorText, errorTextColor);
         setButton(errorButtonText, errorButtonTextColor, errorButtonBackgroundColor);
+        if (emptyFont != null) {
+            setTypeface(emptyFont);
+        }
     }
 
     private void setIcon(@Nullable Drawable drawable, @ColorInt int tint) {
@@ -321,10 +343,16 @@ public class EmptyView extends RelativeLayout {
             textView.setVisibility(VISIBLE);
             textView.setText(fromHtml(text.toString()));
             textView.setTextColor(color);
+            textView.setLineSpacing(emptyLineSpacingExtra, emptyLineSpacingMultiplier);
+            if (Build.VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+                textView.setLetterSpacing(emptyLetterSpacing);
+            }
         }
     }
 
-    private void setButton(@Nullable CharSequence text, @ColorInt int color, @ColorInt int backgroundColor) {
+    private void setButton(@Nullable CharSequence text,
+            @ColorInt int color,
+            @ColorInt int backgroundColor) {
         if (TextUtils.isEmpty(text)) {
             button.setVisibility(GONE);
         } else {
@@ -350,6 +378,33 @@ public class EmptyView extends RelativeLayout {
         } else {
             return Html.fromHtml(text).toString();
         }
+    }
+
+    @IntDef({State.CONTENT, State.EMPTY, State.ERROR, State.LOADING})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface State {
+
+        int LOADING = 0;
+        int EMPTY = 1;
+        int ERROR = 2;
+        int CONTENT = 3;
+    }
+
+    @IntDef({Style.CIRCULAR, Style.TEXT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Style {
+
+        int CIRCULAR = 0;
+        int TEXT = 1;
+    }
+
+    @IntDef({Position.CENTER, Position.TOP, Position.BOTTOM})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Position {
+
+        int CENTER = 0;
+        int TOP = 1;
+        int BOTTOM = 2;
     }
 
 }
