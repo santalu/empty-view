@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
@@ -45,34 +46,60 @@ public class EmptyView extends RelativeLayout {
     private ImageView imageView;
     private TextView textView;
     private Button button;
+    @Nullable
     private OnClickListener onClickListener;
+    @Nullable
     private CharSequence loadingText;
+    @Nullable
     private CharSequence emptyText;
+    @Nullable
     private CharSequence emptyButtonText;
+    @Nullable
     private CharSequence errorText;
+    @Nullable
     private CharSequence errorButtonText;
+    @ColorInt
     private int loadingTint;
+    @ColorInt
     private int loadingTextColor;
+    @ColorInt
     private int loadingBackgroundColor;
+    @Style
     private int loadingStyle;
+    @ColorInt
     private int emptyTint;
+    @ColorInt
     private int emptyTextColor;
+    @ColorInt
     private int emptyBackgroundColor;
+    @Position
     private int emptyGravity;
+    @ColorInt
     private int emptyButtonTextColor;
+    @ColorInt
     private int emptyButtonBackgroundColor;
+    @ColorInt
     private int errorTint;
+    @ColorInt
     private int errorTextColor;
+    @ColorInt
     private int errorButtonTextColor;
+    @ColorInt
     private int errorButtonBackgroundColor;
+    @ColorInt
     private int errorBackgroundColor;
+    @State
     private int state;
     private float emptyLetterSpacing;
     private float emptyLineSpacingExtra;
     private float emptyLineSpacingMultiplier;
+    @Nullable
     private Typeface emptyFont;
+    @Nullable
     private Drawable loadingDrawable;
+    @Nullable
     private Drawable emptyDrawable;
+    @Nullable
     private Drawable errorDrawable;
 
     public EmptyView(Context context) {
@@ -95,7 +122,8 @@ public class EmptyView extends RelativeLayout {
         init(attrs);
     }
 
-    @Override protected void onFinishInflate() {
+    @Override
+    protected void onFinishInflate() {
         super.onFinishInflate();
         inflate(getContext(), R.layout.empty_view, this);
         container = findViewById(R.id.empty_layout);
@@ -107,7 +135,8 @@ public class EmptyView extends RelativeLayout {
         setEmptyGravity(emptyGravity);
     }
 
-    @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    @Override
+    public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
         if (child.getVisibility() == VISIBLE &&
                 (child.getTag() == null || !child.getTag().equals(TAG))) {
@@ -115,19 +144,20 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    @Override public void setOnClickListener(OnClickListener onClickListener) {
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
     public void setEmptyGravity(@Position int gravity) {
         switch (gravity) {
-            case Position.BOTTOM:
+            case POSITION_BOTTOM:
                 container.setGravity(Gravity.BOTTOM | Gravity.CENTER);
                 break;
-            case Position.TOP:
+            case POSITION_TOP:
                 container.setGravity(Gravity.TOP | Gravity.CENTER);
                 break;
-            case Position.CENTER:
+            case POSITION_CENTER:
             default:
                 container.setGravity(Gravity.CENTER);
                 break;
@@ -138,53 +168,54 @@ public class EmptyView extends RelativeLayout {
         showLoading(getString(text));
     }
 
-    public void showLoading(CharSequence text) {
+    public void showLoading(@Nullable CharSequence text) {
         loadingText = text;
         showLoading();
     }
 
     public void showLoading() {
-        setState(State.LOADING);
+        setState(STATE_LOADING);
     }
 
     public void showError(@StringRes int text) {
         showError(getString(text));
     }
 
-    public void showError(CharSequence text) {
+    public void showError(@Nullable CharSequence text) {
         errorText = text;
         showError();
     }
 
     public void showError() {
-        setState(State.ERROR);
+        setState(STATE_ERROR);
     }
 
     public void showEmpty(@StringRes int text) {
         showEmpty(getString(text));
     }
 
-    public void showEmpty(CharSequence text) {
+    public void showEmpty(@Nullable CharSequence text) {
         emptyText = text;
         showEmpty();
     }
 
     public void showEmpty() {
-        setState(State.EMPTY);
+        setState(STATE_EMPTY);
     }
 
     public void showContent() {
-        setState(State.CONTENT);
+        setState(STATE_CONTENT);
     }
 
-    @State public int getState() {
+    @State
+    public int getState() {
         return state;
     }
 
     private void setState(@State int state) {
         this.state = state;
         switch (state) {
-            case State.LOADING:
+            case STATE_LOADING:
                 container.setVisibility(VISIBLE);
                 progressBar.setVisibility(VISIBLE);
                 imageView.setVisibility(GONE);
@@ -193,7 +224,7 @@ public class EmptyView extends RelativeLayout {
                 setupLoadingView();
                 setChildVisibility(GONE);
                 break;
-            case State.EMPTY:
+            case STATE_EMPTY:
                 container.setVisibility(VISIBLE);
                 progressBar.setVisibility(GONE);
                 imageView.setVisibility(VISIBLE);
@@ -202,7 +233,7 @@ public class EmptyView extends RelativeLayout {
                 setupEmptyView();
                 setChildVisibility(GONE);
                 break;
-            case State.ERROR:
+            case STATE_ERROR:
                 container.setVisibility(VISIBLE);
                 progressBar.setVisibility(GONE);
                 imageView.setVisibility(VISIBLE);
@@ -211,7 +242,7 @@ public class EmptyView extends RelativeLayout {
                 setupErrorView();
                 setChildVisibility(GONE);
                 break;
-            case State.CONTENT:
+            case STATE_CONTENT:
                 container.setVisibility(GONE);
                 progressBar.setVisibility(GONE);
                 imageView.setVisibility(GONE);
@@ -222,12 +253,12 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    public void setTypeface(Typeface typeface) {
+    public void setTypeface(@Nullable Typeface typeface) {
         textView.setTypeface(typeface);
         button.setTypeface(typeface);
     }
 
-    private void init(AttributeSet attrs) {
+    private void init(@NonNull AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmptyView);
         try {
             if (Build.VERSION.SDK_INT >= VERSION_CODES.O) {
@@ -245,7 +276,7 @@ public class EmptyView extends RelativeLayout {
             loadingBackgroundColor = a.getColor(R.styleable.EmptyView_loadingBackgroundColor, 0);
             loadingDrawable = a.getDrawable(R.styleable.EmptyView_loadingDrawable);
             loadingTint = a.getColor(R.styleable.EmptyView_loadingTint, 0);
-            loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, Style.CIRCULAR);
+            loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, STYLE_CIRCULAR);
 
             //Empty state attrs
             emptyText = a.getText(R.styleable.EmptyView_emptyText);
@@ -253,7 +284,7 @@ public class EmptyView extends RelativeLayout {
             emptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
             emptyDrawable = a.getDrawable(R.styleable.EmptyView_emptyDrawable);
             emptyTint = a.getColor(R.styleable.EmptyView_emptyDrawableTint, 0);
-            emptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, Position.CENTER);
+            emptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, POSITION_CENTER);
             emptyLetterSpacing = a.getFloat(R.styleable.EmptyView_emptyLetterSpacing, 0);
             emptyLineSpacingExtra = a.getFloat(R.styleable.EmptyView_emptyLineSpacingExtra, 1);
             emptyLineSpacingMultiplier = a.getFloat(
@@ -288,7 +319,7 @@ public class EmptyView extends RelativeLayout {
 
     private void setupLoadingView() {
         container.setBackgroundColor(loadingBackgroundColor);
-        if (loadingStyle == Style.TEXT) {
+        if (loadingStyle == STYLE_TEXT) {
             progressBar.setVisibility(GONE);
         } else {
             progressBar.setVisibility(VISIBLE);
@@ -351,8 +382,8 @@ public class EmptyView extends RelativeLayout {
     }
 
     private void setButton(@Nullable CharSequence text,
-            @ColorInt int color,
-            @ColorInt int backgroundColor) {
+                           @ColorInt int color,
+                           @ColorInt int backgroundColor) {
         if (TextUtils.isEmpty(text)) {
             button.setVisibility(GONE);
         } else {
@@ -380,31 +411,30 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    @IntDef({State.CONTENT, State.EMPTY, State.ERROR, State.LOADING})
+    public static final int STATE_LOADING = 0;
+    public static final int STATE_EMPTY = 1;
+    public static final int STATE_ERROR = 2;
+    public static final int STATE_CONTENT = 3;
+
+    @IntDef({STATE_CONTENT, STATE_EMPTY, STATE_ERROR, STATE_LOADING})
     @Retention(RetentionPolicy.SOURCE)
     public @interface State {
-
-        int LOADING = 0;
-        int EMPTY = 1;
-        int ERROR = 2;
-        int CONTENT = 3;
     }
 
-    @IntDef({Style.CIRCULAR, Style.TEXT})
+    public static final int STYLE_CIRCULAR = 0;
+    public static final int STYLE_TEXT = 1;
+
+    @IntDef({STYLE_CIRCULAR, STYLE_TEXT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Style {
-
-        int CIRCULAR = 0;
-        int TEXT = 1;
     }
 
-    @IntDef({Position.CENTER, Position.TOP, Position.BOTTOM})
+    public static final int POSITION_CENTER = 0;
+    public static final int POSITION_TOP = 1;
+    public static final int POSITION_BOTTOM = 2;
+
+    @IntDef({POSITION_CENTER, POSITION_TOP, POSITION_BOTTOM})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Position {
-
-        int CENTER = 0;
-        int TOP = 1;
-        int BOTTOM = 2;
     }
-
 }
