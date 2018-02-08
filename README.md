@@ -38,8 +38,12 @@ dependencies {
     android:id="@+id/empty_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:emptyAnimateLayoutChanges="true"
+    app:emptyButtonText="@string/try_again"
+    app:emptyButtonTextColor="@color/colorPrimaryDark"
     app:emptyDrawable="@drawable/ic_sentiment_dissatisfied"
     app:emptyDrawableTint="@color/colorPrimary"
+    app:emptyFont="@font/allerta"
     app:emptyGravity="center"
     app:emptyText="@string/empty"
     app:errorBackgroundColor="@color/red"
@@ -48,11 +52,11 @@ dependencies {
     app:errorButtonTextColor="@color/black"
     app:errorDrawable="@drawable/ic_sentiment_very_dissatisfied"
     app:errorDrawableTint="@color/white"
-    app:errorText="@string/error_unknown"
+    app:errorText="@string/emptyview_error_unknown"
     app:errorTextColor="@color/white"
     app:loadingDrawable="@drawable/ic_sentiment_satisfied"
     app:loadingStyle="circular"
-    app:loadingText="@string/loading"
+    app:loadingText="@string/emptyview_loading"
     app:loadingTint="@color/colorPrimary">
 
     *** your content here ***
@@ -64,6 +68,7 @@ dependencies {
 
 | Name        | Description           | Value  |
 | ------------- |:-------------:| -----:|
+| emptyAnimateLayoutChanges      | enable/disable transitions | boolean default false |
 | emptyFont      | font family | reference |
 | emptyGravity      | gravity of empty view | top, center, bottom |
 | loadingStyle     | style of loading state      | circular, linear, text |
@@ -88,6 +93,10 @@ dependencies {
 | errorButtonText | error state button text     |   string |
 | errorButtonTextColor | error state button text color    |   color |
 | errorButtonBackgroundColor | error state button background color       |   color |
+
+## Notes
+
+* Use `setTransition(android.support.transition transition)` method to define which transitions is played when animating layout changes
 
 ## License
 ```
