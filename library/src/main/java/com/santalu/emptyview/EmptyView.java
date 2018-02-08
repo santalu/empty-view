@@ -10,9 +10,13 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
+import android.support.transition.Explode;
+import android.support.transition.Transition;
+import android.support.transition.TransitionManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.Html;
 import android.text.TextUtils;
@@ -37,6 +41,21 @@ import java.util.ArrayList;
 
 public class EmptyView extends RelativeLayout {
 
+    //Style
+    public static final int CIRCULAR = 0;
+    public static final int TEXT = 1;
+
+    //Position
+    public static final int CENTER = 0;
+    public static final int TOP = 1;
+    public static final int BOTTOM = 2;
+
+    //State
+    public static final int LOADING = 0;
+    public static final int EMPTY = 1;
+    public static final int ERROR = 2;
+    public static final int CONTENT = 3;
+
     private static final String TAG = EmptyView.class.getSimpleName();
 
     private ArrayList<View> childViews = new ArrayList<>();
@@ -45,7 +64,12 @@ public class EmptyView extends RelativeLayout {
     private ImageView imageView;
     private TextView textView;
     private Button button;
+    private Typeface emptyFont;
+    private Drawable loadingDrawable;
+    private Drawable emptyDrawable;
+    private Drawable errorDrawable;
     private OnClickListener onClickListener;
+
     private CharSequence loadingText;
     private CharSequence emptyText;
     private CharSequence emptyButtonText;
@@ -70,10 +94,9 @@ public class EmptyView extends RelativeLayout {
     private float emptyLetterSpacing;
     private float emptyLineSpacingExtra;
     private float emptyLineSpacingMultiplier;
-    private Typeface emptyFont;
-    private Drawable loadingDrawable;
-    private Drawable emptyDrawable;
-    private Drawable errorDrawable;
+    private boolean emptyAnimateLayoutChanges;
+
+    private Transition transition = new Explode();
 
     public EmptyView(Context context) {
         super(context);
@@ -115,66 +138,36 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    @Override public void setOnClickListener(OnClickListener onClickListener) {
+    @Override public void setOnClickListener(@Nullable OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
+    }
+
+    public void setTypeface(@Nullable Typeface typeface) {
+        textView.setTypeface(typeface);
+        button.setTypeface(typeface);
     }
 
     public void setEmptyGravity(@Position int gravity) {
         switch (gravity) {
-            case Position.BOTTOM:
+            case BOTTOM:
                 container.setGravity(Gravity.BOTTOM | Gravity.CENTER);
                 break;
-            case Position.TOP:
+            case TOP:
                 container.setGravity(Gravity.TOP | Gravity.CENTER);
                 break;
-            case Position.CENTER:
+            case CENTER:
             default:
                 container.setGravity(Gravity.CENTER);
                 break;
         }
     }
 
-    public void showLoading(@StringRes int text) {
-        showLoading(getString(text));
+    public void setLoadingStyle(@Style int style) {
+        this.loadingStyle = style;
     }
 
-    public void showLoading(CharSequence text) {
-        loadingText = text;
-        showLoading();
-    }
-
-    public void showLoading() {
-        setState(State.LOADING);
-    }
-
-    public void showError(@StringRes int text) {
-        showError(getString(text));
-    }
-
-    public void showError(CharSequence text) {
-        errorText = text;
-        showError();
-    }
-
-    public void showError() {
-        setState(State.ERROR);
-    }
-
-    public void showEmpty(@StringRes int text) {
-        showEmpty(getString(text));
-    }
-
-    public void showEmpty(CharSequence text) {
-        emptyText = text;
-        showEmpty();
-    }
-
-    public void showEmpty() {
-        setState(State.EMPTY);
-    }
-
-    public void showContent() {
-        setState(State.CONTENT);
+    public void setTransition(@Nullable Transition transition) {
+        this.transition = transition;
     }
 
     @State public int getState() {
@@ -182,9 +175,14 @@ public class EmptyView extends RelativeLayout {
     }
 
     private void setState(@State int state) {
+        //start animation
+        if (emptyAnimateLayoutChanges) {
+            TransitionManager.beginDelayedTransition(container, transition);
+        }
+
         this.state = state;
         switch (state) {
-            case State.LOADING:
+            case LOADING:
                 container.setVisibility(VISIBLE);
                 progressBar.setVisibility(VISIBLE);
                 imageView.setVisibility(GONE);
@@ -193,7 +191,7 @@ public class EmptyView extends RelativeLayout {
                 setupLoadingView();
                 setChildVisibility(GONE);
                 break;
-            case State.EMPTY:
+            case EMPTY:
                 container.setVisibility(VISIBLE);
                 progressBar.setVisibility(GONE);
                 imageView.setVisibility(VISIBLE);
@@ -202,7 +200,7 @@ public class EmptyView extends RelativeLayout {
                 setupEmptyView();
                 setChildVisibility(GONE);
                 break;
-            case State.ERROR:
+            case ERROR:
                 container.setVisibility(VISIBLE);
                 progressBar.setVisibility(GONE);
                 imageView.setVisibility(VISIBLE);
@@ -211,7 +209,7 @@ public class EmptyView extends RelativeLayout {
                 setupErrorView();
                 setChildVisibility(GONE);
                 break;
-            case State.CONTENT:
+            case CONTENT:
                 container.setVisibility(GONE);
                 progressBar.setVisibility(GONE);
                 imageView.setVisibility(GONE);
@@ -222,12 +220,50 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    public void setTypeface(Typeface typeface) {
-        textView.setTypeface(typeface);
-        button.setTypeface(typeface);
+    public void showLoading(@StringRes int text) {
+        showLoading(getString(text));
     }
 
-    private void init(AttributeSet attrs) {
+    public void showLoading(@Nullable CharSequence text) {
+        loadingText = text;
+        showLoading();
+    }
+
+    public void showLoading() {
+        setState(LOADING);
+    }
+
+    public void showError(@StringRes int text) {
+        showError(getString(text));
+    }
+
+    public void showError(@Nullable CharSequence text) {
+        errorText = text;
+        showError();
+    }
+
+    public void showError() {
+        setState(ERROR);
+    }
+
+    public void showEmpty(@StringRes int text) {
+        showEmpty(getString(text));
+    }
+
+    public void showEmpty(@Nullable CharSequence text) {
+        emptyText = text;
+        showEmpty();
+    }
+
+    public void showEmpty() {
+        setState(EMPTY);
+    }
+
+    public void showContent() {
+        setState(CONTENT);
+    }
+
+    private void init(@NonNull AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmptyView);
         try {
             if (Build.VERSION.SDK_INT >= VERSION_CODES.O) {
@@ -239,13 +275,16 @@ public class EmptyView extends RelativeLayout {
                 }
             }
 
+            emptyAnimateLayoutChanges = a.getBoolean(
+                    R.styleable.EmptyView_emptyAnimateLayoutChanges, false);
+
             //Loading state attrs
             loadingText = a.getText(R.styleable.EmptyView_loadingText);
             loadingTextColor = a.getColor(R.styleable.EmptyView_loadingTextColor, Color.BLACK);
             loadingBackgroundColor = a.getColor(R.styleable.EmptyView_loadingBackgroundColor, 0);
             loadingDrawable = a.getDrawable(R.styleable.EmptyView_loadingDrawable);
             loadingTint = a.getColor(R.styleable.EmptyView_loadingTint, 0);
-            loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, Style.CIRCULAR);
+            loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, CIRCULAR);
 
             //Empty state attrs
             emptyText = a.getText(R.styleable.EmptyView_emptyText);
@@ -253,11 +292,11 @@ public class EmptyView extends RelativeLayout {
             emptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
             emptyDrawable = a.getDrawable(R.styleable.EmptyView_emptyDrawable);
             emptyTint = a.getColor(R.styleable.EmptyView_emptyDrawableTint, 0);
-            emptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, Position.CENTER);
+            emptyGravity = a.getInt(R.styleable.EmptyView_emptyGravity, CENTER);
             emptyLetterSpacing = a.getFloat(R.styleable.EmptyView_emptyLetterSpacing, 0);
             emptyLineSpacingExtra = a.getFloat(R.styleable.EmptyView_emptyLineSpacingExtra, 1);
             emptyLineSpacingMultiplier = a.getFloat(
-                    R.styleable.EmptyView_emptyLineSpacingMultiplier, 1.2f);
+                    R.styleable.EmptyView_emptyLineSpacingMultiplier, 1f);
             emptyButtonText = a.getText(R.styleable.EmptyView_emptyButtonText);
             emptyButtonTextColor = a.getColor(R.styleable.EmptyView_emptyButtonTextColor,
                     Color.BLACK);
@@ -288,7 +327,7 @@ public class EmptyView extends RelativeLayout {
 
     private void setupLoadingView() {
         container.setBackgroundColor(loadingBackgroundColor);
-        if (loadingStyle == Style.TEXT) {
+        if (loadingStyle == TEXT) {
             progressBar.setVisibility(GONE);
         } else {
             progressBar.setVisibility(VISIBLE);
@@ -380,31 +419,16 @@ public class EmptyView extends RelativeLayout {
         }
     }
 
-    @IntDef({State.CONTENT, State.EMPTY, State.ERROR, State.LOADING})
+    @IntDef({CONTENT, EMPTY, ERROR, LOADING})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
+    public @interface State {}
 
-        int LOADING = 0;
-        int EMPTY = 1;
-        int ERROR = 2;
-        int CONTENT = 3;
-    }
-
-    @IntDef({Style.CIRCULAR, Style.TEXT})
+    @IntDef({CIRCULAR, TEXT})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Style {
+    public @interface Style {}
 
-        int CIRCULAR = 0;
-        int TEXT = 1;
-    }
-
-    @IntDef({Position.CENTER, Position.TOP, Position.BOTTOM})
+    @IntDef({CENTER, TOP, BOTTOM})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Position {
-
-        int CENTER = 0;
-        int TOP = 1;
-        int BOTTOM = 2;
-    }
+    public @interface Position {}
 
 }
