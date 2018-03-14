@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="emptyview_spacing_lite">8dp</dimen>
-    <dimen name="emptyview_spacing_small">12dp</dimen>
-    <dimen name="emptyview_spacing_normal">20dp</dimen>
-    <dimen name="emptyview_spacing_medium">24dp</dimen>
-    <dimen name="emptyview_spacing_large">28dp</dimen>
-    <dimen name="emptyview_text_size">20sp</dimen>
-    <dimen name="emptyview_button_text_size">22sp</dimen>
-
+  <dimen name="emptyview_spacing_lite">8dp</dimen>
+  <dimen name="emptyview_spacing_small">12dp</dimen>
+  <dimen name="emptyview_spacing_normal">20dp</dimen>
+  <dimen name="emptyview_spacing_medium">24dp</dimen>
+  <dimen name="emptyview_spacing_large">28dp</dimen>
+  <dimen name="emptyview_text_size">20sp</dimen>
+  <dimen name="emptyview_button_text_size">22sp</dimen>
 
 </resources>

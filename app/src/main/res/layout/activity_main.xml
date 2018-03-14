@@ -11,12 +11,10 @@
     app:emptyDrawable="@drawable/ic_sentiment_dissatisfied"
     app:emptyDrawableTint="@color/colorPrimary"
     app:emptyFont="@font/allerta"
-    app:emptyGravity="center"
     app:emptyText="@string/empty"
     app:errorBackgroundColor="@color/red"
-    app:errorButtonBackgroundColor="@color/white"
     app:errorButtonText="@string/try_again"
-    app:errorButtonTextColor="@color/black"
+    app:errorButtonTextColor="@color/white"
     app:errorDrawable="@drawable/ic_sentiment_very_dissatisfied"
     app:errorDrawableTint="@color/white"
     app:errorText="@string/emptyview_error_unknown"
@@ -26,13 +24,13 @@
     app:loadingText="@string/emptyview_loading"
     app:loadingTint="@color/colorPrimary">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/allerta"
-        android:lineSpacingMultiplier="1.2"
-        android:padding="16dp"
-        android:text="@string/lorem" />
+  <TextView
+      android:id="@+id/text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/allerta"
+      android:lineSpacingMultiplier="1.2"
+      android:padding="16dp"
+      android:text="@string/lorem"/>
 
 </com.santalu.emptyview.EmptyView>
