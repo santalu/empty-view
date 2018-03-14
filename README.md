@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  compile 'com.github.santalu:emptyview:1.0.5'
+  compile 'com.github.santalu:emptyview:1.1.0'
 }
 ```
 
@@ -44,7 +44,6 @@ dependencies {
     app:emptyDrawable="@drawable/ic_sentiment_dissatisfied"
     app:emptyDrawableTint="@color/colorPrimary"
     app:emptyFont="@font/allerta"
-    app:emptyGravity="center"
     app:emptyText="@string/empty"
     app:errorBackgroundColor="@color/red"
     app:errorButtonBackgroundColor="@color/white"
@@ -70,7 +69,6 @@ dependencies {
 | ------------- |:-------------:| -----:|
 | emptyAnimateLayoutChanges      | enable/disable transitions | boolean default false |
 | emptyFont      | font family | reference |
-| emptyGravity      | gravity of empty view | top, center, bottom |
 | loadingStyle     | style of loading state      | circular, linear, text |
 | loadingText | text will show on loading state      |   string |
 | loadingTextColor | loading state text color      |   color |
