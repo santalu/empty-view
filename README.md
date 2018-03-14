@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  implementation 'com.github.santalu:emptyview:1.1.0'
+  implementation 'com.github.santalu:emptyview:1.1.1'
 }
 ```
 
