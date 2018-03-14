@@ -4,14 +4,18 @@
   <declare-styleable name="EmptyView">
     <attr name="loadingStyle">
       <enum name="circular" value="0"/>
-      <enum name="text" value="2"/>
+      <enum name="text" value="1"/>
+    </attr>
+    <attr name="emptyTransition">
+      <enum name="slide" value="0"/>
+      <enum name="explode" value="1"/>
+      <enum name="fade" value="2"/>
     </attr>
     <attr format="string" name="loadingText"/>
     <attr format="color" name="loadingTextColor"/>
     <attr format="reference" name="loadingDrawable"/>
     <attr format="color" name="loadingTint"/>
     <attr format="color" name="loadingBackgroundColor"/>
-    <attr format="boolean" name="emptyAnimateLayoutChanges"/>
     <attr format="reference" name="emptyFont"/>
     <attr format="string" name="emptyText"/>
     <attr format="color" name="emptyTextColor"/>
