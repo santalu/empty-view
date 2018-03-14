@@ -125,6 +125,23 @@ public class EmptyView extends ConstraintLayout {
     this.onClickListener = onClickListener;
   }
 
+  public void exclude(int... ids) {
+    for (int id : ids) {
+      View view = findViewById(id);
+      if (childViews.contains(view)) {
+        childViews.remove(view);
+      }
+    }
+  }
+
+  public void exclude(View... views) {
+    for (View view : views) {
+      if (childViews.contains(view)) {
+        childViews.remove(view);
+      }
+    }
+  }
+
   public void setTypeface(@Nullable Typeface typeface) {
     textView.setTypeface(typeface);
     button.setTypeface(typeface);

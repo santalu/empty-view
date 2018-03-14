@@ -12,6 +12,6 @@
   <string name="sample_normal" translatable="false">Normal Sample</string>
   <string name="sample_recycler_view" translatable="false">RecyclerView Sample</string>
 
-  <string name="lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl enim, gravida vel enim et, eleifend pretium lectus. Cras ullamcorper a quam eu ultricies. Fusce facilisis mattis libero a blandit. Donec et pellentesque ligula. Nulla quis velit a dui mattis tempus sit amet commodo quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse tempor, massa sed vestibulum auctor, massa mi aliquam lacus, ac sollicitudin mi arcu eu elit. Sed condimentum ex at nisl porta egestas.</string>
+  <string name="lorem" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl enim, gravida vel enim et, eleifend pretium lectus. Cras ullamcorper a quam eu ultricies. Fusce facilisis mattis libero a blandit. Donec et pellentesque ligula. Nulla quis velit a dui mattis tempus sit amet commodo quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</string>
 
 </resources>

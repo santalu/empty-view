@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     emptyView = findViewById(R.id.empty_view);
+    //emptyView.exclude(R.id.text);
     emptyHelper = new EmptyHelper(emptyView);
   }
 

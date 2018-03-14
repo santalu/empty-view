@@ -2,13 +2,6 @@
 <resources>
 
   <declare-styleable name="EmptyView">
-    <attr format="boolean" name="emptyAnimateLayoutChanges"/>
-    <attr format="reference" name="emptyFont"/>
-    <!--<attr format="enum" name="emptyGravity">
-      <enum name="center" value="0"/>
-      <enum name="top" value="1"/>
-      <enum name="bottom" value="2"/>
-    </attr>-->
     <attr name="loadingStyle">
       <enum name="circular" value="0"/>
       <enum name="text" value="2"/>
@@ -18,6 +11,8 @@
     <attr format="reference" name="loadingDrawable"/>
     <attr format="color" name="loadingTint"/>
     <attr format="color" name="loadingBackgroundColor"/>
+    <attr format="boolean" name="emptyAnimateLayoutChanges"/>
+    <attr format="reference" name="emptyFont"/>
     <attr format="string" name="emptyText"/>
     <attr format="color" name="emptyTextColor"/>
     <attr format="reference" name="emptyDrawable"/>
