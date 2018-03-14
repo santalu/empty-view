@@ -38,13 +38,13 @@ dependencies {
     android:id="@+id/empty_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:emptyAnimateLayoutChanges="true"
     app:emptyButtonText="@string/try_again"
     app:emptyButtonTextColor="@color/colorPrimaryDark"
     app:emptyDrawable="@drawable/ic_sentiment_dissatisfied"
     app:emptyDrawableTint="@color/colorPrimary"
     app:emptyFont="@font/allerta"
     app:emptyText="@string/empty"
+    app:emptyTransition="slide"
     app:errorBackgroundColor="@color/red"
     app:errorButtonBackgroundColor="@color/white"
     app:errorButtonText="@string/try_again"
@@ -67,14 +67,14 @@ dependencies {
 
 | Name        | Description           | Value  |
 | ------------- |:-------------:| -----:|
-| emptyAnimateLayoutChanges      | enable/disable transitions | boolean default false |
-| emptyFont      | font family | reference |
 | loadingStyle     | style of loading state      | circular, linear, text |
 | loadingText | text will show on loading state      |   string |
 | loadingTextColor | loading state text color      |   color |
 | loadingDrawable | drawable will show on loading state      |   reference |
 | loadingTint | tint color of loading drawable     |   color |
 | loadingBackgroundColor | background color of loading state     |   color |
+| emptyFont      | font family | reference |
+| emptyTransition      | transition animation | slide, explode, fade default null |
 | emptyText | text will show on empty state      |   string |
 | emptyTextColor | empty state text color     |   color |
 | emptyLetterSpacing | empty state letter spacing    |   float |
