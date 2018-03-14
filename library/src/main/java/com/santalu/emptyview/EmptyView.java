@@ -155,6 +155,30 @@ public class EmptyView extends ConstraintLayout {
     this.transition = transition;
   }
 
+  public void setEmptyButton(CharSequence text) {
+    setEmptyButton(text, emptyButtonTextColor, emptyButtonBackgroundColor);
+  }
+
+  public void setEmptyButton(CharSequence text,
+      @ColorInt int color,
+      @ColorInt int backgroundColor) {
+    emptyButtonText = text;
+    emptyButtonTextColor = color;
+    emptyButtonBackgroundColor = backgroundColor;
+  }
+
+  public void setErrorButton(CharSequence text) {
+    setErrorButton(text, errorButtonTextColor, errorButtonBackgroundColor);
+  }
+
+  public void setErrorButton(CharSequence text,
+      @ColorInt int color,
+      @ColorInt int backgroundColor) {
+    errorButtonText = text;
+    errorButtonTextColor = color;
+    errorButtonBackgroundColor = backgroundColor;
+  }
+
   @State public int getState() {
     return state;
   }

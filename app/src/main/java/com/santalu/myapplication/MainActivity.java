@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     emptyView = findViewById(R.id.empty_view);
     //emptyView.exclude(R.id.text);
+    //emptyView.setErrorButton("Error Button");
+    //emptyView.setEmptyButton("Empty Button");
     emptyHelper = new EmptyHelper(emptyView);
   }
 
