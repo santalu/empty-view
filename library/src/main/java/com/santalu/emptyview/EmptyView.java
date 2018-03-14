@@ -15,6 +15,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.constraint.ConstraintLayout;
 import android.support.transition.Explode;
+import android.support.transition.Fade;
+import android.support.transition.Slide;
 import android.support.transition.Transition;
 import android.support.transition.TransitionManager;
 import android.support.v4.content.res.ResourcesCompat;
@@ -46,6 +48,11 @@ public class EmptyView extends ConstraintLayout {
   public static final int EMPTY = 1;
   public static final int ERROR = 2;
   public static final int CONTENT = 3;
+
+  //Transition
+  public static final int SLIDE = 0;
+  public static final int EXPLODE = 1;
+  public static final int FADE = 2;
 
   private static final String TAG = EmptyView.class.getSimpleName();
 
@@ -84,9 +91,8 @@ public class EmptyView extends ConstraintLayout {
   private float emptyLetterSpacing;
   private float emptyLineSpacingExtra;
   private float emptyLineSpacingMultiplier;
-  private boolean emptyAnimateLayoutChanges;
 
-  private Transition transition = new Explode();
+  private Transition transition;
 
   public EmptyView(Context context) {
     super(context);
@@ -185,7 +191,7 @@ public class EmptyView extends ConstraintLayout {
 
   private void setState(@State int state) {
     //start animation
-    if (emptyAnimateLayoutChanges) {
+    if (transition != null) {
       TransitionManager.beginDelayedTransition(container, transition);
     }
 
@@ -284,8 +290,18 @@ public class EmptyView extends ConstraintLayout {
         }
       }
 
-      emptyAnimateLayoutChanges = a.getBoolean(
-          R.styleable.EmptyView_emptyAnimateLayoutChanges, false);
+      int emptyTransition = a.getInt(R.styleable.EmptyView_emptyTransition, -1);
+      switch (emptyTransition) {
+        case SLIDE:
+          transition = new Slide();
+          break;
+        case EXPLODE:
+          transition = new Explode();
+          break;
+        case FADE:
+          transition = new Fade();
+          break;
+      }
 
       //Loading state attrs
       loadingText = a.getText(R.styleable.EmptyView_loadingText);
