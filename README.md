@@ -95,6 +95,8 @@ dependencies {
 ## Notes
 
 * Use `setTransition(android.support.transition transition)` method to define which transitions is played when animating layout changes
+* Use `setEmptyButton(CharSequence text, @ColorInt int color, @ColorInt int backgroundColor)` or `setErrorButton(CharSequence text, @ColorInt int color, @ColorInt int backgroundColor)` methods to set button text, textColor and backgroundColor attributes
+* Use `exclude(int... ids)` or `exclude(View... views)` methods to exclude views from visiblity changes
 
 ## License
 ```
