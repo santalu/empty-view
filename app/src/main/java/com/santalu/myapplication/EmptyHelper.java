@@ -58,8 +58,7 @@ public class EmptyHelper {
   public void showEmpty(View.OnClickListener listener) {
     if (emptyView != null) {
       if (isConnected(emptyView.getContext())) {
-        emptyView.setOnClickListener(listener);
-        emptyView.showEmpty();
+        emptyView.showEmpty(listener);
       } else {
         showConnectionError(listener);
       }
@@ -68,36 +67,31 @@ public class EmptyHelper {
 
   public void showEmpty(CharSequence text, View.OnClickListener listener) {
     if (emptyView != null) {
-      emptyView.setOnClickListener(listener);
-      emptyView.showEmpty(text);
+      emptyView.showEmpty(text, listener);
     }
   }
 
   public void showEmpty(int textId, View.OnClickListener listener) {
     if (emptyView != null) {
-      emptyView.setOnClickListener(listener);
-      emptyView.showEmpty(textId);
+      emptyView.showEmpty(textId, listener);
     }
   }
 
   public void showError(View.OnClickListener listener) {
     if (emptyView != null) {
-      emptyView.setOnClickListener(listener);
-      emptyView.showError();
+      emptyView.showError(listener);
     }
   }
 
   public void showError(CharSequence text, View.OnClickListener listener) {
     if (emptyView != null) {
-      emptyView.setOnClickListener(listener);
-      emptyView.showError(text);
+      emptyView.showError(text, listener);
     }
   }
 
   public void showError(int textId, View.OnClickListener listener) {
     if (emptyView != null) {
-      emptyView.setOnClickListener(listener);
-      emptyView.showError(textId);
+      emptyView.showError(textId, listener);
     }
   }
 
