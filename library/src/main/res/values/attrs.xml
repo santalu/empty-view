@@ -17,6 +17,8 @@
     <attr format="color" name="loadingTint"/>
     <attr format="color" name="loadingBackgroundColor"/>
     <attr format="reference" name="emptyFont"/>
+    <attr format="string" name="emptyTitle"/>
+    <attr format="color" name="emptyTitleColor"/>
     <attr format="string" name="emptyText"/>
     <attr format="color" name="emptyTextColor"/>
     <attr format="reference" name="emptyDrawable"/>
@@ -28,6 +30,8 @@
     <attr format="string" name="emptyButtonText"/>
     <attr format="color" name="emptyButtonTextColor"/>
     <attr format="color" name="emptyButtonBackgroundColor"/>
+    <attr format="string" name="errorTitle"/>
+    <attr format="color" name="errorTitleColor"/>
     <attr format="string" name="errorText"/>
     <attr format="color" name="errorTextColor"/>
     <attr format="reference" name="errorDrawable"/>

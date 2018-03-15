@@ -11,6 +11,8 @@
     app:emptyDrawableTint="@color/colorPrimary"
     app:emptyFont="@font/allerta"
     app:emptyText="@string/empty"
+    app:emptyTitle="@string/empty_title"
+    app:emptyTitleColor="@color/colorPrimary"
     app:emptyTransition="slide"
     app:errorBackgroundColor="@color/red"
     app:errorButtonText="@string/try_again"

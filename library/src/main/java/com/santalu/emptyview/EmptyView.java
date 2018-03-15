@@ -39,17 +39,17 @@ import java.util.ArrayList;
 
 public class EmptyView extends ConstraintLayout {
 
-  //Style
+  // Style
   public static final int CIRCULAR = 0;
   public static final int TEXT = 1;
 
-  //State
-  public static final int LOADING = 0;
-  public static final int EMPTY = 1;
-  public static final int ERROR = 2;
-  public static final int CONTENT = 3;
+  // State
+  public static final int CONTENT = 0;
+  public static final int LOADING = 1;
+  public static final int EMPTY = 2;
+  public static final int ERROR = 3;
 
-  //Transition
+  // Transition
   public static final int SLIDE = 0;
   public static final int EXPLODE = 1;
   public static final int FADE = 2;
@@ -60,6 +60,7 @@ public class EmptyView extends ConstraintLayout {
   private ConstraintLayout container;
   private ProgressBar progressBar;
   private ImageView imageView;
+  private TextView titleView;
   private TextView textView;
   private Button button;
   private Typeface emptyFont;
@@ -69,8 +70,10 @@ public class EmptyView extends ConstraintLayout {
   private OnClickListener onClickListener;
 
   private CharSequence loadingText;
+  private CharSequence emptyTitle;
   private CharSequence emptyText;
   private CharSequence emptyButtonText;
+  private CharSequence errorTitle;
   private CharSequence errorText;
   private CharSequence errorButtonText;
   private int loadingTint;
@@ -78,11 +81,13 @@ public class EmptyView extends ConstraintLayout {
   private int loadingBackgroundColor;
   private int loadingStyle;
   private int emptyTint;
+  private int emptyTitleColor;
   private int emptyTextColor;
   private int emptyBackgroundColor;
   private int emptyButtonTextColor;
   private int emptyButtonBackgroundColor;
   private int errorTint;
+  private int errorTitleColor;
   private int errorTextColor;
   private int errorButtonTextColor;
   private int errorButtonBackgroundColor;
@@ -115,6 +120,7 @@ public class EmptyView extends ConstraintLayout {
     container.setTag(TAG);
     imageView = findViewById(R.id.empty_icon);
     textView = findViewById(R.id.empty_text);
+    titleView = findViewById(R.id.empty_title);
     button = findViewById(R.id.empty_button);
     progressBar = findViewById(R.id.empty_progress_bar);
   }
@@ -149,8 +155,11 @@ public class EmptyView extends ConstraintLayout {
   }
 
   public void setTypeface(@Nullable Typeface typeface) {
-    textView.setTypeface(typeface);
-    button.setTypeface(typeface);
+    if (typeface != null) {
+      titleView.setTypeface(typeface);
+      textView.setTypeface(typeface);
+      button.setTypeface(typeface);
+    }
   }
 
   public void setLoadingStyle(@Style int style) {
@@ -166,10 +175,10 @@ public class EmptyView extends ConstraintLayout {
   }
 
   public void setEmptyButton(CharSequence text,
-      @ColorInt int color,
+      @ColorInt int textColor,
       @ColorInt int backgroundColor) {
     emptyButtonText = text;
-    emptyButtonTextColor = color;
+    emptyButtonTextColor = textColor;
     emptyButtonBackgroundColor = backgroundColor;
   }
 
@@ -178,10 +187,10 @@ public class EmptyView extends ConstraintLayout {
   }
 
   public void setErrorButton(CharSequence text,
-      @ColorInt int color,
+      @ColorInt int textColor,
       @ColorInt int backgroundColor) {
     errorButtonText = text;
-    errorButtonTextColor = color;
+    errorButtonTextColor = textColor;
     errorButtonBackgroundColor = backgroundColor;
   }
 
@@ -190,7 +199,7 @@ public class EmptyView extends ConstraintLayout {
   }
 
   private void setState(@State int state) {
-    //start animation
+    // start animation
     if (transition != null) {
       TransitionManager.beginDelayedTransition(container, transition);
     }
@@ -201,6 +210,7 @@ public class EmptyView extends ConstraintLayout {
         container.setVisibility(VISIBLE);
         progressBar.setVisibility(VISIBLE);
         imageView.setVisibility(GONE);
+        titleView.setVisibility(View.GONE);
         textView.setVisibility(GONE);
         button.setVisibility(GONE);
         setupLoadingView();
@@ -210,6 +220,7 @@ public class EmptyView extends ConstraintLayout {
         container.setVisibility(VISIBLE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(VISIBLE);
+        titleView.setVisibility(View.VISIBLE);
         textView.setVisibility(VISIBLE);
         button.setVisibility(GONE);
         setupEmptyView();
@@ -219,6 +230,7 @@ public class EmptyView extends ConstraintLayout {
         container.setVisibility(VISIBLE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(VISIBLE);
+        titleView.setVisibility(View.VISIBLE);
         textView.setVisibility(VISIBLE);
         button.setVisibility(VISIBLE);
         setupErrorView();
@@ -228,6 +240,7 @@ public class EmptyView extends ConstraintLayout {
         container.setVisibility(GONE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(GONE);
+        titleView.setVisibility(View.GONE);
         textView.setVisibility(GONE);
         button.setVisibility(GONE);
         setChildVisibility(VISIBLE);
@@ -312,6 +325,8 @@ public class EmptyView extends ConstraintLayout {
       loadingStyle = a.getInt(R.styleable.EmptyView_loadingStyle, CIRCULAR);
 
       //Empty state attrs
+      emptyTitle = a.getText(R.styleable.EmptyView_emptyTitle);
+      emptyTitleColor = a.getColor(R.styleable.EmptyView_emptyTitleColor, Color.BLACK);
       emptyText = a.getText(R.styleable.EmptyView_emptyText);
       emptyTextColor = a.getColor(R.styleable.EmptyView_emptyTextColor, Color.BLACK);
       emptyBackgroundColor = a.getColor(R.styleable.EmptyView_emptyBackgroundColor, 0);
@@ -328,6 +343,8 @@ public class EmptyView extends ConstraintLayout {
           R.styleable.EmptyView_emptyButtonBackgroundColor, 0);
 
       //Error state attrs
+      errorTitle = a.getText(R.styleable.EmptyView_errorTitle);
+      errorTitleColor = a.getColor(R.styleable.EmptyView_errorTitleColor, Color.BLACK);
       errorText = a.getText(R.styleable.EmptyView_errorText);
       errorTextColor = a.getColor(R.styleable.EmptyView_errorTextColor, Color.BLACK);
       errorButtonText = a.getText(R.styleable.EmptyView_errorButtonText);
@@ -361,9 +378,7 @@ public class EmptyView extends ConstraintLayout {
     }
     setIcon(loadingDrawable, loadingTint);
     setText(loadingText, loadingTextColor);
-    if (emptyFont != null) {
-      setTypeface(emptyFont);
-    }
+    setTypeface(emptyFont);
   }
 
   private void setupEmptyView() {
@@ -372,21 +387,19 @@ public class EmptyView extends ConstraintLayout {
       container.setOnClickListener(onClickListener);
     }
     setIcon(emptyDrawable, emptyTint);
+    setTitle(emptyTitle, emptyTitleColor);
     setText(emptyText, emptyTextColor);
     setButton(emptyButtonText, emptyButtonTextColor, emptyButtonBackgroundColor);
-    if (emptyFont != null) {
-      setTypeface(emptyFont);
-    }
+    setTypeface(emptyFont);
   }
 
   private void setupErrorView() {
     container.setBackgroundColor(errorBackgroundColor);
     setIcon(errorDrawable, errorTint);
+    setTitle(errorTitle, errorTitleColor);
     setText(errorText, errorTextColor);
     setButton(errorButtonText, errorButtonTextColor, errorButtonBackgroundColor);
-    if (emptyFont != null) {
-      setTypeface(emptyFont);
-    }
+    setTypeface(emptyFont);
   }
 
   private void setIcon(@Nullable Drawable drawable, @ColorInt int tint) {
@@ -399,13 +412,23 @@ public class EmptyView extends ConstraintLayout {
     }
   }
 
-  private void setText(@Nullable CharSequence text, @ColorInt int color) {
+  private void setTitle(@Nullable CharSequence text, @ColorInt int textColor) {
+    if (TextUtils.isEmpty(text)) {
+      titleView.setVisibility(GONE);
+    } else {
+      titleView.setVisibility(VISIBLE);
+      titleView.setText(fromHtml(text.toString()));
+      titleView.setTextColor(textColor);
+    }
+  }
+
+  private void setText(@Nullable CharSequence text, @ColorInt int textColor) {
     if (TextUtils.isEmpty(text)) {
       textView.setVisibility(GONE);
     } else {
       textView.setVisibility(VISIBLE);
       textView.setText(fromHtml(text.toString()));
-      textView.setTextColor(color);
+      textView.setTextColor(textColor);
       textView.setLineSpacing(emptyLineSpacingExtra, emptyLineSpacingMultiplier);
       if (Build.VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
         textView.setLetterSpacing(emptyLetterSpacing);
@@ -414,14 +437,14 @@ public class EmptyView extends ConstraintLayout {
   }
 
   private void setButton(@Nullable CharSequence text,
-      @ColorInt int color,
+      @ColorInt int textColor,
       @ColorInt int backgroundColor) {
     if (TextUtils.isEmpty(text)) {
       button.setVisibility(GONE);
     } else {
       button.setVisibility(VISIBLE);
       button.setText(fromHtml(text.toString()));
-      button.setTextColor(color);
+      button.setTextColor(textColor);
       if (backgroundColor != 0) {
         button.setBackgroundColor(backgroundColor);
       }

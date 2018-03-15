@@ -3,6 +3,7 @@
   <string name="app_name" translatable="false">EmptyView</string>
 
   <string name="try_again" translatable="false">Try Again</string>
+  <string name="empty_title" translatable="false">Sorry...</string>
   <string name="empty" translatable="false">Content not found!\nTap here to try again.</string>
   <string name="show_progress" translatable="false">Show progress</string>
   <string name="show_content" translatable="false">Show content</string>
