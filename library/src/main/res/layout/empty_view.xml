@@ -1,55 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/empty_layout"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/emptyview_spacing_medium"
-    android:visibility="gone"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <ImageView
       android:id="@+id/empty_icon"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/emptyview_spacing_medium"/>
+      android:layout_marginBottom="@dimen/emptyview_spacing_medium"
+      android:layout_marginEnd="@dimen/emptyview_spacing_medium"
+      android:layout_marginStart="@dimen/emptyview_spacing_medium"
+      android:layout_marginTop="@dimen/emptyview_spacing_medium"
+      android:visibility="gone"
+      app:layout_constraintBottom_toTopOf="@+id/empty_progress_bar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"/>
 
   <ProgressBar
       android:id="@+id/empty_progress_bar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/emptyview_spacing_medium"/>
+      android:layout_marginBottom="@dimen/emptyview_spacing_medium"
+      android:layout_marginEnd="@dimen/emptyview_spacing_medium"
+      android:layout_marginStart="@dimen/emptyview_spacing_medium"
+      android:visibility="gone"
+      app:layout_constraintBottom_toTopOf="@+id/empty_title"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/empty_icon"/>
 
   <TextView
       android:id="@+id/empty_title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/emptyview_spacing_medium"
+      android:layout_marginEnd="@dimen/emptyview_spacing_medium"
+      android:layout_marginStart="@dimen/emptyview_spacing_medium"
       android:gravity="center"
       android:paddingEnd="@dimen/emptyview_spacing_medium"
       android:paddingStart="@dimen/emptyview_spacing_medium"
-      android:textSize="@dimen/emptyview_title_text_size"/>
+      android:textSize="@dimen/emptyview_title_text_size"
+      android:visibility="gone"
+      app:layout_constraintBottom_toTopOf="@+id/empty_text"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/empty_progress_bar"/>
 
   <TextView
       android:id="@+id/empty_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/emptyview_spacing_medium"
+      android:layout_marginEnd="@dimen/emptyview_spacing_medium"
+      android:layout_marginStart="@dimen/emptyview_spacing_medium"
       android:gravity="center"
       android:paddingEnd="@dimen/emptyview_spacing_medium"
       android:paddingStart="@dimen/emptyview_spacing_medium"
-      android:textSize="@dimen/emptyview_text_size"/>
+      android:textSize="@dimen/emptyview_text_size"
+      android:visibility="gone"
+      app:layout_constraintBottom_toTopOf="@+id/empty_button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/empty_title"/>
 
   <Button
       android:id="@+id/empty_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/emptyview_spacing_medium"
+      android:layout_marginEnd="@dimen/emptyview_spacing_medium"
+      android:layout_marginStart="@dimen/emptyview_spacing_medium"
       android:paddingBottom="@dimen/emptyview_spacing_small"
       android:paddingLeft="@dimen/emptyview_spacing_normal"
       android:paddingRight="@dimen/emptyview_spacing_normal"
@@ -57,6 +83,12 @@
       android:textAllCaps="false"
       android:textColor="@android:color/black"
       android:textSize="@dimen/emptyview_button_text_size"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/empty_text"
       style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
-</LinearLayout>
+</merge>
