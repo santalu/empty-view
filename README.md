@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  implementation 'com.github.santalu:emptyview:1.1.2'
+  implementation 'com.github.santalu:emptyview:1.1.3'
 }
 ```
 
@@ -73,6 +73,7 @@ dependencies {
 | loadingDrawable | reference |
 | loadingTint | color default transparent |
 | loadingBackgroundColor | color default transparent |
+| emptyGravity | center, top, bottom default center |
 | emptyFont | reference |
 | emptyTransition | slide, explode, fade default null |
 | emptyTitle | string |
