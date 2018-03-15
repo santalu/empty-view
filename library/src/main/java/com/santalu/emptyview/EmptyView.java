@@ -23,10 +23,12 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.lang.annotation.Retention;
@@ -43,6 +45,11 @@ public class EmptyView extends ConstraintLayout {
   public static final int CIRCULAR = 0;
   public static final int TEXT = 1;
 
+  // Position
+  public static final int CENTER = 0;
+  public static final int TOP = 1;
+  public static final int BOTTOM = 2;
+
   // State
   public static final int CONTENT = 0;
   public static final int LOADING = 1;
@@ -57,7 +64,7 @@ public class EmptyView extends ConstraintLayout {
   private static final String TAG = EmptyView.class.getSimpleName();
 
   private ArrayList<View> childViews = new ArrayList<>();
-  private ConstraintLayout container;
+  private LinearLayout container;
   private ProgressBar progressBar;
   private ImageView imageView;
   private TextView titleView;
@@ -93,6 +100,7 @@ public class EmptyView extends ConstraintLayout {
   private int errorButtonBackgroundColor;
   private int errorBackgroundColor;
   private int state;
+  private int gravity;
   private float emptyLetterSpacing;
   private float emptyLineSpacingExtra;
   private float emptyLineSpacingMultiplier;
@@ -123,6 +131,7 @@ public class EmptyView extends ConstraintLayout {
     titleView = findViewById(R.id.empty_title);
     button = findViewById(R.id.empty_button);
     progressBar = findViewById(R.id.empty_progress_bar);
+    setGravity(gravity);
   }
 
   @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
@@ -151,6 +160,21 @@ public class EmptyView extends ConstraintLayout {
       if (childViews.contains(view)) {
         childViews.remove(view);
       }
+    }
+  }
+
+  public void setGravity(@Position int gravity) {
+    switch (gravity) {
+      case BOTTOM:
+        container.setGravity(Gravity.BOTTOM | Gravity.CENTER);
+        break;
+      case TOP:
+        container.setGravity(Gravity.TOP | Gravity.CENTER);
+        break;
+      case CENTER:
+      default:
+        container.setGravity(Gravity.CENTER);
+        break;
     }
   }
 
@@ -316,6 +340,8 @@ public class EmptyView extends ConstraintLayout {
           break;
       }
 
+      gravity = a.getInt(R.styleable.EmptyView_emptyGravity, CENTER);
+
       //Loading state attrs
       loadingText = a.getText(R.styleable.EmptyView_loadingText);
       loadingTextColor = a.getColor(R.styleable.EmptyView_loadingTextColor, Color.BLACK);
@@ -474,5 +500,10 @@ public class EmptyView extends ConstraintLayout {
   @IntDef({ CIRCULAR, TEXT })
   @Retention(RetentionPolicy.SOURCE)
   public @interface Style {
+  }
+
+  @IntDef({ CENTER, TOP, BOTTOM })
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Position {
   }
 }

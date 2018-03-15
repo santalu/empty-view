@@ -6,16 +6,21 @@
       <enum name="circular" value="0"/>
       <enum name="text" value="1"/>
     </attr>
-    <attr name="emptyTransition">
-      <enum name="slide" value="0"/>
-      <enum name="explode" value="1"/>
-      <enum name="fade" value="2"/>
-    </attr>
     <attr format="string" name="loadingText"/>
     <attr format="color" name="loadingTextColor"/>
     <attr format="reference" name="loadingDrawable"/>
     <attr format="color" name="loadingTint"/>
     <attr format="color" name="loadingBackgroundColor"/>
+    <attr name="emptyTransition">
+      <enum name="slide" value="0"/>
+      <enum name="explode" value="1"/>
+      <enum name="fade" value="2"/>
+    </attr>
+    <attr name="emptyGravity">
+      <enum name="center" value="0"/>
+      <enum name="top" value="1"/>
+      <enum name="bottom" value="2"/>
+    </attr>
     <attr format="reference" name="emptyFont"/>
     <attr format="string" name="emptyTitle"/>
     <attr format="color" name="emptyTitleColor"/>
