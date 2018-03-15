@@ -73,7 +73,6 @@ dependencies {
 | loadingDrawable | reference |
 | loadingTint | color default transparent |
 | loadingBackgroundColor | color default transparent |
-| emptyGravity | center, top, bottom default center |
 | emptyFont | reference |
 | emptyTransition | slide, explode, fade default null |
 | emptyTitle | string |
