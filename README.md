@@ -65,32 +65,34 @@ dependencies {
 
 ## Attributes
 
-| Name        | Description           | Value  |
-| ------------- |:-------------:| -----:|
-| loadingStyle     | style of loading state      | circular, linear, text |
-| loadingText | text will show on loading state      |   string |
-| loadingTextColor | loading state text color      |   color |
-| loadingDrawable | drawable will show on loading state      |   reference |
-| loadingTint | tint color of loading drawable     |   color |
-| loadingBackgroundColor | background color of loading state     |   color |
-| emptyFont      | font family | reference |
-| emptyTransition      | transition animation | slide, explode, fade default null |
-| emptyText | text will show on empty state      |   string |
-| emptyTextColor | empty state text color     |   color |
-| emptyLetterSpacing | empty state letter spacing    |   float |
-| emptyLineSpacingExtra | empty state line spacing extra    |   float |
-| emptyLineSpacingMultiplier | empty state line spacing multiplier    |   float |
-| emptyDrawable | drawable will show on empty state     |   reference |
-| emptyDrawableTint | tint color of empty drawable      |   color |
-| emptyBackgroundColor | background color of empty state     |   color |
-| errorText | text will show on error state     |   string |
-| errorTextColor | error state text color    |   color |
-| errorDrawable | drawable will show on error state     |   reference |
-| errorDrawableTint | tint color of error drawable     |   color |
-| errorBackgroundColor | background color of error state     |   color |
-| errorButtonText | error state button text     |   string |
-| errorButtonTextColor | error state button text color    |   color |
-| errorButtonBackgroundColor | error state button background color       |   color |
+| Name        |  Value  |
+| ------------- |:-------------:|
+| loadingStyle | circular, linear, text default circular |
+| loadingText  | string |
+| loadingTextColor | color default black |
+| loadingDrawable | reference |
+| loadingTint | color default transparent |
+| loadingBackgroundColor | color default transparent |
+| emptyFont | reference |
+| emptyTransition | slide, explode, fade default null |
+| emptyTitle | string |
+| emptyTitleColor | color default black |
+| emptyText | string |
+| emptyTextColor | color default black |
+| emptyLetterSpacing | float default 0 |
+| emptyLineSpacingExtra | float default 1 |
+| emptyLineSpacingMultiplier | float default 1 |
+| emptyDrawable | reference |
+| emptyDrawableTint | color default transparent |
+| emptyBackgroundColor | color default transparent |
+| errorText | string |
+| errorTextColor | color default black |
+| errorDrawable | reference |
+| errorDrawableTint | color default transparent |
+| errorBackgroundColor | color default transparent |
+| errorButtonText | string |
+| errorButtonTextColor | color default black |
+| errorButtonBackgroundColor | color default transparent |
 
 ## Notes
 
