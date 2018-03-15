@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
@@ -23,12 +24,10 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.lang.annotation.Retention;
@@ -46,9 +45,9 @@ public class EmptyView extends ConstraintLayout {
   public static final int TEXT = 1;
 
   // Position
-  public static final int CENTER = 0;
+  /*public static final int CENTER = 0;
   public static final int TOP = 1;
-  public static final int BOTTOM = 2;
+  public static final int BOTTOM = 2;*/
 
   // State
   public static final int CONTENT = 0;
@@ -64,7 +63,6 @@ public class EmptyView extends ConstraintLayout {
   private static final String TAG = EmptyView.class.getSimpleName();
 
   private ArrayList<View> childViews = new ArrayList<>();
-  private LinearLayout container;
   private ProgressBar progressBar;
   private ImageView imageView;
   private TextView titleView;
@@ -83,6 +81,7 @@ public class EmptyView extends ConstraintLayout {
   private CharSequence errorTitle;
   private CharSequence errorText;
   private CharSequence errorButtonText;
+  private int contentBackgroundColor;
   private int loadingTint;
   private int loadingTextColor;
   private int loadingBackgroundColor;
@@ -100,7 +99,7 @@ public class EmptyView extends ConstraintLayout {
   private int errorButtonBackgroundColor;
   private int errorBackgroundColor;
   private int state;
-  private int gravity;
+  // private int gravity;
   private float emptyLetterSpacing;
   private float emptyLineSpacingExtra;
   private float emptyLineSpacingMultiplier;
@@ -124,14 +123,16 @@ public class EmptyView extends ConstraintLayout {
   @Override protected void onFinishInflate() {
     super.onFinishInflate();
     inflate(getContext(), R.layout.empty_view, this);
-    container = findViewById(R.id.empty_layout);
-    container.setTag(TAG);
     imageView = findViewById(R.id.empty_icon);
     textView = findViewById(R.id.empty_text);
     titleView = findViewById(R.id.empty_title);
     button = findViewById(R.id.empty_button);
     progressBar = findViewById(R.id.empty_progress_bar);
-    setGravity(gravity);
+
+    Drawable backgroundDrawable = getBackground();
+    if (backgroundDrawable instanceof ColorDrawable) {
+      contentBackgroundColor = ((ColorDrawable) backgroundDrawable).getColor();
+    }
   }
 
   @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
@@ -160,21 +161,6 @@ public class EmptyView extends ConstraintLayout {
       if (childViews.contains(view)) {
         childViews.remove(view);
       }
-    }
-  }
-
-  public void setGravity(@Position int gravity) {
-    switch (gravity) {
-      case BOTTOM:
-        container.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-        break;
-      case TOP:
-        container.setGravity(Gravity.TOP | Gravity.CENTER);
-        break;
-      case CENTER:
-      default:
-        container.setGravity(Gravity.CENTER);
-        break;
     }
   }
 
@@ -225,13 +211,12 @@ public class EmptyView extends ConstraintLayout {
   private void setState(@State int state) {
     // start animation
     if (transition != null) {
-      TransitionManager.beginDelayedTransition(container, transition);
+      TransitionManager.beginDelayedTransition(this, transition);
     }
 
     this.state = state;
     switch (state) {
       case LOADING:
-        container.setVisibility(VISIBLE);
         progressBar.setVisibility(VISIBLE);
         imageView.setVisibility(GONE);
         titleView.setVisibility(View.GONE);
@@ -241,7 +226,6 @@ public class EmptyView extends ConstraintLayout {
         setChildVisibility(GONE);
         break;
       case EMPTY:
-        container.setVisibility(VISIBLE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(VISIBLE);
         titleView.setVisibility(View.VISIBLE);
@@ -251,7 +235,6 @@ public class EmptyView extends ConstraintLayout {
         setChildVisibility(GONE);
         break;
       case ERROR:
-        container.setVisibility(VISIBLE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(VISIBLE);
         titleView.setVisibility(View.VISIBLE);
@@ -261,7 +244,7 @@ public class EmptyView extends ConstraintLayout {
         setChildVisibility(GONE);
         break;
       case CONTENT:
-        container.setVisibility(GONE);
+        setBackgroundColor(contentBackgroundColor);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(GONE);
         titleView.setVisibility(View.GONE);
@@ -340,7 +323,7 @@ public class EmptyView extends ConstraintLayout {
           break;
       }
 
-      gravity = a.getInt(R.styleable.EmptyView_emptyGravity, CENTER);
+      // gravity = a.getInt(R.styleable.EmptyView_emptyGravity, CENTER);
 
       //Loading state attrs
       loadingText = a.getText(R.styleable.EmptyView_loadingText);
@@ -393,7 +376,7 @@ public class EmptyView extends ConstraintLayout {
   }
 
   private void setupLoadingView() {
-    container.setBackgroundColor(loadingBackgroundColor);
+    setBackgroundColor(loadingBackgroundColor);
     if (loadingStyle == TEXT) {
       progressBar.setVisibility(GONE);
     } else {
@@ -408,9 +391,9 @@ public class EmptyView extends ConstraintLayout {
   }
 
   private void setupEmptyView() {
-    container.setBackgroundColor(emptyBackgroundColor);
+    setBackgroundColor(emptyBackgroundColor);
     if (TextUtils.isEmpty(emptyButtonText)) {
-      container.setOnClickListener(onClickListener);
+      super.setOnClickListener(onClickListener);
     }
     setIcon(emptyDrawable, emptyTint);
     setTitle(emptyTitle, emptyTitleColor);
@@ -420,7 +403,7 @@ public class EmptyView extends ConstraintLayout {
   }
 
   private void setupErrorView() {
-    container.setBackgroundColor(errorBackgroundColor);
+    setBackgroundColor(errorBackgroundColor);
     setIcon(errorDrawable, errorTint);
     setTitle(errorTitle, errorTitleColor);
     setText(errorText, errorTextColor);
@@ -502,8 +485,8 @@ public class EmptyView extends ConstraintLayout {
   public @interface Style {
   }
 
-  @IntDef({ CENTER, TOP, BOTTOM })
+  /*@IntDef({ CENTER, TOP, BOTTOM })
   @Retention(RetentionPolicy.SOURCE)
   public @interface Position {
-  }
+  }*/
 }
