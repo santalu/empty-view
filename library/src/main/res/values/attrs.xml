@@ -7,6 +7,7 @@
       <enum name="text" value="1"/>
     </attr>
     <attr format="string" name="loadingText"/>
+    <attr format="dimension" name="loadingTextSize"/>
     <attr format="color" name="loadingTextColor"/>
     <attr format="reference" name="loadingDrawable"/>
     <attr format="color" name="loadingTint"/>
@@ -23,8 +24,10 @@
     </attr>
     <attr format="reference" name="emptyFont"/>
     <attr format="string" name="emptyTitle"/>
+    <attr format="dimension" name="emptyTitleSize"/>
     <attr format="color" name="emptyTitleColor"/>
     <attr format="string" name="emptyText"/>
+    <attr format="dimension" name="emptyTextSize"/>
     <attr format="color" name="emptyTextColor"/>
     <attr format="reference" name="emptyDrawable"/>
     <attr format="color" name="emptyDrawableTint"/>
@@ -33,16 +36,20 @@
     <attr format="float" name="emptyLineSpacingExtra"/>
     <attr format="float" name="emptyLineSpacingMultiplier"/>
     <attr format="string" name="emptyButtonText"/>
+    <attr format="dimension" name="emptyButtonTextSize"/>
     <attr format="color" name="emptyButtonTextColor"/>
     <attr format="color" name="emptyButtonBackgroundColor"/>
     <attr format="string" name="errorTitle"/>
+    <attr format="dimension" name="errorTitleSize"/>
     <attr format="color" name="errorTitleColor"/>
     <attr format="string" name="errorText"/>
+    <attr format="dimension" name="errorTextSize"/>
     <attr format="color" name="errorTextColor"/>
     <attr format="reference" name="errorDrawable"/>
     <attr format="color" name="errorDrawableTint"/>
     <attr format="color" name="errorBackgroundColor"/>
     <attr format="string" name="errorButtonText"/>
+    <attr format="dimension" name="errorButtonTextSize"/>
     <attr format="color" name="errorButtonTextColor"/>
     <attr format="color" name="errorButtonBackgroundColor"/>
   </declare-styleable>
