@@ -104,7 +104,7 @@ public class EmptyHelper {
   public void showError(Throwable throwable, View.OnClickListener listener) {
     if (emptyView != null) {
       if (throwable == null || TextUtils.isEmpty(throwable.getMessage())) {
-        showError(R.string.emptyview_error_unknown, listener);
+        showError(R.string.emptyview_unknown_error_text, listener);
         return;
       }
       Error error = Error.find(throwable);
@@ -123,15 +123,15 @@ public class EmptyHelper {
   }
 
   public void showConnectionError(View.OnClickListener listener) {
-    showError(R.string.emptyview_error_connection_not_found, listener);
+    showError(R.string.emptyview_connection_error_text, listener);
   }
 
   public void showTimeoutError(View.OnClickListener listener) {
-    showError(R.string.emptyview_error_connection_timeout, listener);
+    showError(R.string.emptyview_connection_timeout_error_text, listener);
   }
 
   public void showEndpointError(View.OnClickListener listener) {
-    showError(R.string.emptyview_error_endpoint, listener);
+    showError(R.string.emptyview_error_endpoint_text, listener);
   }
 
   enum Error {
