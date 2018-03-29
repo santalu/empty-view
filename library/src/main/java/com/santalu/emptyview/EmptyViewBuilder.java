@@ -26,21 +26,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.santalu.emptyview.EmptyView.CIRCULAR;
-import static com.santalu.emptyview.EmptyView.CONTENT;
-import static com.santalu.emptyview.EmptyView.EMPTY;
-import static com.santalu.emptyview.EmptyView.ERROR;
-import static com.santalu.emptyview.EmptyView.EXPLODE;
-import static com.santalu.emptyview.EmptyView.FADE;
-import static com.santalu.emptyview.EmptyView.LOADING;
-import static com.santalu.emptyview.EmptyView.NONE;
-import static com.santalu.emptyview.EmptyView.SLIDE;
-
 /**
  * Created by santalu on 09/08/2017.
  */
 
 public class EmptyViewBuilder {
+
+  public static final int NONE = 0;
+
+  // Loading
+  public static final int CIRCULAR = 1;
+
+  // State
+  public static final int CONTENT = 1;
+  public static final int LOADING = 2;
+  public static final int EMPTY = 3;
+  public static final int ERROR = 4;
+
+  // Transition
+  public static final int SLIDE = 1;
+  public static final int EXPLODE = 2;
+  public static final int FADE = 3;
 
   private final EmptyView emptyView;
   private final Context context;
