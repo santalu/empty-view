@@ -72,7 +72,7 @@ dependencies {
 
 | Name        |  Value  |
 | ------------- |:-------------:|
-| ev_transition | slide, explode, fade default slide |
+| ev_transition | slide, explode, fade default none |
 | ev_font | reference |
 | ev_titleTextSize | dimension |
 | ev_textSize | dimension |
