@@ -10,6 +10,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.FontRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.TransitionRes;
 import android.support.transition.Explode;
@@ -19,6 +20,8 @@ import android.support.transition.Transition;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.View;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.santalu.emptyview.EmptyView.CIRCULAR;
 import static com.santalu.emptyview.EmptyView.EXPLODE;
@@ -34,6 +37,7 @@ public class EmptyViewBuilder {
 
   private final EmptyView emptyView;
   private final Context context;
+  List<View> excludedViews;
   int state;
 
   // Shared attributes
@@ -179,6 +183,27 @@ public class EmptyViewBuilder {
     } finally {
       a.recycle();
     }
+  }
+
+  public EmptyViewBuilder exclude(@IdRes int... ids) {
+    excludedViews = new ArrayList<>();
+    for (int id : ids) {
+      View view = emptyView.findViewById(id);
+      if (!excludedViews.contains(view)) {
+        excludedViews.add(view);
+      }
+    }
+    return this;
+  }
+
+  public EmptyViewBuilder exclude(View... views) {
+    excludedViews = new ArrayList<>();
+    for (View view : views) {
+      if (!excludedViews.contains(view)) {
+        excludedViews.add(view);
+      }
+    }
+    return this;
   }
 
   public EmptyViewBuilder setState(@EmptyView.State int state) {

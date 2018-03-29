@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -97,27 +96,8 @@ public class EmptyView extends ConstraintLayout {
     builder.setOnClickListener(onClickListener);
   }
 
-  public void exclude(@IdRes int... ids) {
-    for (int id : ids) {
-      View view = findViewById(id);
-      if (childViews.contains(view)) {
-        childViews.remove(view);
-      }
-    }
-  }
-
-  public void exclude(View... views) {
-    for (View view : views) {
-      if (childViews.contains(view)) {
-        childViews.remove(view);
-      }
-    }
-  }
-
-  private void setChildVisibility(int visibility) {
-    for (View view : childViews) {
-      view.setVisibility(visibility);
-    }
+  public EmptyViewBuilder builder() {
+    return builder;
   }
 
   public void showContent() {
@@ -204,8 +184,18 @@ public class EmptyView extends ConstraintLayout {
     }
   }
 
-  public EmptyViewBuilder setState(@State int state) {
-    return builder.setState(state);
+  private void setChildVisibility(int visibility) {
+    if (builder.excludedViews == null || builder.excludedViews.isEmpty()) {
+      for (View view : childViews) {
+        view.setVisibility(visibility);
+      }
+      return;
+    }
+    for (View view : childViews) {
+      if (!builder.excludedViews.contains(view)) {
+        view.setVisibility(visibility);
+      }
+    }
   }
 
   private void setLoadingDrawable(@Loading int style, @ColorInt int drawableTint) {
