@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.transition.TransitionManager;
@@ -19,8 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +43,8 @@ public class EmptyView extends ConstraintLayout {
   public static final int EXPLODE = 2;
   public static final int FADE = 3;
 
-  private final List<View> childViews = new ArrayList<>();
   private final EmptyViewBuilder builder;
+  private final List<View> children;
 
   private ProgressBar progressBar;
   private ImageView imageView;
@@ -58,16 +55,19 @@ public class EmptyView extends ConstraintLayout {
   public EmptyView(Context context) {
     super(context);
     builder = new EmptyViewBuilder(this);
+    children = new ArrayList<>();
   }
 
   public EmptyView(Context context, AttributeSet attrs) {
     super(context, attrs);
     builder = new EmptyViewBuilder(this, attrs);
+    children = new ArrayList<>();
   }
 
   public EmptyView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     builder = new EmptyViewBuilder(this, attrs);
+    children = new ArrayList<>();
   }
 
   @Override protected void onFinishInflate() {
@@ -88,7 +88,7 @@ public class EmptyView extends ConstraintLayout {
   @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
     super.addView(child, index, params);
     if (child.getVisibility() == VISIBLE) {
-      childViews.add(child);
+      children.add(child);
     }
   }
 
@@ -186,12 +186,12 @@ public class EmptyView extends ConstraintLayout {
 
   private void setChildVisibility(int visibility) {
     if (builder.excludedViews == null || builder.excludedViews.isEmpty()) {
-      for (View view : childViews) {
+      for (View view : children) {
         view.setVisibility(visibility);
       }
       return;
     }
-    for (View view : childViews) {
+    for (View view : children) {
       if (!builder.excludedViews.contains(view)) {
         view.setVisibility(visibility);
       }
@@ -285,15 +285,5 @@ public class EmptyView extends ConstraintLayout {
     }
     button.setTypeface(builder.font);
     button.setOnClickListener(builder.onClickListener);
-  }
-
-  @IntDef({ CONTENT, EMPTY, ERROR, LOADING })
-  @Retention(RetentionPolicy.SOURCE)
-  public @interface State {
-  }
-
-  @IntDef({ NONE, CIRCULAR })
-  @Retention(RetentionPolicy.SOURCE)
-  public @interface Loading {
   }
 }

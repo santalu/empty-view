@@ -55,7 +55,7 @@ public class EmptyViewBuilder {
   @ColorInt int contentBackgroundColor;
 
   // Loading state attributes
-  @EmptyView.Loading int loading;
+  @Loading int loading;
   CharSequence loadingTitle;
   @ColorInt int loadingTitleTextColor;
   CharSequence loadingText;
@@ -206,7 +206,7 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setState(@EmptyView.State int state) {
+  public EmptyViewBuilder setState(@State int state) {
     this.state = state;
     return this;
   }
@@ -281,7 +281,7 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setLoading(@EmptyView.Loading int loading) {
+  public EmptyViewBuilder setLoading(@Loading int loading) {
     this.loading = loading;
     return this;
   }
