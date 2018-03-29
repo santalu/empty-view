@@ -21,27 +21,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.santalu.emptyview.EmptyViewBuilder.CONTENT;
+import static com.santalu.emptyview.EmptyViewBuilder.EMPTY;
+import static com.santalu.emptyview.EmptyViewBuilder.ERROR;
+import static com.santalu.emptyview.EmptyViewBuilder.LOADING;
+import static com.santalu.emptyview.EmptyViewBuilder.NONE;
+
 /**
  * Created by santalu on 09/08/2017.
  */
 
 public class EmptyView extends ConstraintLayout {
-
-  public static final int NONE = 0;
-
-  // Loading
-  public static final int CIRCULAR = 1;
-
-  // State
-  public static final int CONTENT = 1;
-  public static final int LOADING = 2;
-  public static final int EMPTY = 3;
-  public static final int ERROR = 4;
-
-  // Transition
-  public static final int SLIDE = 1;
-  public static final int EXPLODE = 2;
-  public static final int FADE = 3;
 
   private final EmptyViewBuilder builder;
   private final List<View> children;
@@ -198,7 +188,7 @@ public class EmptyView extends ConstraintLayout {
     }
   }
 
-  private void setLoadingDrawable(@Loading int style, @ColorInt int drawableTint) {
+  private void setLoadingDrawable(@EmptyViewBuilder.Loading int style, @ColorInt int drawableTint) {
     if (progressBar.getVisibility() != VISIBLE) {
       return;
     }

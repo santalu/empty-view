@@ -11,6 +11,7 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.FontRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.TransitionRes;
 import android.support.transition.Explode;
@@ -20,20 +21,32 @@ import android.support.transition.Transition;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.View;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.santalu.emptyview.EmptyView.CIRCULAR;
-import static com.santalu.emptyview.EmptyView.EXPLODE;
-import static com.santalu.emptyview.EmptyView.FADE;
-import static com.santalu.emptyview.EmptyView.NONE;
-import static com.santalu.emptyview.EmptyView.SLIDE;
 
 /**
  * Created by santalu on 09/08/2017.
  */
 
 public class EmptyViewBuilder {
+
+  public static final int NONE = 0;
+
+  // Loading
+  public static final int CIRCULAR = 1;
+
+  // State
+  public static final int CONTENT = 1;
+  public static final int LOADING = 2;
+  public static final int EMPTY = 3;
+  public static final int ERROR = 4;
+
+  // Transition
+  public static final int SLIDE = 1;
+  public static final int EXPLODE = 2;
+  public static final int FADE = 3;
 
   private final EmptyView emptyView;
   private final Context context;
@@ -435,5 +448,15 @@ public class EmptyViewBuilder {
 
   public void show() {
     emptyView.show();
+  }
+
+  @IntDef({ NONE, CIRCULAR })
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Loading {
+  }
+
+  @IntDef({ CONTENT, EMPTY, ERROR, LOADING })
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface State {
   }
 }
