@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  compile 'com.github.santalu:emptyview:1.0.5'
+  implementation 'com.github.santalu:emptyview:1.2'
 }
 ```
 
@@ -38,26 +38,30 @@ dependencies {
     android:id="@+id/empty_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:emptyAnimateLayoutChanges="true"
-    app:emptyButtonText="@string/try_again"
-    app:emptyButtonTextColor="@color/colorPrimaryDark"
-    app:emptyDrawable="@drawable/ic_sentiment_dissatisfied"
-    app:emptyDrawableTint="@color/colorPrimary"
-    app:emptyFont="@font/allerta"
-    app:emptyGravity="center"
-    app:emptyText="@string/empty"
-    app:errorBackgroundColor="@color/red"
-    app:errorButtonBackgroundColor="@color/white"
-    app:errorButtonText="@string/try_again"
-    app:errorButtonTextColor="@color/black"
-    app:errorDrawable="@drawable/ic_sentiment_very_dissatisfied"
-    app:errorDrawableTint="@color/white"
-    app:errorText="@string/emptyview_error_unknown"
-    app:errorTextColor="@color/white"
-    app:loadingDrawable="@drawable/ic_sentiment_satisfied"
-    app:loading="circular"
-    app:loadingText="@string/emptyview_loading"
-    app:loadingTint="@color/colorPrimary">
+    app:ev_buttonTextSize="18sp"
+    app:ev_empty_button="@string/try_again"
+    app:ev_empty_buttonTextColor="@color/colorPrimaryDark"
+    app:ev_empty_drawable="@drawable/ic_sentiment_dissatisfied"
+    app:ev_empty_drawableTint="@color/colorPrimary"
+    app:ev_empty_text="@string/empty"
+    app:ev_empty_title="@string/emptyview_unknown_error_title"
+    app:ev_error_backgroundColor="@color/red"
+    app:ev_error_button="@string/try_again"
+    app:ev_error_buttonTextColor="@color/white"
+    app:ev_error_drawable="@drawable/ic_sentiment_very_dissatisfied"
+    app:ev_error_drawableTint="@color/white"
+    app:ev_error_text="@string/emptyview_unknown_error_text"
+    app:ev_error_textColor="@color/white"
+    app:ev_error_title="@string/emptyview_unknown_error_title"
+    app:ev_error_titleTextColor="@color/white"
+    app:ev_font="@font/allerta"
+    app:ev_loading="circular"
+    app:ev_loading_drawable="@drawable/ic_sentiment_satisfied"
+    app:ev_loading_drawableTint="@color/colorPrimary"
+    app:ev_loading_title="@string/emptyview_loading"
+    app:ev_textSize="16sp"
+    app:ev_titleTextSize="20sp"
+    app:ev_transition="slide">
 
     *** your content here ***
 
@@ -66,37 +70,48 @@ dependencies {
 
 ## Attributes
 
-| Name        | Description           | Value  |
-| ------------- |:-------------:| -----:|
-| emptyAnimateLayoutChanges      | enable/disable transitions | boolean default false |
-| emptyFont      | font family | reference |
-| emptyGravity      | gravity of empty view | top, center, bottom |
-| loading     | style of loading state      | circular, linear, text |
-| loadingText | text will show on loading state      |   string |
-| loadingTextColor | loading state text color      |   color |
-| loadingDrawable | drawable will show on loading state      |   reference |
-| loadingTint | tint color of loading drawable     |   color |
-| loadingBackgroundColor | background color of loading state     |   color |
-| emptyText | text will show on empty state      |   string |
-| emptyTextColor | empty state text color     |   color |
-| emptyLetterSpacing | empty state letter spacing    |   float |
-| emptyLineSpacingExtra | empty state line spacing extra    |   float |
-| emptyLineSpacingMultiplier | empty state line spacing multiplier    |   float |
-| emptyDrawable | drawable will show on empty state     |   reference |
-| emptyDrawableTint | tint color of empty drawable      |   color |
-| emptyBackgroundColor | background color of empty state     |   color |
-| errorText | text will show on error state     |   string |
-| errorTextColor | error state text color    |   color |
-| errorDrawable | drawable will show on error state     |   reference |
-| errorDrawableTint | tint color of error drawable     |   color |
-| errorBackgroundColor | background color of error state     |   color |
-| errorButtonText | error state button text     |   string |
-| errorButtonTextColor | error state button text color    |   color |
-| errorButtonBackgroundColor | error state button background color       |   color |
+| Name        |  Value  |
+| ------------- |:-------------:|
+| ev_transition | slide, explode, fade default slide |
+| ev_font | reference |
+| ev_titleTextSize | dimension |
+| ev_textSize | dimension |
+| ev_letterSpacing | dimension |
+| ev_lineSpacingExtra | dimension |
+| ev_lineSpacingExtraMultiplier | dimension |
+| ev_buttonTextSize | dimension |
+| ev_loading | none, circular default circular |
+| ev_loading_title | string |
+| ev_loading_titleTextColor | color |
+| ev_loading_text | string |
+| ev_loading_textColor | color |
+| ev_loading_drawable | reference |
+| ev_loading_drawableTint | color |
+| ev_loading_backgroundColor | color |
+| ev_empty_title | string |
+| ev_empty_titleTextColor | color |
+| ev_empty_text | string |
+| ev_empty_textColor | color |
+| ev_empty_button | string |
+| ev_empty_buttonTextColor | color |
+| ev_empty_buttonBackgroundColor | color |
+| ev_empty_drawable | reference |
+| ev_empty_drawableTint | color |
+| ev_empty_backgroundColor | color |
+| ev_error_title | string |
+| ev_error_titleTextColor | color |
+| ev_error_text | string |
+| ev_error_textColor | color |
+| ev_error_button | string |
+| ev_error_buttonTextColor | color |
+| ev_error_buttonBackgroundColor | color |
+| ev_error_drawable | reference |
+| ev_error_drawableTint | color |
+| ev_error_backgroundColor | color |
 
 ## Notes
 
-* Use `setTransition(android.support.transition transition)` method to define which transitions is played when animating layout changes
+* Use `exclude(int... ids)` or `exclude(View... views)` methods to exclude views from visibility changes
 
 ## License
 ```
@@ -114,7 +129,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-
-
-
