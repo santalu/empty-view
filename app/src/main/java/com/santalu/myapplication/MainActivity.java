@@ -11,16 +11,19 @@ import com.santalu.emptyview.EmptyView;
 public class MainActivity extends AppCompatActivity {
 
   private EmptyView emptyView;
-  private EmptyHelper emptyHelper;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     emptyView = findViewById(R.id.empty_view);
-    //emptyView.exclude(R.id.text);
-    //emptyView.setErrorButton("Error Button");
-    //emptyView.setEmptyButton("Empty Button");
-    emptyHelper = new EmptyHelper(emptyView);
+
+    /*emptyView.setState(EmptyView.EMPTY)
+        .setEmptyDrawable(R.mipmap.ic_launcher)
+        .setEmptyDrawableTint(0)
+        .setEmptyTitle("Empty Title")
+        .setEmptyText("Empty Text")
+        .setEmptyButtonText("Empty Button")
+        .show();*/
   }
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,24 +35,34 @@ public class MainActivity extends AppCompatActivity {
     int itemId = item.getItemId();
     switch (itemId) {
       case R.id.show_progress:
-        emptyHelper.showLoading();
+        //emptyView.showLoading();
+        emptyView.setState(EmptyView.LOADING)
+            .show();
         break;
       case R.id.show_content:
-        emptyHelper.showContent();
+        //emptyView.showContent();
+        emptyView.setState(EmptyView.CONTENT)
+            .show();
         break;
       case R.id.show_error:
-        emptyHelper.showError(new OnClickListener() {
-          @Override public void onClick(View v) {
-            emptyView.showLoading();
-          }
-        });
+        //emptyView.showError();
+        emptyView.setState(EmptyView.ERROR)
+            .setOnClickListener(new OnClickListener() {
+              @Override public void onClick(View v) {
+                emptyView.showLoading();
+              }
+            })
+            .show();
         break;
       case R.id.show_empty:
-        emptyHelper.showEmpty(new OnClickListener() {
-          @Override public void onClick(View v) {
-            emptyView.showLoading();
-          }
-        });
+        //emptyView.showEmpty();
+        emptyView.setState(EmptyView.EMPTY)
+            .setOnClickListener(new OnClickListener() {
+              @Override public void onClick(View v) {
+                emptyView.showLoading();
+              }
+            })
+            .show();
         break;
     }
     return super.onOptionsItemSelected(item);

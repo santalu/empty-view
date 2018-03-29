@@ -55,7 +55,7 @@ dependencies {
     app:errorText="@string/emptyview_error_unknown"
     app:errorTextColor="@color/white"
     app:loadingDrawable="@drawable/ic_sentiment_satisfied"
-    app:loadingStyle="circular"
+    app:loading="circular"
     app:loadingText="@string/emptyview_loading"
     app:loadingTint="@color/colorPrimary">
 
@@ -71,7 +71,7 @@ dependencies {
 | emptyAnimateLayoutChanges      | enable/disable transitions | boolean default false |
 | emptyFont      | font family | reference |
 | emptyGravity      | gravity of empty view | top, center, bottom |
-| loadingStyle     | style of loading state      | circular, linear, text |
+| loading     | style of loading state      | circular, linear, text |
 | loadingText | text will show on loading state      |   string |
 | loadingTextColor | loading state text color      |   color |
 | loadingDrawable | drawable will show on loading state      |   reference |
