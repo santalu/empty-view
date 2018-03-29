@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import com.santalu.emptyview.EmptyView;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,12 +15,19 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     emptyView = findViewById(R.id.empty_view);
 
-    /*emptyView.setState(EmptyView.EMPTY)
+    /*emptyView.builder()
+        .setState(EmptyView.EMPTY)
         .setEmptyDrawable(R.mipmap.ic_launcher)
         .setEmptyDrawableTint(0)
         .setEmptyTitle("Empty Title")
         .setEmptyText("Empty Text")
         .setEmptyButtonText("Empty Button")
+        .setOnClickListener(v ->
+            emptyView.builder()
+                .setState(EmptyView.LOADING)
+                .exclude(0)
+                .show())
+        .exclude(R.id.text)
         .show();*/
   }
 
@@ -36,32 +41,28 @@ public class MainActivity extends AppCompatActivity {
     switch (itemId) {
       case R.id.show_progress:
         //emptyView.showLoading();
-        emptyView.setState(EmptyView.LOADING)
+        emptyView.builder()
+            .setState(EmptyView.LOADING)
             .show();
         break;
       case R.id.show_content:
         //emptyView.showContent();
-        emptyView.setState(EmptyView.CONTENT)
+        emptyView.builder()
+            .setState(EmptyView.CONTENT)
             .show();
         break;
       case R.id.show_error:
         //emptyView.showError();
-        emptyView.setState(EmptyView.ERROR)
-            .setOnClickListener(new OnClickListener() {
-              @Override public void onClick(View v) {
-                emptyView.showLoading();
-              }
-            })
+        emptyView.builder()
+            .setState(EmptyView.ERROR)
+            .setOnClickListener(v -> emptyView.showLoading())
             .show();
         break;
       case R.id.show_empty:
         //emptyView.showEmpty();
-        emptyView.setState(EmptyView.EMPTY)
-            .setOnClickListener(new OnClickListener() {
-              @Override public void onClick(View v) {
-                emptyView.showLoading();
-              }
-            })
+        emptyView.builder()
+            .setState(EmptyView.EMPTY)
+            .setOnClickListener(v -> emptyView.showLoading())
             .show();
         break;
     }
