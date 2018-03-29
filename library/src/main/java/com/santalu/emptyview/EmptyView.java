@@ -198,7 +198,7 @@ public class EmptyView extends ConstraintLayout {
     }
   }
 
-  private void setLoadingDrawable(@Loading int style, @ColorInt int drawableTint) {
+  private void setLoadingDrawable(@EmptyViewBuilder.Loading int style, @ColorInt int drawableTint) {
     if (progressBar.getVisibility() != VISIBLE) {
       return;
     }
