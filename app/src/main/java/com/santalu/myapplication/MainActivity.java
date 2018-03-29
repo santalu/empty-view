@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.santalu.emptyview.EmptyView;
+import com.santalu.emptyview.EmptyViewBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     emptyView = findViewById(R.id.empty_view);
 
     /*emptyView.builder()
-        .setState(EmptyView.EMPTY)
+        .setState(EmptyViewBuilder.EMPTY)
         .setEmptyDrawable(R.mipmap.ic_launcher)
         .setEmptyDrawableTint(0)
         .setEmptyTitle("Empty Title")
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         .setEmptyButtonText("Empty Button")
         .setOnClickListener(v ->
             emptyView.builder()
-                .setState(EmptyView.LOADING)
+                .setState(EmptyViewBuilder.LOADING)
                 .exclude(0)
                 .show())
         .exclude(R.id.text)
@@ -42,26 +43,26 @@ public class MainActivity extends AppCompatActivity {
       case R.id.show_progress:
         //emptyView.showLoading();
         emptyView.builder()
-            .setState(EmptyView.LOADING)
+            .setState(EmptyViewBuilder.LOADING)
             .show();
         break;
       case R.id.show_content:
         //emptyView.showContent();
         emptyView.builder()
-            .setState(EmptyView.CONTENT)
+            .setState(EmptyViewBuilder.CONTENT)
             .show();
         break;
       case R.id.show_error:
         //emptyView.showError();
         emptyView.builder()
-            .setState(EmptyView.ERROR)
+            .setState(EmptyViewBuilder.ERROR)
             .setOnClickListener(v -> emptyView.showLoading())
             .show();
         break;
       case R.id.show_empty:
         //emptyView.showEmpty();
         emptyView.builder()
-            .setState(EmptyView.EMPTY)
+            .setState(EmptyViewBuilder.EMPTY)
             .setOnClickListener(v -> emptyView.showLoading())
             .show();
         break;
