@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="emptyview_loading">Loading…</string>
-  <string name="emptyview_unknown_error_title">Sorry…</string>
-  <string name="emptyview_unknown_error_text">We can not fulfill your request now.\nPlease try again later</string>
-  <string name="emptyview_connection_error_title">No connection…</string>
-  <string name="emptyview_connection_error_text">Please check your connection settings</string>
-  <string name="emptyview_connection_timeout_error_title">Connection timed out…</string>
-  <string name="emptyview_connection_timeout_error_text">Please check your connection settings</string>
-  <string name="emptyview_error_endpoint_title">Oops…</string>
-  <string name="emptyview_error_endpoint_text">Unable to access the connection address.\nPlease try again later</string>
+  <string name="error_connection_title">No Connection</string>
+  <string name="error_connection">Please check your connection settings and try again</string>
+
+  <string name="error_endpoint_title">Oops</string>
+  <string name="error_endpoint">Unable to access the connection address. \nPlease check your connection settings and try again</string>
+
+  <string name="error_connection_timeout_title">Connection Timed Out</string>
+  <string name="error_connection_timeout">Please check your connection settings and try again</string>
+
+  <string name="error_unknown_title">Sorry</string>
+  <string name="error_unknown">We can not fulfill your request now.\nPlease try again later</string>
 
 </resources>
