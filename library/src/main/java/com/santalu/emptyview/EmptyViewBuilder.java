@@ -13,6 +13,7 @@ import android.support.annotation.FontRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.annotation.TransitionRes;
 import android.support.transition.Explode;
 import android.support.transition.Fade;
@@ -299,6 +300,10 @@ public class EmptyViewBuilder {
     return this;
   }
 
+  public EmptyViewBuilder setLoadingTitle(@StringRes int id) {
+    return setLoadingTitle(EmptyUtils.getString(context, id));
+  }
+
   public EmptyViewBuilder setLoadingTitle(CharSequence loadingTitle) {
     this.loadingTitle = loadingTitle;
     return this;
@@ -307,6 +312,10 @@ public class EmptyViewBuilder {
   public EmptyViewBuilder setLoadingTitleTextColor(@ColorInt int loadingTitleTextColor) {
     this.loadingTitleTextColor = loadingTitleTextColor;
     return this;
+  }
+
+  public EmptyViewBuilder setLoadingText(@StringRes int id) {
+    return setLoadingText(EmptyUtils.getString(context, id));
   }
 
   public EmptyViewBuilder setLoadingText(CharSequence loadingText) {
@@ -338,6 +347,10 @@ public class EmptyViewBuilder {
     return this;
   }
 
+  public EmptyViewBuilder setEmptyTitle(@StringRes int id) {
+    return setEmptyTitle(EmptyUtils.getString(context, id));
+  }
+
   public EmptyViewBuilder setEmptyTitle(CharSequence emptyTitle) {
     this.emptyTitle = emptyTitle;
     return this;
@@ -348,6 +361,10 @@ public class EmptyViewBuilder {
     return this;
   }
 
+  public EmptyViewBuilder setEmptyText(@StringRes int id) {
+    return setEmptyText(EmptyUtils.getString(context, id));
+  }
+
   public EmptyViewBuilder setEmptyText(CharSequence emptyText) {
     this.emptyText = emptyText;
     return this;
@@ -356,6 +373,10 @@ public class EmptyViewBuilder {
   public EmptyViewBuilder setEmptyTextColor(@ColorInt int emptyTextColor) {
     this.emptyTextColor = emptyTextColor;
     return this;
+  }
+
+  public EmptyViewBuilder setEmptyButtonText(@StringRes int id) {
+    return setEmptyButtonText(EmptyUtils.getString(context, id));
   }
 
   public EmptyViewBuilder setEmptyButtonText(CharSequence emptyButtonText) {
@@ -392,6 +413,10 @@ public class EmptyViewBuilder {
     return this;
   }
 
+  public EmptyViewBuilder setErrorTitle(@StringRes int id) {
+    return setErrorTitle(EmptyUtils.getString(context, id));
+  }
+
   public EmptyViewBuilder setErrorTitle(CharSequence errorTitle) {
     this.errorTitle = errorTitle;
     return this;
@@ -402,6 +427,10 @@ public class EmptyViewBuilder {
     return this;
   }
 
+  public EmptyViewBuilder setErrorText(@StringRes int id) {
+    return setErrorText(EmptyUtils.getString(context, id));
+  }
+
   public EmptyViewBuilder setErrorText(CharSequence errorText) {
     this.errorText = errorText;
     return this;
@@ -410,6 +439,10 @@ public class EmptyViewBuilder {
   public EmptyViewBuilder setErrorTextColor(@ColorInt int errorTextColor) {
     this.errorTextColor = errorTextColor;
     return this;
+  }
+
+  public EmptyViewBuilder setErrorButtonText(@StringRes int id) {
+    return setErrorButtonText(EmptyUtils.getString(context, id));
   }
 
   public EmptyViewBuilder setErrorButtonText(CharSequence errorButtonText) {
