@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.santalu.emptyview.EmptyView;
-import com.santalu.emptyview.EmptyViewBuilder;
+
+/**
+ * Created by santalu on 09/08/2017.
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,16 +19,14 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     emptyView = findViewById(R.id.empty_view);
 
-    /*emptyView.builder()
-        .setState(EmptyViewBuilder.EMPTY)
+    /*emptyView.empty()
         .setEmptyDrawable(R.mipmap.ic_launcher)
         .setEmptyDrawableTint(0)
         .setEmptyTitle("Empty Title")
         .setEmptyText("Empty Text")
         .setEmptyButtonText("Empty Button")
         .setOnClickListener(v ->
-            emptyView.builder()
-                .setState(EmptyViewBuilder.LOADING)
+            emptyView.loading()
                 .exclude(0)
                 .show())
         .exclude(R.id.text)
@@ -42,27 +43,21 @@ public class MainActivity extends AppCompatActivity {
     switch (itemId) {
       case R.id.show_progress:
         //emptyView.showLoading();
-        emptyView.builder()
-            .setState(EmptyViewBuilder.LOADING)
-            .show();
+        emptyView.loading().show();
         break;
       case R.id.show_content:
         //emptyView.showContent();
-        emptyView.builder()
-            .setState(EmptyViewBuilder.CONTENT)
-            .show();
+        emptyView.content().show();
         break;
       case R.id.show_error:
         //emptyView.showError();
-        emptyView.builder()
-            .setState(EmptyViewBuilder.ERROR)
+        emptyView.error()
             .setOnClickListener(v -> emptyView.showLoading())
             .show();
         break;
       case R.id.show_empty:
         //emptyView.showEmpty();
-        emptyView.builder()
-            .setState(EmptyViewBuilder.EMPTY)
+        emptyView.empty()
             .setOnClickListener(v -> emptyView.showLoading())
             .show();
         break;

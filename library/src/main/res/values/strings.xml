@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="emptyview_tag">EmptyView</string>
   <string name="emptyview_loading">Loading…</string>
   <string name="emptyview_unknown_error_title">Sorry…</string>
   <string name="emptyview_unknown_error_text">We can not fulfill your request now.\nPlease try again later</string>

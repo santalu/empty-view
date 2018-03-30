@@ -90,24 +90,36 @@ public class EmptyView extends ConstraintLayout {
     return builder;
   }
 
+  public EmptyViewBuilder content() {
+    return builder.setState(CONTENT);
+  }
+
+  public EmptyViewBuilder loading() {
+    return builder.setState(LOADING);
+  }
+
+  public EmptyViewBuilder empty() {
+    return builder.setState(EMPTY);
+  }
+
+  public EmptyViewBuilder error() {
+    return builder.setState(ERROR);
+  }
+
   public void showContent() {
-    builder.setState(CONTENT)
-        .show();
+    content().show();
   }
 
   public void showLoading() {
-    builder.setState(LOADING)
-        .show();
+    loading().show();
   }
 
   public void showEmpty() {
-    builder.setState(EMPTY)
-        .show();
+    empty().show();
   }
 
   public void showError() {
-    builder.setState(ERROR)
-        .show();
+    error().show();
   }
 
   void show() {
