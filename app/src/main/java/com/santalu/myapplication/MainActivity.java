@@ -19,6 +19,14 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     emptyView = findViewById(R.id.empty_view);
 
+    /*emptyView.error(new IllegalStateException())
+        .setOnClickListener(v -> emptyView.showLoading())
+        .show();*/
+
+    /*emptyView.error(Error.CONNECTION)
+        .setOnClickListener(v -> emptyView.showLoading())
+        .show();*/
+
     /*emptyView.empty()
         .setEmptyDrawable(R.mipmap.ic_launcher)
         .setEmptyDrawableTint(0)
