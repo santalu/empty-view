@@ -60,7 +60,21 @@ public class EmptyView extends ConstraintLayout {
     children = new ArrayList<>();
   }
 
-  @Override protected void onFinishInflate() {
+  @Override
+  public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    super.addView(child, index, params);
+    if (child.getVisibility() == VISIBLE) {
+      children.add(child);
+    }
+  }
+
+  @Override
+  public void setOnClickListener(@Nullable OnClickListener onClickListener) {
+    builder.setOnClickListener(onClickListener);
+  }
+
+  @Override
+  protected void onFinishInflate() {
     super.onFinishInflate();
     inflate(getContext(), R.layout.empty_view, this);
     imageView = findViewById(R.id.empty_icon);
@@ -73,17 +87,6 @@ public class EmptyView extends ConstraintLayout {
     if (backgroundDrawable instanceof ColorDrawable) {
       builder.setContentBackgroundColor(((ColorDrawable) backgroundDrawable).getColor());
     }
-  }
-
-  @Override public void addView(View child, int index, ViewGroup.LayoutParams params) {
-    super.addView(child, index, params);
-    if (child.getVisibility() == VISIBLE) {
-      children.add(child);
-    }
-  }
-
-  @Override public void setOnClickListener(@Nullable OnClickListener onClickListener) {
-    builder.setOnClickListener(onClickListener);
   }
 
   public EmptyViewBuilder builder() {

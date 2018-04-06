@@ -45,26 +45,6 @@ public enum Error {
     }
   }
 
-  public boolean isConnection() {
-    return this == Error.CONNECTION;
-  }
-
-  public boolean isEndpoint() {
-    return this == Error.ENDPOINT;
-  }
-
-  public boolean isTimeout() {
-    return this == Error.TIMEOUT;
-  }
-
-  public boolean isUnknown() {
-    return this == Error.UNKNOWN;
-  }
-
-  public boolean isService() {
-    return this == Error.SERVICE;
-  }
-
   public int getTitleResId() {
     return titleResId;
   }
