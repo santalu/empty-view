@@ -102,12 +102,12 @@ public class EmptyViewBuilder {
   @ColorInt int errorDrawableTint;
   @ColorInt int errorBackgroundColor;
 
-  public EmptyViewBuilder(EmptyView emptyView) {
+  EmptyViewBuilder(EmptyView emptyView) {
     this.emptyView = emptyView;
     this.context = emptyView.getContext();
   }
 
-  public EmptyViewBuilder(EmptyView emptyView, @NonNull AttributeSet attributeSet) {
+  EmptyViewBuilder(EmptyView emptyView, @NonNull AttributeSet attributeSet) {
     this(emptyView);
 
     TypedArray a = context.obtainStyledAttributes(attributeSet, R.styleable.EmptyView);
