@@ -9,6 +9,12 @@
       <enum name="fade" value="3"/>
     </attr>
 
+    <attr name="ev_gravity">
+      <enum name="top" value="48"/>
+      <enum name="center" value="17"/>
+      <enum name="bottom" value="80"/>
+    </attr>
+
     <attr format="reference" name="ev_font"/>
     <attr format="dimension" name="ev_titleTextSize"/>
     <attr format="dimension" name="ev_textSize"/>
