@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  implementation 'com.github.santalu:emptyview:1.2.7'
+  implementation 'com.github.santalu:emptyview:1.2.8'
 }
 ```
 
@@ -38,7 +38,7 @@ dependencies {
     android:id="@+id/empty_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:ev_buttonTextSize="18sp"
+    app:ev_gravity="center"
     app:ev_empty_button="@string/try_again"
     app:ev_empty_buttonTextColor="@color/colorPrimaryDark"
     app:ev_empty_drawable="@drawable/ic_sentiment_dissatisfied"
@@ -59,8 +59,6 @@ dependencies {
     app:ev_loading_drawable="@drawable/ic_sentiment_satisfied"
     app:ev_loading_drawableTint="@color/colorPrimary"
     app:ev_loading_title="@string/loading"
-    app:ev_textSize="16sp"
-    app:ev_titleTextSize="20sp"
     app:ev_transition="slide">
 
     *** your content here ***
@@ -72,6 +70,7 @@ dependencies {
 
 | Name        |  Value  |
 | ------------- |:-------------:|
+| ev_gravity | top,center,bottom default center |
 | ev_transition | slide, explode, fade default none |
 | ev_font | reference |
 | ev_titleTextSize | dimension |
