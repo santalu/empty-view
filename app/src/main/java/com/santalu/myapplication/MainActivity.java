@@ -2,6 +2,7 @@ package com.santalu.myapplication;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.santalu.emptyview.EmptyView;
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     /*emptyView.empty()
         .setEmptyDrawable(R.mipmap.ic_launcher)
-        .setEmptyDrawableTint(0)
         .setEmptyTitle("Empty Title")
         .setEmptyText("Empty Text")
         .setEmptyButtonText("Empty Button")
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             emptyView.loading()
                 .exclude(0)
                 .show())
-        .exclude(R.id.text)
+        //.exclude(R.id.text)
         .show();*/
   }
 

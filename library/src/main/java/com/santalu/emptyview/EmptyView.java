@@ -1,8 +1,8 @@
 package com.santalu.emptyview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class EmptyView extends ConstraintLayout {
   private final EmptyViewBuilder builder;
   private final List<View> children;
 
+  private LinearLayout container;
   private ProgressBar progressBar;
   private ImageView imageView;
   private TextView titleView;
@@ -77,16 +79,12 @@ public class EmptyView extends ConstraintLayout {
   protected void onFinishInflate() {
     super.onFinishInflate();
     inflate(getContext(), R.layout.empty_view, this);
+    container = findViewById(R.id.empty_layout);
     imageView = findViewById(R.id.empty_icon);
     textView = findViewById(R.id.empty_text);
     titleView = findViewById(R.id.empty_title);
     button = findViewById(R.id.empty_button);
     progressBar = findViewById(R.id.empty_progress_bar);
-
-    Drawable backgroundDrawable = getBackground();
-    if (backgroundDrawable instanceof ColorDrawable) {
-      builder.setContentBackgroundColor(((ColorDrawable) backgroundDrawable).getColor());
-    }
   }
 
   public EmptyViewBuilder builder() {
@@ -144,6 +142,7 @@ public class EmptyView extends ConstraintLayout {
 
     switch (builder.state) {
       case CONTENT:
+        container.setVisibility(View.GONE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(GONE);
         titleView.setVisibility(GONE);
@@ -151,9 +150,10 @@ public class EmptyView extends ConstraintLayout {
         button.setVisibility(GONE);
         setChildVisibility(VISIBLE);
 
-        setBackgroundColor(builder.contentBackgroundColor);
+        setContainer(Color.TRANSPARENT);
         break;
       case EMPTY:
+        container.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(VISIBLE);
         titleView.setVisibility(VISIBLE);
@@ -161,14 +161,15 @@ public class EmptyView extends ConstraintLayout {
         button.setVisibility(VISIBLE);
         setChildVisibility(GONE);
 
-        setDrawable(builder.emptyDrawable, builder.emptyDrawableTint);
+        setContainer(builder.emptyBackgroundColor);
+        setIcon(builder.emptyDrawable, builder.emptyDrawableTint);
         setTitle(builder.emptyTitle, builder.emptyTitleTextColor);
         setText(builder.emptyText, builder.emptyTextColor);
         setButton(builder.emptyButtonText, builder.emptyButtonTextColor,
             builder.emptyButtonBackgroundColor);
-        setBackgroundColor(builder.emptyBackgroundColor);
         break;
       case ERROR:
+        container.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
         imageView.setVisibility(VISIBLE);
         titleView.setVisibility(VISIBLE);
@@ -176,14 +177,15 @@ public class EmptyView extends ConstraintLayout {
         button.setVisibility(VISIBLE);
         setChildVisibility(GONE);
 
-        setDrawable(builder.errorDrawable, builder.errorDrawableTint);
+        setContainer(builder.errorBackgroundColor);
+        setIcon(builder.errorDrawable, builder.errorDrawableTint);
         setTitle(builder.errorTitle, builder.errorTitleTextColor);
         setText(builder.errorText, builder.errorTextColor);
         setButton(builder.errorButtonText, builder.errorButtonTextColor,
             builder.errorButtonBackgroundColor);
-        setBackgroundColor(builder.errorBackgroundColor);
         break;
       case LOADING:
+        container.setVisibility(View.VISIBLE);
         progressBar.setVisibility(VISIBLE);
         imageView.setVisibility(GONE);
         titleView.setVisibility(VISIBLE);
@@ -191,11 +193,11 @@ public class EmptyView extends ConstraintLayout {
         button.setVisibility(GONE);
         setChildVisibility(GONE);
 
-        setLoadingDrawable(builder.loading, builder.loadingDrawableTint);
-        setDrawable(builder.loadingDrawable, builder.loadingDrawableTint);
+        setContainer(builder.loadingBackgroundColor);
+        setProgressBar(builder.loading, builder.loadingDrawableTint);
+        setIcon(builder.loadingDrawable, builder.loadingDrawableTint);
         setTitle(builder.loadingTitle, builder.loadingTitleTextColor);
         setText(builder.loadingText, builder.loadingTextColor);
-        setBackgroundColor(builder.loadingBackgroundColor);
         break;
     }
   }
@@ -214,7 +216,12 @@ public class EmptyView extends ConstraintLayout {
     }
   }
 
-  private void setLoadingDrawable(@EmptyViewBuilder.Loading int style, @ColorInt int drawableTint) {
+  private void setContainer(@ColorInt int backgroundColor) {
+    container.setGravity(builder.gravity);
+    container.setBackgroundColor(backgroundColor);
+  }
+
+  private void setProgressBar(@EmptyViewBuilder.Loading int style, @ColorInt int drawableTint) {
     if (progressBar.getVisibility() != VISIBLE) {
       return;
     }
@@ -231,7 +238,7 @@ public class EmptyView extends ConstraintLayout {
     }
   }
 
-  private void setDrawable(Drawable drawable, @ColorInt int drawableTint) {
+  private void setIcon(Drawable drawable, @ColorInt int drawableTint) {
     if (imageView.getVisibility() != VISIBLE) {
       return;
     }
@@ -253,7 +260,7 @@ public class EmptyView extends ConstraintLayout {
       return;
     }
     titleView.setVisibility(VISIBLE);
-    titleView.setText(EmptyUtils.fromHtml(text.toString()));
+    titleView.setText(text);
     titleView.setTextColor(textColor);
     titleView.setTypeface(builder.font);
     if (builder.titleTextSize != 0) {
@@ -270,7 +277,7 @@ public class EmptyView extends ConstraintLayout {
       return;
     }
     textView.setVisibility(VISIBLE);
-    textView.setText(EmptyUtils.fromHtml(text.toString()));
+    textView.setText(text);
     textView.setTextColor(textColor);
     textView.setTypeface(builder.font);
     if (builder.textSize != 0) {
@@ -293,7 +300,7 @@ public class EmptyView extends ConstraintLayout {
       return;
     }
     button.setVisibility(VISIBLE);
-    button.setText(EmptyUtils.fromHtml(text.toString()));
+    button.setText(text);
     button.setTextColor(textColor);
     button.setBackgroundColor(backgroundColor);
     if (builder.buttonTextSize != 0) {

@@ -9,12 +9,10 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.FontRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.annotation.TransitionRes;
 import android.support.transition.Explode;
 import android.support.transition.Fade;
 import android.support.transition.Slide;
@@ -35,6 +33,11 @@ public class EmptyViewBuilder {
 
   public static final int NONE = 0;
 
+  // Gravity
+  public static final int TOP = 48;
+  public static final int CENTER = 17;
+  public static final int BOTTOM = 80;
+
   // Loading
   public static final int CIRCULAR = 1;
 
@@ -53,6 +56,7 @@ public class EmptyViewBuilder {
   private final Context context;
   List<View> excludedViews;
   int state;
+  int gravity;
 
   // Shared attributes
   float titleTextSize;
@@ -64,9 +68,6 @@ public class EmptyViewBuilder {
   Typeface font;
   Transition transition;
   View.OnClickListener onClickListener;
-
-  // Content state attributes
-  @ColorInt int contentBackgroundColor;
 
   // Loading state attributes
   @Loading int loading;
@@ -118,15 +119,7 @@ public class EmptyViewBuilder {
       float defaultButtonTextSize = resources.getDimension(R.dimen.emptyview_button_text_size);
       int defaultTextColor = resources.getColor(android.R.color.secondary_text_dark);
 
-      // Shared attributes
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        font = a.getFont(R.styleable.EmptyView_ev_font);
-      } else {
-        int fontResId = a.getResourceId(R.styleable.EmptyView_ev_font, 0);
-        if (fontResId != 0) {
-          font = ResourcesCompat.getFont(context, fontResId);
-        }
-      }
+      gravity = a.getInt(R.styleable.EmptyView_ev_gravity, CENTER);
 
       int transitionType = a.getInt(R.styleable.EmptyView_ev_transition, NONE);
       switch (transitionType) {
@@ -143,6 +136,16 @@ public class EmptyViewBuilder {
         default:
           transition = null;
           break;
+      }
+
+      // Shared attributes
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        font = a.getFont(R.styleable.EmptyView_ev_font);
+      } else {
+        int fontResId = a.getResourceId(R.styleable.EmptyView_ev_font, 0);
+        if (fontResId != 0) {
+          font = ResourcesCompat.getFont(context, fontResId);
+        }
       }
 
       titleTextSize = a.getDimension(R.styleable.EmptyView_ev_titleTextSize, defaultTitleTextSize);
@@ -199,6 +202,11 @@ public class EmptyViewBuilder {
     }
   }
 
+  public EmptyViewBuilder setOnClickListener(View.OnClickListener onClickListener) {
+    this.onClickListener = onClickListener;
+    return this;
+  }
+
   public EmptyViewBuilder exclude(@IdRes int... ids) {
     excludedViews = new ArrayList<>();
     for (int id : ids) {
@@ -225,76 +233,6 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setTitleTextSize(@DimenRes int id) {
-    return setTitleTextSize(EmptyUtils.getDimension(context, id));
-  }
-
-  public EmptyViewBuilder setTitleTextSize(float titleTextSize) {
-    this.titleTextSize = titleTextSize;
-    return this;
-  }
-
-  public EmptyViewBuilder setTextSize(@DimenRes int id) {
-    return setTextSize(EmptyUtils.getDimension(context, id));
-  }
-
-  public EmptyViewBuilder setTextSize(float textSize) {
-    this.textSize = textSize;
-    return this;
-  }
-
-  public EmptyViewBuilder setButtonTextSize(@DimenRes int id) {
-    return setButtonTextSize(EmptyUtils.getDimension(context, id));
-  }
-
-  public EmptyViewBuilder setButtonTextSize(float buttonTextSize) {
-    this.buttonTextSize = buttonTextSize;
-    return this;
-  }
-
-  public EmptyViewBuilder setLetterSpacing(float letterSpacing) {
-    this.letterSpacing = letterSpacing;
-    return this;
-  }
-
-  public EmptyViewBuilder setLineSpacingExtra(float lineSpacingExtra) {
-    this.lineSpacingExtra = lineSpacingExtra;
-    return this;
-  }
-
-  public EmptyViewBuilder setLineSpacingMultiplier(float lineSpacingMultiplier) {
-    this.lineSpacingMultiplier = lineSpacingMultiplier;
-    return this;
-  }
-
-  public EmptyViewBuilder setFont(@FontRes int id) {
-    return setFont(EmptyUtils.getFont(context, id));
-  }
-
-  public EmptyViewBuilder setFont(Typeface font) {
-    this.font = font;
-    return this;
-  }
-
-  public EmptyViewBuilder setTransition(@TransitionRes int id) {
-    return setTransition(EmptyUtils.getTransition(context, id));
-  }
-
-  public EmptyViewBuilder setTransition(Transition transition) {
-    this.transition = transition;
-    return this;
-  }
-
-  public EmptyViewBuilder setOnClickListener(View.OnClickListener onClickListener) {
-    this.onClickListener = onClickListener;
-    return this;
-  }
-
-  public EmptyViewBuilder setContentBackgroundColor(@ColorInt int contentBackgroundColor) {
-    this.contentBackgroundColor = contentBackgroundColor;
-    return this;
-  }
-
   public EmptyViewBuilder setLoading(@Loading int loading) {
     this.loading = loading;
     return this;
@@ -309,22 +247,12 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setLoadingTitleTextColor(@ColorInt int loadingTitleTextColor) {
-    this.loadingTitleTextColor = loadingTitleTextColor;
-    return this;
-  }
-
   public EmptyViewBuilder setLoadingText(@StringRes int id) {
     return setLoadingText(EmptyUtils.getString(context, id));
   }
 
   public EmptyViewBuilder setLoadingText(CharSequence loadingText) {
     this.loadingText = loadingText;
-    return this;
-  }
-
-  public EmptyViewBuilder setLoadingTextColor(@ColorInt int loadingTextColor) {
-    this.loadingTextColor = loadingTextColor;
     return this;
   }
 
@@ -337,27 +265,12 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setLoadingDrawableTint(@ColorInt int loadingDrawableTint) {
-    this.loadingDrawableTint = loadingDrawableTint;
-    return this;
-  }
-
-  public EmptyViewBuilder setLoadingBackgroundColor(@ColorInt int loadingBackgroundColor) {
-    this.loadingBackgroundColor = loadingBackgroundColor;
-    return this;
-  }
-
   public EmptyViewBuilder setEmptyTitle(@StringRes int id) {
     return setEmptyTitle(EmptyUtils.getString(context, id));
   }
 
   public EmptyViewBuilder setEmptyTitle(CharSequence emptyTitle) {
     this.emptyTitle = emptyTitle;
-    return this;
-  }
-
-  public EmptyViewBuilder setEmptyTitleTextColor(@ColorInt int emptyTitleTextColor) {
-    this.emptyTitleTextColor = emptyTitleTextColor;
     return this;
   }
 
@@ -370,27 +283,12 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setEmptyTextColor(@ColorInt int emptyTextColor) {
-    this.emptyTextColor = emptyTextColor;
-    return this;
-  }
-
   public EmptyViewBuilder setEmptyButtonText(@StringRes int id) {
     return setEmptyButtonText(EmptyUtils.getString(context, id));
   }
 
   public EmptyViewBuilder setEmptyButtonText(CharSequence emptyButtonText) {
     this.emptyButtonText = emptyButtonText;
-    return this;
-  }
-
-  public EmptyViewBuilder setEmptyButtonTextColor(@ColorInt int emptyButtonTextColor) {
-    this.emptyButtonTextColor = emptyButtonTextColor;
-    return this;
-  }
-
-  public EmptyViewBuilder setEmptyButtonBackgroundColor(@ColorInt int emptyButtonBackgroundColor) {
-    this.emptyButtonBackgroundColor = emptyButtonBackgroundColor;
     return this;
   }
 
@@ -403,27 +301,12 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setEmptyDrawableTint(@ColorInt int emptyDrawableTint) {
-    this.emptyDrawableTint = emptyDrawableTint;
-    return this;
-  }
-
-  public EmptyViewBuilder setEmptyBackgroundColor(@ColorInt int emptyBackgroundColor) {
-    this.emptyBackgroundColor = emptyBackgroundColor;
-    return this;
-  }
-
   public EmptyViewBuilder setErrorTitle(@StringRes int id) {
     return setErrorTitle(EmptyUtils.getString(context, id));
   }
 
   public EmptyViewBuilder setErrorTitle(CharSequence errorTitle) {
     this.errorTitle = errorTitle;
-    return this;
-  }
-
-  public EmptyViewBuilder setErrorTitleTextColor(@ColorInt int errorTitleTextColor) {
-    this.errorTitleTextColor = errorTitleTextColor;
     return this;
   }
 
@@ -436,11 +319,6 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setErrorTextColor(@ColorInt int errorTextColor) {
-    this.errorTextColor = errorTextColor;
-    return this;
-  }
-
   public EmptyViewBuilder setErrorButtonText(@StringRes int id) {
     return setErrorButtonText(EmptyUtils.getString(context, id));
   }
@@ -450,32 +328,12 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setErrorButtonTextColor(@ColorInt int errorButtonTextColor) {
-    this.errorButtonTextColor = errorButtonTextColor;
-    return this;
-  }
-
-  public EmptyViewBuilder setErrorButtonBackgroundColor(@ColorInt int errorButtonBackgroundColor) {
-    this.errorButtonBackgroundColor = errorButtonBackgroundColor;
-    return this;
-  }
-
   public EmptyViewBuilder setErrorDrawable(@DrawableRes int id) {
     return setErrorDrawable(EmptyUtils.getDrawable(context, id));
   }
 
   public EmptyViewBuilder setErrorDrawable(Drawable errorDrawable) {
     this.errorDrawable = errorDrawable;
-    return this;
-  }
-
-  public EmptyViewBuilder setErrorDrawableTint(@ColorInt int errorDrawableTint) {
-    this.errorDrawableTint = errorDrawableTint;
-    return this;
-  }
-
-  public EmptyViewBuilder setErrorBackgroundColor(@ColorInt int errorBackgroundColor) {
-    this.errorBackgroundColor = errorBackgroundColor;
     return this;
   }
 

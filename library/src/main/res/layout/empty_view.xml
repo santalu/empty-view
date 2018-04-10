@@ -1,80 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/empty_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    tools:visibility="visible"
+    style="@style/EmptyView.Layout">
 
   <ImageView
       android:id="@+id/empty_icon"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/emptyview_inline_spacing"
-      android:layout_marginEnd="@dimen/emptyview_outline_spacing"
-      android:layout_marginStart="@dimen/emptyview_outline_spacing"
-      android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@+id/empty_progress_bar"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_chainStyle="packed"/>
+      style="@style/EmptyView.ProgressBar"/>
 
   <ProgressBar
       android:id="@+id/empty_progress_bar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/emptyview_inline_spacing"
-      android:layout_marginEnd="@dimen/emptyview_outline_spacing"
-      android:layout_marginStart="@dimen/emptyview_outline_spacing"
-      android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@+id/empty_title"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/empty_icon"/>
+      style="@style/EmptyView.ProgressBar"/>
 
   <TextView
       android:id="@+id/empty_title"
-      android:layout_width="0dp"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/emptyview_outline_spacing"
-      android:layout_marginStart="@dimen/emptyview_outline_spacing"
-      android:gravity="center"
-      android:textSize="@dimen/emptyview_title_text_size"
-      android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@+id/empty_text"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/empty_progress_bar"/>
+      style="@style/EmptyView.Title"/>
 
   <TextView
       android:id="@+id/empty_text"
-      android:layout_width="0dp"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/emptyview_inline_spacing"
-      android:layout_marginEnd="@dimen/emptyview_outline_spacing"
-      android:layout_marginStart="@dimen/emptyview_outline_spacing"
-      android:gravity="center"
-      android:textSize="@dimen/emptyview_text_size"
-      android:visibility="gone"
-      app:layout_constraintBottom_toTopOf="@+id/empty_button"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/empty_title"/>
+      style="@style/EmptyView.Text"/>
 
   <Button
       android:id="@+id/empty_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/emptyview_outline_spacing"
-      android:layout_marginStart="@dimen/emptyview_outline_spacing"
-      android:foreground="?selectableItemBackground"
-      android:textAllCaps="false"
-      android:textColor="@android:color/black"
-      android:textSize="@dimen/emptyview_button_text_size"
-      android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/empty_text"/>
+      style="@style/EmptyView.Button"/>
 
-</merge>
+</LinearLayout>
