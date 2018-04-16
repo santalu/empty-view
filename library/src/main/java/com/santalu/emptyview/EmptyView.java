@@ -118,6 +118,11 @@ public class EmptyView extends ConstraintLayout {
         .setErrorText(error.getMessage(getContext()));
   }
 
+  @EmptyViewBuilder.State
+  public int state() {
+    return builder.state;
+  }
+
   public void showContent() {
     content().show();
   }

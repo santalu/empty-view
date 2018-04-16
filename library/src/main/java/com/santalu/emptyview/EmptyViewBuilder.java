@@ -55,7 +55,7 @@ public class EmptyViewBuilder {
   private final EmptyView emptyView;
   private final Context context;
   List<View> excludedViews;
-  int state;
+  @State int state;
   int gravity;
 
   // Shared attributes
