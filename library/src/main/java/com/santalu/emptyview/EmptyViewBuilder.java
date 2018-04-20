@@ -7,12 +7,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
-import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.transition.AutoTransition;
 import android.support.transition.Explode;
 import android.support.transition.Fade;
 import android.support.transition.Slide;
@@ -51,26 +51,24 @@ public class EmptyViewBuilder {
   public static final int SLIDE = 1;
   public static final int EXPLODE = 2;
   public static final int FADE = 3;
+  public static final int AUTO = 4;
 
   private final EmptyView emptyView;
   private final Context context;
   List<View> excludedViews;
-  int state;
+  @State int state;
   int gravity;
 
   // Shared attributes
   float titleTextSize;
   float textSize;
   float buttonTextSize;
-  float letterSpacing;
-  float lineSpacingExtra;
-  float lineSpacingMultiplier;
   Typeface font;
   Transition transition;
   View.OnClickListener onClickListener;
 
   // Loading state attributes
-  @Loading int loading;
+  @LoadingType int loading;
   CharSequence loadingTitle;
   @ColorInt int loadingTitleTextColor;
   CharSequence loadingText;
@@ -114,89 +112,116 @@ public class EmptyViewBuilder {
     TypedArray a = context.obtainStyledAttributes(attributeSet, R.styleable.EmptyView);
     try {
       Resources resources = context.getResources();
-      float defaultTitleTextSize = resources.getDimension(R.dimen.emptyview_title_text_size);
-      float defaultTextSize = resources.getDimension(R.dimen.emptyview_text_size);
-      float defaultButtonTextSize = resources.getDimension(R.dimen.emptyview_button_text_size);
       int defaultTextColor = resources.getColor(android.R.color.secondary_text_dark);
 
-      gravity = a.getInt(R.styleable.EmptyView_ev_gravity, CENTER);
-
-      int transitionType = a.getInt(R.styleable.EmptyView_ev_transition, NONE);
-      switch (transitionType) {
-        case SLIDE:
-          transition = new Slide();
-          break;
-        case EXPLODE:
-          transition = new Explode();
-          break;
-        case FADE:
-          transition = new Fade();
-          break;
-        case NONE:
-        default:
-          transition = null;
-          break;
+      if (a.hasValue(R.styleable.EmptyView_ev_gravity)) {
+        gravity = a.getInt(R.styleable.EmptyView_ev_gravity, CENTER);
       }
-
-      // Shared attributes
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        font = a.getFont(R.styleable.EmptyView_ev_font);
-      } else {
-        int fontResId = a.getResourceId(R.styleable.EmptyView_ev_font, 0);
-        if (fontResId != 0) {
-          font = ResourcesCompat.getFont(context, fontResId);
+      if (a.hasValue(R.styleable.EmptyView_ev_transition)) {
+        setTransition(a.getInt(R.styleable.EmptyView_ev_transition, NONE));
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_font)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          font = a.getFont(R.styleable.EmptyView_ev_font);
+        } else {
+          int fontResId = a.getResourceId(R.styleable.EmptyView_ev_font, 0);
+          if (fontResId != 0) {
+            font = ResourcesCompat.getFont(context, fontResId);
+          }
         }
       }
-
-      titleTextSize = a.getDimension(R.styleable.EmptyView_ev_titleTextSize, defaultTitleTextSize);
-      textSize = a.getDimension(R.styleable.EmptyView_ev_textSize, defaultTextSize);
-      buttonTextSize =
-          a.getDimension(R.styleable.EmptyView_ev_buttonTextSize, defaultButtonTextSize);
-      letterSpacing = a.getDimension(R.styleable.EmptyView_ev_letterSpacing, 0);
-      lineSpacingExtra = a.getDimension(R.styleable.EmptyView_ev_lineSpacingExtra, 1);
-      lineSpacingMultiplier =
-          a.getDimension(R.styleable.EmptyView_ev_lineSpacingExtraMultiplier, 1);
+      if (a.hasValue(R.styleable.EmptyView_ev_titleTextSize)) {
+        titleTextSize = a.getDimension(R.styleable.EmptyView_ev_titleTextSize, 0);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_textSize)) {
+        textSize = a.getDimension(R.styleable.EmptyView_ev_textSize, 0);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_buttonTextSize)) {
+        buttonTextSize = a.getDimension(R.styleable.EmptyView_ev_buttonTextSize, 0);
+      }
 
       // Loading state attributes
-      loading = a.getInt(R.styleable.EmptyView_ev_loading, CIRCULAR);
-      loadingTitle = a.getText(R.styleable.EmptyView_ev_loading_title);
-      loadingTitleTextColor =
-          a.getColor(R.styleable.EmptyView_ev_loading_titleTextColor, defaultTextColor);
-      loadingText = a.getText(R.styleable.EmptyView_ev_loading_text);
+      if (a.hasValue(R.styleable.EmptyView_ev_loading)) {
+        loading = a.getInt(R.styleable.EmptyView_ev_loading, CIRCULAR);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_title)) {
+        loadingTitle = a.getText(R.styleable.EmptyView_ev_loading_title);
+      }
+      loadingTitleTextColor = a.getColor(R.styleable.EmptyView_ev_loading_titleTextColor,
+          defaultTextColor);
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_text)) {
+        loadingText = a.getText(R.styleable.EmptyView_ev_loading_text);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_text)) {
+        loadingText = a.getText(R.styleable.EmptyView_ev_loading_text);
+      }
       loadingTextColor = a.getColor(R.styleable.EmptyView_ev_loading_textColor, defaultTextColor);
-      loadingDrawable = a.getDrawable(R.styleable.EmptyView_ev_loading_drawable);
-      loadingDrawableTint = a.getColor(R.styleable.EmptyView_ev_loading_drawableTint, 0);
-      loadingBackgroundColor = a.getColor(R.styleable.EmptyView_ev_loading_backgroundColor, 0);
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_drawable)) {
+        loadingDrawable = a.getDrawable(R.styleable.EmptyView_ev_loading_drawable);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_drawable)) {
+        loadingDrawable = a.getDrawable(R.styleable.EmptyView_ev_loading_drawable);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_drawableTint)) {
+        loadingDrawableTint = a.getColor(R.styleable.EmptyView_ev_loading_drawableTint, 0);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_backgroundColor)) {
+        loadingBackgroundColor = a.getColor(R.styleable.EmptyView_ev_loading_backgroundColor, 0);
+      }
 
       // Empty state attributes
-      emptyTitle = a.getText(R.styleable.EmptyView_ev_empty_title);
-      emptyTitleTextColor =
-          a.getColor(R.styleable.EmptyView_ev_empty_titleTextColor, defaultTextColor);
-      emptyText = a.getText(R.styleable.EmptyView_ev_empty_text);
+      if (a.hasValue(R.styleable.EmptyView_ev_empty_title)) {
+        emptyTitle = a.getText(R.styleable.EmptyView_ev_empty_title);
+      }
+      emptyTitleTextColor = a.getColor(R.styleable.EmptyView_ev_empty_titleTextColor,
+          defaultTextColor);
+      if (a.hasValue(R.styleable.EmptyView_ev_empty_text)) {
+        emptyText = a.getText(R.styleable.EmptyView_ev_empty_text);
+      }
       emptyTextColor = a.getColor(R.styleable.EmptyView_ev_empty_textColor, defaultTextColor);
-      emptyButtonText = a.getText(R.styleable.EmptyView_ev_empty_button);
-      emptyButtonTextColor =
-          a.getColor(R.styleable.EmptyView_ev_empty_buttonTextColor, defaultTextColor);
-      emptyButtonBackgroundColor =
-          a.getColor(R.styleable.EmptyView_ev_empty_buttonBackgroundColor, 0);
-      emptyDrawable = a.getDrawable(R.styleable.EmptyView_ev_empty_drawable);
-      emptyDrawableTint = a.getColor(R.styleable.EmptyView_ev_empty_drawableTint, 0);
-      emptyBackgroundColor = a.getColor(R.styleable.EmptyView_ev_empty_backgroundColor, 0);
+      if (a.hasValue(R.styleable.EmptyView_ev_empty_button)) {
+        emptyButtonText = a.getText(R.styleable.EmptyView_ev_empty_button);
+      }
+      emptyButtonTextColor = a.getColor(R.styleable.EmptyView_ev_empty_buttonTextColor,
+          defaultTextColor);
+      emptyButtonBackgroundColor = a.getColor(R.styleable.EmptyView_ev_empty_buttonBackgroundColor,
+          0);
+      if (a.hasValue(R.styleable.EmptyView_ev_empty_drawable)) {
+        emptyDrawable = a.getDrawable(R.styleable.EmptyView_ev_empty_drawable);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_empty_drawableTint)) {
+        emptyDrawableTint = a.getColor(R.styleable.EmptyView_ev_empty_drawableTint, 0);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_empty_backgroundColor)) {
+        emptyBackgroundColor = a.getColor(R.styleable.EmptyView_ev_empty_backgroundColor, 0);
+      }
 
       // Error state attributes
-      errorTitle = a.getText(R.styleable.EmptyView_ev_error_title);
-      errorTitleTextColor =
-          a.getColor(R.styleable.EmptyView_ev_error_titleTextColor, defaultTextColor);
-      errorText = a.getText(R.styleable.EmptyView_ev_error_text);
+      if (a.hasValue(R.styleable.EmptyView_ev_error_title)) {
+        errorTitle = a.getText(R.styleable.EmptyView_ev_error_title);
+      }
+      errorTitleTextColor = a.getColor(R.styleable.EmptyView_ev_error_titleTextColor,
+          defaultTextColor);
+      if (a.hasValue(R.styleable.EmptyView_ev_error_text)) {
+        errorText = a.getText(R.styleable.EmptyView_ev_error_text);
+      }
       errorTextColor = a.getColor(R.styleable.EmptyView_ev_error_textColor, defaultTextColor);
-      errorButtonText = a.getText(R.styleable.EmptyView_ev_error_button);
-      errorButtonTextColor =
-          a.getColor(R.styleable.EmptyView_ev_error_buttonTextColor, defaultTextColor);
-      errorButtonBackgroundColor =
-          a.getColor(R.styleable.EmptyView_ev_error_buttonBackgroundColor, 0);
-      errorDrawable = a.getDrawable(R.styleable.EmptyView_ev_error_drawable);
-      errorDrawableTint = a.getColor(R.styleable.EmptyView_ev_error_drawableTint, 0);
-      errorBackgroundColor = a.getColor(R.styleable.EmptyView_ev_error_backgroundColor, 0);
+      if (a.hasValue(R.styleable.EmptyView_ev_error_button)) {
+        errorButtonText = a.getText(R.styleable.EmptyView_ev_error_button);
+      }
+      errorButtonTextColor = a.getColor(R.styleable.EmptyView_ev_error_buttonTextColor,
+          defaultTextColor);
+      errorButtonBackgroundColor = a.getColor(R.styleable.EmptyView_ev_error_buttonBackgroundColor,
+          0);
+      if (a.hasValue(R.styleable.EmptyView_ev_error_drawable)) {
+        errorDrawable = a.getDrawable(R.styleable.EmptyView_ev_error_drawable);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_error_drawableTint)) {
+        errorDrawableTint = a.getColor(R.styleable.EmptyView_ev_error_drawableTint, 0);
+      }
+      if (a.hasValue(R.styleable.EmptyView_ev_error_backgroundColor)) {
+        errorBackgroundColor = a.getColor(R.styleable.EmptyView_ev_error_backgroundColor, 0);
+      }
     } finally {
       a.recycle();
     }
@@ -228,12 +253,34 @@ public class EmptyViewBuilder {
     return this;
   }
 
+  public EmptyViewBuilder setTransition(@TransitionType int type) {
+    switch (type) {
+      case NONE:
+      default:
+        transition = null;
+        break;
+      case AUTO:
+        transition = new AutoTransition();
+        break;
+      case EXPLODE:
+        transition = new Explode();
+        break;
+      case FADE:
+        transition = new Fade();
+        break;
+      case SLIDE:
+        transition = new Slide();
+        break;
+    }
+    return this;
+  }
+
   public EmptyViewBuilder setState(@State int state) {
     this.state = state;
     return this;
   }
 
-  public EmptyViewBuilder setLoading(@Loading int loading) {
+  public EmptyViewBuilder setLoading(@LoadingType int loading) {
     this.loading = loading;
     return this;
   }
@@ -341,9 +388,14 @@ public class EmptyViewBuilder {
     emptyView.show();
   }
 
+  @IntDef({ NONE, SLIDE, EXPLODE, FADE, AUTO })
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface TransitionType {
+  }
+
   @IntDef({ NONE, CIRCULAR })
   @Retention(RetentionPolicy.SOURCE)
-  public @interface Loading {
+  public @interface LoadingType {
   }
 
   @IntDef({ CONTENT, EMPTY, ERROR, LOADING })

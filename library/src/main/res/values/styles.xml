@@ -1,44 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="EmptyView"/>
+  <style name="EmptyTextAppearance"/>
 
-  <style name="EmptyView.Layout">
-    <item name="android:padding">@dimen/emptyview_padding</item>
-    <item name="android:orientation">vertical</item>
-    <item name="android:gravity">center</item>
-  </style>
+  <style name="EmptyTextAppearance.Title" parent="TextAppearance.AppCompat.Title"/>
 
-  <style name="EmptyView.Icon">
-    <item name="android:layout_gravity">center_horizontal</item>
-    <item name="android:layout_marginBottom">@dimen/emptyview_margin</item>
-  </style>
+  <style name="EmptyTextAppearance.Body" parent="TextAppearance.AppCompat.Subhead"/>
 
-  <style name="EmptyView.ProgressBar">
-    <item name="android:layout_gravity">center_horizontal</item>
-    <item name="android:layout_marginBottom">@dimen/emptyview_margin</item>
-  </style>
-
-  <style name="EmptyView.Title">
-    <item name="android:layout_gravity">center_horizontal</item>
-    <item name="android:layout_marginBottom">@dimen/emptyview_margin</item>
-    <item name="android:gravity">center</item>
-    <item name="android:textSize">@dimen/emptyview_title_text_size</item>
-  </style>
-
-  <style name="EmptyView.Text">
-    <item name="android:layout_gravity">center_horizontal</item>
-    <item name="android:layout_marginBottom">@dimen/emptyview_margin</item>
-    <item name="android:gravity">center</item>
-    <item name="android:textSize">@dimen/emptyview_text_size</item>
-  </style>
-
-  <style name="EmptyView.Button">
-    <item name="android:layout_gravity">center_horizontal</item>
-    <item name="android:gravity">center</item>
-    <item name="android:foreground">?selectableItemBackground</item>
-    <item name="android:textSize">@dimen/emptyview_button_text_size</item>
-    <item name="android:textAllCaps">false</item>
-  </style>
+  <style name="EmptyTextAppearance.Button" parent="TextAppearance.AppCompat.Button"/>
 
 </resources>

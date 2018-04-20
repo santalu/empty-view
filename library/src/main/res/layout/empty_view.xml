@@ -4,37 +4,51 @@
     android:id="@+id/empty_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone"
-    style="@style/EmptyView.Layout">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:visibility="gone">
 
   <ImageView
       android:id="@+id/empty_icon"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      style="@style/EmptyView.ProgressBar"/>
+      android:layout_gravity="center_horizontal"
+      android:layout_marginBottom="16dp"/>
 
   <ProgressBar
       android:id="@+id/empty_progress_bar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      style="@style/EmptyView.ProgressBar"/>
+      android:layout_gravity="center_horizontal"
+      android:layout_marginBottom="16dp"/>
 
   <TextView
       android:id="@+id/empty_title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      style="@style/EmptyView.Title"/>
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="8dp"
+      android:gravity="center"
+      android:textAppearance="@style/EmptyTextAppearance.Title"/>
 
   <TextView
       android:id="@+id/empty_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      style="@style/EmptyView.Text"/>
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="8dp"
+      android:gravity="center"
+      android:textAppearance="@style/EmptyTextAppearance.Body"/>
 
-  <Button
+  <android.support.v7.widget.AppCompatButton
       android:id="@+id/empty_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      style="@style/EmptyView.Button"/>
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="24dp"
+      android:foreground="?selectableItemBackground"
+      android:gravity="center"
+      android:textAppearance="@style/EmptyTextAppearance.Button"/>
 
 </LinearLayout>
