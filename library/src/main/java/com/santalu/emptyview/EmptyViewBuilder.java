@@ -114,9 +114,7 @@ public class EmptyViewBuilder {
       Resources resources = context.getResources();
       int defaultTextColor = resources.getColor(android.R.color.secondary_text_dark);
 
-      if (a.hasValue(R.styleable.EmptyView_ev_gravity)) {
-        gravity = a.getInt(R.styleable.EmptyView_ev_gravity, CENTER);
-      }
+      gravity = a.getInt(R.styleable.EmptyView_ev_gravity, CENTER);
       if (a.hasValue(R.styleable.EmptyView_ev_transition)) {
         setTransition(a.getInt(R.styleable.EmptyView_ev_transition, NONE));
       }
@@ -141,9 +139,7 @@ public class EmptyViewBuilder {
       }
 
       // Loading state attributes
-      if (a.hasValue(R.styleable.EmptyView_ev_loading)) {
-        loading = a.getInt(R.styleable.EmptyView_ev_loading, CIRCULAR);
-      }
+      loading = a.getInt(R.styleable.EmptyView_ev_loading, CIRCULAR);
       if (a.hasValue(R.styleable.EmptyView_ev_loading_title)) {
         loadingTitle = a.getText(R.styleable.EmptyView_ev_loading_title);
       }

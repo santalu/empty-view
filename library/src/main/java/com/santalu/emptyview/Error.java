@@ -14,7 +14,6 @@ import java.util.concurrent.TimeoutException;
 public enum Error {
 
   CONNECTION(R.string.error_connection_title, R.string.error_connection),
-  ENDPOINT(R.string.error_endpoint_title, R.string.error_endpoint),
   TIMEOUT(R.string.error_connection_timeout_title, R.string.error_connection_timeout),
   SERVICE(0, 0),
   UNKNOWN(R.string.error_unknown_title, R.string.error_unknown);
@@ -29,13 +28,9 @@ public enum Error {
   }
 
   public static Error get(Throwable e) {
-    if (e instanceof NoConnectionException) {
+    if (e instanceof ConnectException || e instanceof UnknownHostException) {
       return CONNECTION;
-    } else if (e instanceof UnknownHostException) {
-      return ENDPOINT;
-    } else if (e instanceof SocketTimeoutException ||
-        e instanceof TimeoutException ||
-        e instanceof ConnectException) {
+    } else if (e instanceof SocketTimeoutException || e instanceof TimeoutException) {
       return TIMEOUT;
     } else if (!TextUtils.isEmpty(e.getMessage())) {
       SERVICE.message = e.getMessage();
