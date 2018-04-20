@@ -4,9 +4,6 @@
   <string name="error_connection_title">No Connection</string>
   <string name="error_connection">Please check your connection settings and try again</string>
 
-  <string name="error_endpoint_title">Oops</string>
-  <string name="error_endpoint">Unable to access the connection address.\nPlease check your connection settings and try again</string>
-
   <string name="error_connection_timeout_title">Connection Timed Out</string>
   <string name="error_connection_timeout">Please check your connection settings and try again</string>
 
