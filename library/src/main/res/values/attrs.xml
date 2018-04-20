@@ -7,28 +7,22 @@
       <enum name="slide" value="1"/>
       <enum name="explode" value="2"/>
       <enum name="fade" value="3"/>
+      <enum name="auto" value="4"/>
     </attr>
-
     <attr name="ev_gravity">
       <enum name="top" value="48"/>
       <enum name="center" value="17"/>
       <enum name="bottom" value="80"/>
     </attr>
-
     <attr format="reference" name="ev_font"/>
     <attr format="dimension" name="ev_titleTextSize"/>
     <attr format="dimension" name="ev_textSize"/>
-    <attr format="dimension" name="ev_letterSpacing"/>
-    <attr format="dimension" name="ev_lineSpacingExtra"/>
-    <attr format="dimension" name="ev_lineSpacingExtraMultiplier"/>
     <attr format="dimension" name="ev_buttonTextSize"/>
 
     <!-- Loading state attributes -->
     <attr name="ev_loading">
-      <enum name="none" value="0"/>
       <enum name="circular" value="1"/>
     </attr>
-
     <attr format="string" name="ev_loading_title"/>
     <attr format="color" name="ev_loading_titleTextColor"/>
     <attr format="string" name="ev_loading_text"/>

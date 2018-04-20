@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.santalu.emptyview.EmptyView
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/empty_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:ev_empty_button="@string/try_again"
-    app:ev_empty_buttonTextColor="@color/colorPrimaryDark"
-    app:ev_empty_drawable="@drawable/ic_sentiment_dissatisfied"
-    app:ev_empty_drawableTint="@color/colorPrimary"
-    app:ev_empty_text="@string/empty"
-    app:ev_empty_title="@string/error_endpoint_title"
-    app:ev_error_backgroundColor="@color/red"
-    app:ev_error_button="@string/try_again"
-    app:ev_error_buttonTextColor="@color/white"
-    app:ev_error_drawable="@drawable/ic_sentiment_very_dissatisfied"
-    app:ev_error_drawableTint="@color/white"
-    app:ev_error_text="@string/error_unknown"
-    app:ev_error_textColor="@color/white"
-    app:ev_error_title="@string/error_unknown_title"
-    app:ev_error_titleTextColor="@color/white"
-    app:ev_font="@font/allerta"
-    app:ev_gravity="center"
-    app:ev_loading="circular"
-    app:ev_loading_drawable="@drawable/ic_sentiment_satisfied"
-    app:ev_loading_drawableTint="@color/colorPrimary"
-    app:ev_loading_title="@string/loading"
-    app:ev_transition="slide">
+    android:fillViewport="true">
 
-  <TextView
-      android:id="@+id/text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:fontFamily="@font/allerta"
-      android:lineSpacingMultiplier="1.2"
-      android:padding="16dp"
-      android:text="@string/lorem"/>
+  <com.santalu.emptyview.EmptyView
+      android:id="@+id/empty_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:ev_empty_button="@string/try_again"
+      app:ev_empty_buttonBackgroundColor="@color/colorPrimary"
+      app:ev_empty_buttonTextColor="@color/white"
+      app:ev_empty_drawable="@drawable/ic_sentiment_dissatisfied"
+      app:ev_empty_drawableTint="@color/colorPrimary"
+      app:ev_empty_text="@string/empty"
+      app:ev_empty_title="@string/error_endpoint_title"
+      app:ev_error_backgroundColor="@color/red"
+      app:ev_error_button="@string/try_again"
+      app:ev_error_buttonTextColor="@color/white"
+      app:ev_error_drawable="@drawable/ic_sentiment_very_dissatisfied"
+      app:ev_error_drawableTint="@color/white"
+      app:ev_error_text="@string/error_unknown"
+      app:ev_error_textColor="@color/white"
+      app:ev_error_title="Hiç pizza bulamadık"
+      app:ev_error_titleTextColor="@color/white"
+      app:ev_font="@font/allerta"
+      app:ev_gravity="center"
+      app:ev_loading="circular"
+      app:ev_loading_drawable="@drawable/ic_sentiment_satisfied"
+      app:ev_loading_drawableTint="@color/colorPrimary"
+      app:ev_loading_title="@string/loading"
+      app:ev_transition="slide">
 
-</com.santalu.emptyview.EmptyView>
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/allerta"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="16dp"
+        android:text="@string/lorem"/>
+
+  </com.santalu.emptyview.EmptyView>
+
+</android.support.v4.widget.NestedScrollView>

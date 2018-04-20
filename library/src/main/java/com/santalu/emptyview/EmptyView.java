@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -226,7 +224,7 @@ public class EmptyView extends ConstraintLayout {
     container.setBackgroundColor(backgroundColor);
   }
 
-  private void setProgressBar(@EmptyViewBuilder.Loading int style, @ColorInt int drawableTint) {
+  private void setProgressBar(@EmptyViewBuilder.LoadingType int style, @ColorInt int tint) {
     if (progressBar.getVisibility() != VISIBLE) {
       return;
     }
@@ -235,15 +233,15 @@ public class EmptyView extends ConstraintLayout {
       return;
     }
     progressBar.setVisibility(VISIBLE);
-    if (drawableTint != 0) {
+    if (tint != 0) {
       Drawable drawable = progressBar.getIndeterminateDrawable();
       if (drawable != null) {
-        drawable.setColorFilter(drawableTint, Mode.SRC_ATOP);
+        drawable.setColorFilter(tint, Mode.SRC_ATOP);
       }
     }
   }
 
-  private void setIcon(Drawable drawable, @ColorInt int drawableTint) {
+  private void setIcon(Drawable drawable, @ColorInt int tint) {
     if (imageView.getVisibility() != VISIBLE) {
       return;
     }
@@ -253,7 +251,7 @@ public class EmptyView extends ConstraintLayout {
     }
     imageView.setVisibility(VISIBLE);
     imageView.setImageDrawable(drawable);
-    imageView.setColorFilter(drawableTint);
+    imageView.setColorFilter(tint);
   }
 
   private void setTitle(CharSequence text, @ColorInt int textColor) {
@@ -288,10 +286,6 @@ public class EmptyView extends ConstraintLayout {
     if (builder.textSize != 0) {
       EmptyUtils.setTextSize(textView, builder.textSize);
     }
-    textView.setLineSpacing(builder.lineSpacingExtra, builder.lineSpacingMultiplier);
-    if (Build.VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
-      textView.setLetterSpacing(builder.letterSpacing);
-    }
   }
 
   private void setButton(CharSequence text,
@@ -307,11 +301,11 @@ public class EmptyView extends ConstraintLayout {
     button.setVisibility(VISIBLE);
     button.setText(text);
     button.setTextColor(textColor);
-    button.setBackgroundColor(backgroundColor);
+    button.setTypeface(builder.font);
     if (builder.buttonTextSize != 0) {
       EmptyUtils.setTextSize(button, builder.buttonTextSize);
     }
-    button.setTypeface(builder.font);
+    button.setBackgroundColor(backgroundColor);
     button.setOnClickListener(builder.onClickListener);
   }
 }
