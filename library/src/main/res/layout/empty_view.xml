@@ -43,7 +43,7 @@
       android:gravity="center"
       android:textAppearance="@style/EmptyTextAppearance.Body"/>
 
-  <android.support.v7.widget.AppCompatButton
+  <Button
       android:id="@+id/empty_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

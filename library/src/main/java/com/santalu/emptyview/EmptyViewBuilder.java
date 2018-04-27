@@ -55,7 +55,7 @@ public class EmptyViewBuilder {
 
   private final EmptyView emptyView;
   private final Context context;
-  List<View> excludedViews;
+  List<View> children;
   @State int state;
   int gravity;
 
@@ -104,6 +104,7 @@ public class EmptyViewBuilder {
   EmptyViewBuilder(EmptyView emptyView) {
     this.emptyView = emptyView;
     this.context = emptyView.getContext();
+    this.children = new ArrayList<>();
   }
 
   EmptyViewBuilder(EmptyView emptyView, @NonNull AttributeSet attributeSet) {
@@ -229,21 +230,38 @@ public class EmptyViewBuilder {
   }
 
   public EmptyViewBuilder exclude(@IdRes int... ids) {
-    excludedViews = new ArrayList<>();
     for (int id : ids) {
       View view = emptyView.findViewById(id);
-      if (!excludedViews.contains(view)) {
-        excludedViews.add(view);
+      if (children.contains(view)) {
+        children.remove(view);
       }
     }
     return this;
   }
 
   public EmptyViewBuilder exclude(View... views) {
-    excludedViews = new ArrayList<>();
     for (View view : views) {
-      if (!excludedViews.contains(view)) {
-        excludedViews.add(view);
+      if (children.contains(view)) {
+        children.remove(view);
+      }
+    }
+    return this;
+  }
+
+  public EmptyViewBuilder include(@IdRes int... ids) {
+    for (int id : ids) {
+      View view = emptyView.findViewById(id);
+      if (!children.contains(view)) {
+        children.add(view);
+      }
+    }
+    return this;
+  }
+
+  public EmptyViewBuilder include(View... views) {
+    for (View view : views) {
+      if (!children.contains(view)) {
+        children.add(view);
       }
     }
     return this;
