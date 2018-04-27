@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  implementation 'com.github.santalu:emptyview:1.3.0'
+  implementation 'com.github.santalu:emptyview:1.3.4'
 }
 ```
 
@@ -111,6 +111,7 @@ dependencies {
 ## Notes
 
 * Use `exclude(int... ids)` or `exclude(View... views)` methods to exclude views from visibility changes
+* Use `include(int... ids)` or `include(View... views)` methods to include views for visibility changes
 
 ## License
 ```
