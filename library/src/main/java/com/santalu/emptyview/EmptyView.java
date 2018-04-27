@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.santalu.emptyview.EmptyViewBuilder.CONTENT;
 import static com.santalu.emptyview.EmptyViewBuilder.EMPTY;
@@ -33,7 +31,6 @@ import static com.santalu.emptyview.EmptyViewBuilder.NONE;
 public class EmptyView extends ConstraintLayout {
 
   private final EmptyViewBuilder builder;
-  private final List<View> children;
 
   private LinearLayout container;
   private ProgressBar progressBar;
@@ -45,26 +42,23 @@ public class EmptyView extends ConstraintLayout {
   public EmptyView(Context context) {
     super(context);
     builder = new EmptyViewBuilder(this);
-    children = new ArrayList<>();
   }
 
   public EmptyView(Context context, AttributeSet attrs) {
     super(context, attrs);
     builder = new EmptyViewBuilder(this, attrs);
-    children = new ArrayList<>();
   }
 
   public EmptyView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     builder = new EmptyViewBuilder(this, attrs);
-    children = new ArrayList<>();
   }
 
   @Override
   public void addView(View child, int index, ViewGroup.LayoutParams params) {
     super.addView(child, index, params);
     if (child.getVisibility() == VISIBLE) {
-      children.add(child);
+      builder.include(child);
     }
   }
 
@@ -206,16 +200,8 @@ public class EmptyView extends ConstraintLayout {
   }
 
   private void setChildVisibility(int visibility) {
-    if (builder.excludedViews == null || builder.excludedViews.isEmpty()) {
-      for (View view : children) {
-        view.setVisibility(visibility);
-      }
-      return;
-    }
-    for (View view : children) {
-      if (!builder.excludedViews.contains(view)) {
-        view.setVisibility(visibility);
-      }
+    for (View view : builder.children) {
+      view.setVisibility(visibility);
     }
   }
 

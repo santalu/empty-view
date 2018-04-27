@@ -2,7 +2,6 @@ package com.santalu.myapplication;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.santalu.emptyview.EmptyView;
@@ -29,16 +28,17 @@ public class MainActivity extends AppCompatActivity {
         .setOnClickListener(v -> emptyView.showLoading())
         .show();*/
 
+    // demonstrates how to include and exclude views from state changes
     /*emptyView.empty()
         .setEmptyDrawable(R.mipmap.ic_launcher)
         .setEmptyTitle("Empty Title")
         .setEmptyText("Empty Text")
         .setEmptyButtonText("Empty Button")
+        .exclude(R.id.text)
         .setOnClickListener(v ->
             emptyView.loading()
-                .exclude(0)
+                .include(R.id.text)
                 .show())
-        //.exclude(R.id.text)
         .show();*/
   }
 

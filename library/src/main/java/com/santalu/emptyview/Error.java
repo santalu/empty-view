@@ -6,6 +6,7 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
+import javax.net.ssl.SSLException;
 
 /**
  * Created by fatih.santalu on 24.01.2018.
@@ -30,7 +31,9 @@ public enum Error {
   public static Error get(Throwable e) {
     if (e instanceof ConnectException || e instanceof UnknownHostException) {
       return CONNECTION;
-    } else if (e instanceof SocketTimeoutException || e instanceof TimeoutException) {
+    } else if (e instanceof SocketTimeoutException ||
+        e instanceof TimeoutException ||
+        e instanceof SSLException) {
       return TIMEOUT;
     } else if (!TextUtils.isEmpty(e.getMessage())) {
       SERVICE.message = e.getMessage();
