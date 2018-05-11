@@ -63,16 +63,21 @@ public class MainActivity extends AppCompatActivity {
       case R.id.show_error:
         //emptyView.showError();
         emptyView.error()
-            .setOnClickListener(v -> emptyView.showLoading())
+            .setOnClickListener(v -> showLoading())
             .show();
         break;
       case R.id.show_empty:
         //emptyView.showEmpty();
         emptyView.empty()
-            .setOnClickListener(v -> emptyView.showLoading())
+            .setOnClickListener(v -> showLoading())
             .show();
         break;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  private void showLoading() {
+    emptyView.showLoading();
+    emptyView.postDelayed(() -> emptyView.showContent(), 2000);
   }
 }
