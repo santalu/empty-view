@@ -1,58 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/empty_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:visibility="gone">
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <ImageView
-      android:id="@+id/empty_icon"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginBottom="16dp"/>
-
-  <ProgressBar
-      android:id="@+id/empty_progress_bar"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginBottom="16dp"/>
-
-  <TextView
-      android:id="@+id/empty_title"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="8dp"
+  <LinearLayout
+      android:id="@+id/empty_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       android:gravity="center"
-      android:textAppearance="@style/EmptyTextAppearance.Title"/>
+      android:orientation="vertical"
+      android:padding="24dp"
+      android:visibility="gone">
 
-  <TextView
-      android:id="@+id/empty_text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginEnd="28dp"
-      android:layout_marginStart="28dp"
-      android:layout_marginTop="8dp"
-      android:gravity="center"
-      android:textAppearance="@style/EmptyTextAppearance.Body"/>
+    <ImageView
+        android:id="@+id/empty_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
 
-  <Button
-      android:id="@+id/empty_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginEnd="28dp"
-      android:layout_marginStart="28dp"
-      android:layout_marginTop="24dp"
-      android:foreground="?selectableItemBackground"
-      android:gravity="center"
-      android:textAppearance="@style/EmptyTextAppearance.Button"/>
+    <ProgressBar
+        android:id="@+id/empty_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/empty_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textAppearance="@style/EmptyTextAppearance.Title"/>
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textAppearance="@style/EmptyTextAppearance.Body"/>
+
+    <Button
+        android:id="@+id/empty_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:foreground="?selectableItemBackground"
+        android:gravity="center"
+        android:textAppearance="@style/EmptyTextAppearance.Button"/>
+
+  </LinearLayout>
+
+</merge>

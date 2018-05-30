@@ -1,6 +1,7 @@
 package com.santalu.myapplication;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,12 +13,14 @@ import com.santalu.emptyview.EmptyView;
 
 public class MainActivity extends AppCompatActivity {
 
+  private SwipeRefreshLayout refreshLayout;
   private EmptyView emptyView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    refreshLayout = findViewById(R.id.refresh_layout);
     emptyView = findViewById(R.id.empty_view);
 
     /*emptyView.error(new IllegalStateException())
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 .include(R.id.text)
                 .show())
         .show();*/
+
+    refreshLayout.setOnRefreshListener(this::showLoading);
   }
 
   @Override
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void showLoading() {
+    refreshLayout.setRefreshing(false);
     emptyView.showLoading();
     emptyView.postDelayed(() -> emptyView.showContent(), 2000);
   }
