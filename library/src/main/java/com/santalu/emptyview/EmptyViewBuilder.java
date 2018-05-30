@@ -101,7 +101,7 @@ public class EmptyViewBuilder {
   @ColorInt int errorDrawableTint;
   @ColorInt int errorBackgroundColor;
 
-  EmptyViewBuilder(EmptyView emptyView) {
+  private EmptyViewBuilder(EmptyView emptyView) {
     this.emptyView = emptyView;
     this.context = emptyView.getContext();
     this.children = new ArrayList<>();

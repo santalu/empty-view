@@ -40,18 +40,28 @@ public class EmptyView extends ConstraintLayout {
   private Button button;
 
   public EmptyView(Context context) {
-    super(context);
-    builder = new EmptyViewBuilder(this);
+    this(context, null, 0);
   }
 
   public EmptyView(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    builder = new EmptyViewBuilder(this, attrs);
+    this(context, attrs, 0);
   }
 
   public EmptyView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     builder = new EmptyViewBuilder(this, attrs);
+    inflate(context, R.layout.empty_view, this);
+  }
+
+  @Override
+  protected void onFinishInflate() {
+    super.onFinishInflate();
+    container = findViewById(R.id.empty_layout);
+    imageView = findViewById(R.id.empty_icon);
+    textView = findViewById(R.id.empty_text);
+    titleView = findViewById(R.id.empty_title);
+    button = findViewById(R.id.empty_button);
+    progressBar = findViewById(R.id.empty_progress_bar);
   }
 
   @Override
@@ -65,18 +75,6 @@ public class EmptyView extends ConstraintLayout {
   @Override
   public void setOnClickListener(@Nullable OnClickListener onClickListener) {
     builder.setOnClickListener(onClickListener);
-  }
-
-  @Override
-  protected void onFinishInflate() {
-    super.onFinishInflate();
-    inflate(getContext(), R.layout.empty_view, this);
-    container = findViewById(R.id.empty_layout);
-    imageView = findViewById(R.id.empty_icon);
-    textView = findViewById(R.id.empty_text);
-    titleView = findViewById(R.id.empty_title);
-    button = findViewById(R.id.empty_button);
-    progressBar = findViewById(R.id.empty_progress_bar);
   }
 
   public EmptyViewBuilder builder() {
