@@ -38,7 +38,7 @@ public class EmptyViewBuilder {
   public static final int CENTER = 17;
   public static final int BOTTOM = 80;
 
-  // Loading
+  // Loading Type
   public static final int CIRCULAR = 1;
 
   // State
@@ -68,7 +68,7 @@ public class EmptyViewBuilder {
   View.OnClickListener onClickListener;
 
   // Loading state attributes
-  @LoadingType int loading;
+  @LoadingType int loadingType;
   CharSequence loadingTitle;
   @ColorInt int loadingTitleTextColor;
   CharSequence loadingText;
@@ -140,7 +140,9 @@ public class EmptyViewBuilder {
       }
 
       // Loading state attributes
-      loading = a.getInt(R.styleable.EmptyView_ev_loading, CIRCULAR);
+      if (a.hasValue(R.styleable.EmptyView_ev_loading_type)) {
+        loadingType = a.getInt(R.styleable.EmptyView_ev_loading_type, CIRCULAR);
+      }
       if (a.hasValue(R.styleable.EmptyView_ev_loading_title)) {
         loadingTitle = a.getText(R.styleable.EmptyView_ev_loading_title);
       }
@@ -294,8 +296,8 @@ public class EmptyViewBuilder {
     return this;
   }
 
-  public EmptyViewBuilder setLoading(@LoadingType int loading) {
-    this.loading = loading;
+  public EmptyViewBuilder setLoadingType(@LoadingType int loadingType) {
+    this.loadingType = loadingType;
     return this;
   }
 

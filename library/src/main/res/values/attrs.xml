@@ -20,7 +20,7 @@
     <attr format="dimension" name="ev_buttonTextSize"/>
 
     <!-- Loading state attributes -->
-    <attr name="ev_loading">
+    <attr name="ev_loading_type">
       <enum name="circular" value="1"/>
     </attr>
     <attr format="string" name="ev_loading_title"/>

@@ -189,7 +189,7 @@ public class EmptyView extends ConstraintLayout {
         setChildVisibility(GONE);
 
         setContainer(builder.loadingBackgroundColor);
-        setProgressBar(builder.loading, builder.loadingDrawableTint);
+        setProgressBar(builder.loadingType, builder.loadingDrawableTint);
         setIcon(builder.loadingDrawable, builder.loadingDrawableTint);
         setTitle(builder.loadingTitle, builder.loadingTitleTextColor);
         setText(builder.loadingText, builder.loadingTextColor);

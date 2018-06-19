@@ -26,6 +26,7 @@
       app:ev_error_title="@string/error_connection_title"
       app:ev_error_titleTextColor="@color/white"
       app:ev_font="@font/allerta"
+      app:ev_loading_type="circular"
       app:ev_transition="auto">
 
     <TextView

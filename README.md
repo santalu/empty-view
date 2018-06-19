@@ -2,13 +2,13 @@
 
 [![](https://jitpack.io/v/santalu/emptyview.svg)](https://jitpack.io/#santalu/emptyview) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EmptyView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6039) [![](https://img.shields.io/badge/AndroidWeekly-%23270-blue.svg)](http://androidweekly.net/issues/issue-270) [![Build Status](https://travis-ci.org/santalu/emptyview.svg?branch=master)](https://travis-ci.org/santalu/emptyview)
 
-A view that displays states of screen like loading, error, empty etc.
+A view that displays states of screen like loadingType, error, empty etc.
 
 ## Samples
 
 <table >
   <tr>
-    <td align="left"><img src="https://github.com/santalu/emptyview/blob/master/screens/loading.png"/></td>
+    <td align="left"><img src="https://github.com/santalu/emptyview/blob/master/screens/loadingType.png"/></td>
     <td align="right"><img src="https://github.com/santalu/emptyview/blob/master/screens/error.png"/></td>
      <td align="left"><img src="https://github.com/santalu/emptyview/blob/master/screens/empty.png"/></td>
   </tr>
@@ -58,7 +58,7 @@ dependencies {
     app:ev_loading="circular"
     app:ev_loading_drawable="@drawable/ic_sentiment_satisfied"
     app:ev_loading_drawableTint="@color/colorPrimary"
-    app:ev_loading_title="@string/loading"
+    app:ev_loading_title="@string/loadingType"
     app:ev_transition="slide">
 
     *** your content here ***
