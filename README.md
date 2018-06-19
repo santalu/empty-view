@@ -59,7 +59,8 @@ dependencies {
     app:ev_loading_drawable="@drawable/ic_sentiment_satisfied"
     app:ev_loading_drawableTint="@color/colorPrimary"
     app:ev_loading_title="@string/loadingType"
-    app:ev_transition="slide">
+    app:ev_loading_type="circular"                             
+    app:ev_transition="auto">
 
     *** your content here ***
 
