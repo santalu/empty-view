@@ -8,7 +8,7 @@ A view that displays states of screen like loadingType, error, empty etc.
 
 <table >
   <tr>
-    <td align="left"><img src="https://github.com/santalu/emptyview/blob/master/screens/loadingType.png"/></td>
+    <td align="left"><img src="https://github.com/santalu/emptyview/blob/master/screens/loading.png"/></td>
     <td align="right"><img src="https://github.com/santalu/emptyview/blob/master/screens/error.png"/></td>
      <td align="left"><img src="https://github.com/santalu/emptyview/blob/master/screens/empty.png"/></td>
   </tr>
@@ -26,7 +26,7 @@ allprojects {
 ```
 ```
 dependencies {
-  implementation 'com.github.santalu:emptyview:1.3.4'
+  implementation 'com.github.santalu:emptyview:1.3.6'
 }
 ```
 
