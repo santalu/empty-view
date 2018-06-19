@@ -80,7 +80,7 @@ dependencies {
 | ev_lineSpacingExtra | dimension |
 | ev_lineSpacingExtraMultiplier | dimension |
 | ev_buttonTextSize | dimension |
-| ev_loading | none, circular default circular |
+| ev_loading_type | circular default none |
 | ev_loading_title | string |
 | ev_loading_titleTextColor | color |
 | ev_loading_text | string |
